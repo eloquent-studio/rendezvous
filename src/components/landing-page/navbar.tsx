@@ -19,7 +19,7 @@ const Navbar = () => {
   }, [])
 
   return (
-    <div className={active ? "bg-white text-black fixed w-full top-0 left-0 z-20" : "bg-slate-600 text-white transition-all ease duration-500 fixed w-full top-0 left-0 z-20"}>
+    <div className={active ? "bg-white text-black fixed w-full top-0 left-0 z-20" : "bg-gray-950 text-white transition-all ease duration-500 fixed w-full top-0 left-0 z-20"}>
       <div className='max-w-screen-lg mx-auto p-2 lg:px-0'>
         <div className='flex flex-row justify-between items-center mb-2'>
           <div>

@@ -2,38 +2,73 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-      <footer className="max-w-screen-lg mx-auto">
-        <div className="w-full md:px-8 p-4">
-          <div className="sm:flex sm:items-center sm:justify-between">
-            Logo
-            <ul className="flex flex-wrap items-center mb-6 text-sm font-semibold text-gray-800 sm:mb-0">
-              <li>
-                <Link href="#" className="mr-4 hover:underline md:mr-6">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="mr-4 hover:underline md:mr-6">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="https://github.com/Rendesvous/rendezvous" target="_blank" rel='noreferrer' className="hover:underline">
-                  Source
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <hr className="my-2 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-4" />
-          <span className="block text-sm text-gray-500 sm:text-center ">
-            © 2023{" "}
-            <Link href="/" className="hover:underline">
-              本当™
-            </Link>
-            All rights reversed.
-          </span>
+    <footer className="border-t w-full text-xs">
+        <div className="mx-auto max-w-screen-lg">
+          <div className="flex flex-row justify-between items-center p-4">
+            <div>
+                <h2 className="mb-6 font-bold text-gray-900 uppercase">Company</h2>
+                <ul className="text-gray-500 font-semibold">
+                    <li className="mb-4">
+                        <Link href="#" className=" hover:underline">About</Link>
+                    </li>
+                    <li className="mb-4">
+                        <Link href="#" className="hover:underline">Careers</Link>
+                    </li>
+                    <li className="mb-4">
+                        <Link href="#" className="hover:underline">Brand Center</Link>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h2 className="mb-6 font-bold text-gray-900 uppercase">Help center</h2>
+                <ul className="text-gray-500 font-semibold">
+                    <li className="mb-4">
+                      <Link href="#" className="hover:underline">Discord Server</Link>
+                    </li>
+                    <li className="mb-4">
+                      <Link href="#" className="hover:underline">Twitter</Link>
+                    </li>
+                    <li className="mb-4">
+                      <Link href="#" className="hover:underline">Contact Us</Link>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h2 className="mb-6 font-bold text-gray-900 uppercase">Legal</h2>
+                <ul className="text-gray-500 font-semibold">
+                    <li className="mb-4">
+                      <Link href="#" className="hover:underline">Privacy Policy</Link>
+                    </li>
+                    <li className="mb-4">
+                      <Link href="#" className="hover:underline">Licensing</Link>
+                    </li>
+                    <li className="mb-4">
+                      <Link href="#" className="hover:underline">Terms &amp; Conditions</Link>
+                    </li>
+                </ul>
+            </div>
+            <div className="hidden md:flex flex-col justify-start">
+                <h2 className="mb-6 font-bold text-gray-900 uppercase">Legal</h2>
+                <ul className="text-gray-500 font-semibold">
+                    <li className="mb-4">
+                      <Link href="#" className="hover:underline">Privacy Policy</Link>
+                    </li>
+                    <li className="mb-4">
+                      <Link href="#" className="hover:underline">Licensing</Link>
+                    </li>
+                    <li className="mb-4">
+                      <Link href="#" className="hover:underline">Terms &amp; Conditions</Link>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </footer>
+        <div className="px-4 py-4 flex items-center justify-center">
+            <span className="text-gray-500 text-center">© 2023 <Link href="/">Logo™</Link>. All Rights Reserved.
+            </span>
+          </div>
+        </div>
+    </footer>
+
   );
 };
 
