@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 const aboutItems = [
   {
@@ -52,19 +53,21 @@ const AboutUs = () => {
       </section>
       <div className="w-full my-8 bg-blue-950">
         <div className="w-full flex flex-row justify-between items-center">
-          <div className="w-1/3 h-64 relative">
+          <div className="hidden md:flex w-1/3 h-64 relative">
             <Image fill src="/1.jpg" alt="" className="absolute self-start"/>
           </div>
-          <div className="w-2/3 p-2 text-white">
-            <p className="font-extrabold text-3xl md:text-5xl lg:text-4xl">
-            何か特にお考えですか。
-            </p>
-            <p className="font-bold text-xl md:text-3xl lg:text-3xl text-end">
-            ここに書いてください。
-            </p>
-            <div className="w-full flex items-center justify-center">
-              <button className="self-center w-fit mt-8 uppercase text-sm border rounded-sm py-2 px-4">Get Started!</button>
+          <div className="w-full md:w-2/3 p-8 md:p-2 text-white flex flex-row items-center justify-evenly">
+            <div>
+              <p className="font-extrabold text-3xl md:text-5xl lg:text-4xl">
+              何か特にお考えですか。
+              </p>
+              <p className="font-bold text-xl md:text-3xl lg:text-3xl">
+              ここに書いてください。
+              </p>
             </div>
+            <Link
+              href="/register"
+              className="border border-gray-200 px-16 py-1 hover:bg-gray-200 rounded-full mt-4 transition-all ease-in duration-500 text-white hover:text-blue-950 text-sm font-semibold">Join</Link>
           </div>
         </div>
       </div>
