@@ -6,10 +6,11 @@ import Link from 'next/link';
 export default function Notification() {
     const isOpen = useMobile((state) => state.isOpen);
     return (
-        <div
-            className={`${isOpen && 'ml-16'} sm:ml-16 w-full h-full bg-slate-300 fixed inset-0 flex flex-row`}
-        >
-            <div className="w-[420px]">Notification</div>
+        <div className="flex flex-row w-full h-full">
+            <div className={`w-full md:w-[320px] lg:w-[360px] bg-slate-300 h-full`}>
+                Notification
+
+            </div>
             <Link
                 href="/dashboard"
                 className="bg-gray-600 bg-opacity-75 transition-opacity w-full h-full cursor-default"
@@ -17,3 +18,4 @@ export default function Notification() {
         </div>
     );
 }
+
