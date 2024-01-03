@@ -1,8 +1,5 @@
-      
-import CloseSvg from '@/components/icons/close-svg'
 import Button from '@/components/props/button'
 import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react'
 
 export default function BusinessPage () {
@@ -39,7 +36,7 @@ export default function BusinessPage () {
                       <div className='text-sm font-semibold text-gray-800'>
                         smt
                       </div>
-                      {/* DER STERN */}
+                      {/* DIE STERNE */}
                       <div className="flex items-center my-3">
                         <div className="flex items-center space-x-1 rtl:space-x-reverse text-gray-800">
                           <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
@@ -47,7 +44,7 @@ export default function BusinessPage () {
                           </svg>
                         </div>
                         <span className="text-xs font-semibold ms-1">5.0</span>
-                    </div>             
+                      </div>             
                     </div>
                   </div>
                   <Button label='Contact' fullWidth large/>  
@@ -74,8 +71,7 @@ export default function BusinessPage () {
             </aside>
             {/* CENTER */}
             <div className="w-2/3 h-full">
-              calendar
-              
+              calendar         
             </div>
           </div>
         </main>
