@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function AuthLayout({children, params: {locale}}: {children: React.ReactNode, params: any}) {
+export default function AuthLayout({children}: {children: React.ReactNode, params: any}) {
   return (
     <div>{children}</div>
   )
