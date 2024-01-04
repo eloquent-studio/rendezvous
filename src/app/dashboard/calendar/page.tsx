@@ -1,11 +1,13 @@
 "use client"
 import { useState } from "react"
-
-import Image from "next/image"
 import CloseSvg from "@/components/icons/close-svg"
 
 export default function Page() {
     const [open, SetOpen] = useState(true)
+    const handleClndrBtn = (e: any) => {
+        console.log(e.target.dataset.id)
+        SetOpen(true)
+    }
     return <div className="w-full h-full bg-white overflow-y-auto overflow-x-auto flex flex-row">
         <div className="bg-white md:p-2 w-full lg:max-w-[925px] overflow-x-auto overflow-y-auto no-scrollbar">
             <p className="text-4xl font-bold text-gray-800 mb-8">March 2021</p>
@@ -21,8 +23,8 @@ export default function Page() {
                 </div>
                 <div className="flex flex-col items-start justify-start">
                     <div className="inline-flex items-center justify-start h-full w-full">
-                        <button>
-                            <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
+                        <button onClick={handleClndrBtn}>
+                            <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200" data-id={1}>
                                 <p className="text-sm font-medium text-gray-800">01</p>
 
                                 <div className="">deneme</div>
@@ -270,7 +272,13 @@ export default function Page() {
                 </div>
             </div>
         </div>
-        <div className={`min-w-[375px] ml-auto lg:ml-0 ${open ? "fixed" : "hidden"} right-0 border-l border-gray-400 xl:border-none xl:static bg-white xl::flex flex-col p-2 h-screen`}>
+        {
+            open && <div
+                onClick={() => SetOpen(false)}
+                className="bg-gray-600 bg-opacity-75 transition-opacity w-full h-full absolute lg:hidden"
+            ></div>
+        }
+        <div className={`w-[375px] ml-auto lg:ml-0 ${open ? "fixed right-0 top-0 bottom-0" : "hidden"} lg:inline border-l border-gray-400 xl:border-none xl:static bg-white xl::flex flex-col p-2 h-full`}>
             <div className="flex items-center justify-between">
                 <span className="text-xl font-semibold">Jan 18th, 2024</span>
                 <button onClick={() => { SetOpen(false) }} className="xl:hidden text-gray-500 focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-400 dark:hover:bg-gray-800 hover:bg-gray-100">
