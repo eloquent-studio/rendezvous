@@ -1,19 +1,9 @@
-"use client"
-import { useState } from "react"
-import CloseSvg from "@/components/icons/close-svg"
-import Image from "next/image"
-
-export default function Page() {
-    const [open, SetOpen] = useState(true)
-    const handleClndrBtn = (e: any) => {
-        console.log(e.target.dataset.id)
-        SetOpen(true)
-    }
-    return <div className="w-full h-full bg-white overflow-y-hidden overflow-x-auto flex flex-row relative">
-        <div className="bg-white md:p-2 w-full lg:max-w-[925px] overflow-x-auto overflow-y-auto no-scrollbar">
-            <p className="text-4xl font-bold text-gray-800 mb-0">March 2021</p>
+export default function Calendar({ onClick }: { onClick: React.MouseEventHandler<HTMLButtonElement> }) {
+    return <div className="w-full h-full bg-white overflow-y-auto overflow-x-auto flex flex-row relative no-scrollbar">
+        <div className="bg-white md:p-2 w-full no-scrollbar">
+            <p className="text-4xl font-bold text-gray-800 mb-8">March 2021</p>
             <div className="inline-flex flex-col items-start justify-start h-full w-full">
-                <div className="flex overflow-x-auto items-start justify-start h-full">
+                <div className="flex overflow-x-auto items-start justify-start h-6">
                     <p className="w-32 h-full text-sm font-medium text-gray-800 uppercase">M</p>
                     <p className="w-32 h-full text-sm font-medium text-gray-800 uppercase">T</p>
                     <p className="w-32 h-full text-sm font-medium text-gray-800 uppercase">W</p>
@@ -22,9 +12,9 @@ export default function Page() {
                     <p className="w-32 h-full text-sm font-medium text-gray-800 uppercase">S</p>
                     <p className="w-32 h-full text-sm font-medium text-gray-800 uppercase">S</p>
                 </div>
-                <div className="flex flex-col items-start justify-start">
+                <div className=" flex flex-col items-start justify-start">
                     <div className="inline-flex items-center justify-start h-full w-full">
-                        <button onClick={handleClndrBtn}>
+                        <button onClick={onClick}>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200" data-id={1}>
                                 <p className="text-sm font-medium text-gray-800">01</p>
 
@@ -84,49 +74,49 @@ export default function Page() {
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">08</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">09</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">10</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">11</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">12</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">13</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">14</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                     </div>
@@ -135,49 +125,49 @@ export default function Page() {
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">15</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">16</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">17</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">18</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">19</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">20</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">21</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                     </div>
@@ -186,49 +176,49 @@ export default function Page() {
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">22</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">23</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">24</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">25</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">26</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">27</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">28</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                     </div>
@@ -237,21 +227,21 @@ export default function Page() {
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">29</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">30</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <button>
                             <div className="flex items-start justify-start w-32 p-2 h-32 flex-col relative border border-gray-200">
                                 <p className="text-sm font-medium text-gray-800">31</p>
 
-                                <div className="">deneme</div>
+                                <div className="">...</div>
                             </div>
                         </button>
                         <div>
@@ -278,53 +268,5 @@ export default function Page() {
                 </div>
             </div>
         </div>
-        {
-            open && <div
-                onClick={() => SetOpen(false)}
-                className="bg-gray-600 bg-opacity-75 transition-opacity w-full h-full absolute xl:hidden"
-            ></div>
-        }
-        <div className={`w-[375px] ${open ? "absolute right-0 top-0 bottom-0" : "hidden"} border-l border-gray-400 xl:border-none  xl:static bg-white p-2 h-full`}>
-            <div className="flex items-start justify-between">
-                <span className="text-xl font-semibold px-1 mx-2">Jan 18th, 2024</span>
-                <button onClick={() => { SetOpen(false) }} className="xl:hidden text-gray-500 focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-400 dark:hover:bg-gray-800 hover:bg-gray-100">
-                    <CloseSvg />
-                </button>
-            </div>
-            <div className="h-full space-y-3 p-1">
-                <Appoint />
-                <Appoint />
-                <Appoint />
-            </div>
-        </div>
-    </div>
-}
-
-
-const Appoint = () => {
-    const [open, SetOpen] = useState(false)
-    return <div className="flex flex-col space-y-1">
-        <div className="flex flex-row items-center justify-between bg-gray-300 rounded-full h-10">
-            <Image
-                src={`https://ui-avatars.com/api/?name=${"MustafaKemal"}`}
-                id="output"
-                width={40}
-                height={40}
-                className="rounded-full"
-                alt="profile image"
-            />
-            <span className="text-center">Mustafa Kemal Gördesli</span>
-            <button onClick={() => SetOpen(s => !s)} className="px-2 hover:bg-gray-500 rounded-full h-full duration-300 transition-all ease-in hover:text-white">
-                {
-                    !open ?
-                        <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-373.847 303.848-549.999h352.304L480-373.847Z" /></svg>
-                        :
-                        <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M303.848-410.001 480-586.153l176.152 176.152H303.848Z" /></svg>
-                }
-            </button>
-        </div>
-        {
-            open && <div className="w-full duration-1000 ease-in transition-all h-20 bg-gray-500">deneme</div>
-        }
     </div>
 }
