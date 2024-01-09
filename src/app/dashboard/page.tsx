@@ -3,18 +3,96 @@ import Notification from "@/components/dashboard/notification"
 
 export default function DashboardPage() {
     return <>
-        <div className="w-full h-full">
-            {/* <SideWindow /> */}
-            <div className="container max-w-screen-sm min-h-96 mx-auto text-white bg-black bg-opacity-30 flex flex-col">
-                <div className="text-lg">Enjoy Your Day!</div>
-                <div>You don&apos;t have any appointments today</div>
-                <button className="flex items-center px-2 py-1 border border-white gap-1 rounded-sm w-40">
-                    <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
-                    <span className="">APPOINTMENT</span>
-                </button>
-            </div>
+      <div className="w-full h-full">
+        <div className="container max-w-screen-sm min-h-[90vh] py-4 px-8 mx-auto text-white bg-black/80 flex flex-col m-4">        
+          <ol className="relative border-s border-gray-200">                  
+            <li className="mb-10 ms-8">
+              <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3">
+                <svg className="w-2.5 h-2.5 text-blue-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                  </svg>
+              </span>
+              <h3 className="flex items-center mb-2 font-semibold">Rendezvous Name
+              </h3>
+              <div className="w-full flex flex-row justify-between items-center font-medium text-gray-100 leading-none text-sm mb-4">
+                <time className="block mb-2 leading-none">JAN 9, 2024 - 12:00 AM</time>
+                <time className="block mb-2">Mary Caroline</time>
+                <span>45$</span>
+              </div> 
+              <div className="w-full flex flex-row justify-end items-end gap-4 font-medium text-gray-100 leading-none text-sm">
+                  <button type="button" className="bg-transparent font-medium text-xs px-4 py-1.5 text-blue-500 hover:underline inline-flex items-center" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                    <svg className="w-2.5 h-2.5 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    Dismiss
+                  </button>
+                  <button type="button" className="font-medium text-xs px-4 py-1.5 text-center inline-flex items-center text-red-600 hover:underline">
+                  <svg className="w-2 h-2 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                  </svg>
+                    Cancel
+                  </button>
+              </div>       
+            </li>
+            <li className="mb-10 ms-8">
+              <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3">
+                <svg className="w-2.5 h-2.5 text-blue-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                  </svg>
+                </span>
+                <h3 className="flex items-center mb-2 font-semibold">Rendezvous Name
+                </h3>
+                <div className="w-full flex flex-row justify-between items-center font-medium text-gray-100 leading-none text-sm mb-4">
+                  <time className="block mb-2 leading-none">JAN 9, 2024 - 12:00 AM</time>
+                  <time className="block mb-2">Mary Caroline</time>
+                  <span>45$</span>
+                </div> 
+              <div className="w-full flex flex-row justify-end items-end gap-4 font-medium text-gray-100 leading-none text-sm">
+                  <button type="button" className="bg-transparent font-medium text-xs px-4 py-1.5 text-blue-500 hover:underline inline-flex items-center" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                    <svg className="w-2.5 h-2.5 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    Dismiss
+                  </button>
+                  <button type="button" className="font-medium text-xs px-4 py-1.5 text-center inline-flex items-center text-red-600 hover:underline">
+                  <svg className="w-2 h-2 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                  </svg>
+                    Cancel
+                  </button>
+                </div>         
+            </li>
+            <li className="mb-10 ms-8">
+              <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3">
+                <svg className="w-2.5 h-2.5 text-blue-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                  </svg>
+                </span>
+                <h3 className="flex items-center mb-2 font-semibold">Rendezvous Name
+                </h3>
+                <div className="w-full flex flex-row justify-between items-center font-medium text-gray-100 leading-none text-sm mb-4">
+                  <time className="block mb-2 leading-none">JAN 9, 2024 - 12:00 AM</time>
+                  <time className="block mb-2">Mary Caroline</time>
+                  <span>45$</span>
+                </div> 
+                <div className="w-full flex flex-row justify-end items-end gap-4 font-medium text-gray-100 leading-none text-sm">
+                  <button type="button" className="bg-transparent font-medium text-xs px-4 py-1.5 text-blue-500 hover:underline inline-flex items-center" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                    <svg className="w-2.5 h-2.5 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                    </svg>
+                    Dismiss
+                  </button>
+                  <button type="button" className="font-medium text-xs px-4 py-1.5 text-center inline-flex items-center text-red-600 hover:underline">
+                  <svg className="w-2 h-2 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                  </svg>
+                    Cancel
+                  </button>
+                </div>        
+            </li>
+          </ol>
         </div>
+      </div>
         {/* <Notification /> */}
     </>
 
