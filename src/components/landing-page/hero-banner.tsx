@@ -9,7 +9,7 @@ const HeroBanner = () => {
           <div className="w-full h-full flex lg:flex-row justify-between items-center gap-8">
             <div className="text-start font-semibold">
               <h1 className="text-xl tracking-tight leading-none text-gray-100 md:text-2xl lg:text-3xl">
-                Customer and Business 
+                Customer and Business
                 <span className="text-lime-400"> Rendezvous </span>
                 Management.
               </h1>
@@ -21,7 +21,7 @@ const HeroBanner = () => {
                   <span className="text-xs w-full flex flex-row items-center justify-between gap-1.5">
                     Get started
                     <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                     </svg>
                   </span>
                 </button>
@@ -29,14 +29,14 @@ const HeroBanner = () => {
             </div>
             <div className="hidden lg:flex flex-col justify-center items-center h-64 w-full relative">
               <Image
-              alt=""
-              src="/1.jpg"
-              fill
-              className="absolute object-cover"
+                alt=""
+                src="/appointment.svg"
+                fill
+                className="absolute object-cover"
               />
             </div>
           </div>
-          
+
           {/* <div className="my-4">
           <form className="flex items-center justify-center w-full ">
             <div className="relative">

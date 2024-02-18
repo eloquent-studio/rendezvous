@@ -33,14 +33,14 @@ const Navbar = () => {
               <button
                 type="button"
                 className="border border-slate-100 py-0.5 md:py-1 px-3 md:px-4 text-xs font-bold focus:outline-none bg-transparent rounded-lg hover:text-slate-100 hover:bg-slate-900 hover:border-slate-950 focus:z-10 focus:ring-4 focus:ring-gray-200 duration-500 transition-all ease-in"
-                >
-                  Join
-                </button>
-                </Link>
+              >
+                Join
+              </button>
+            </Link>
           </div>
         </div>
         <hr className='min-w-full' />
-        <div className='flex flex-row items-center justify-between w-full font-semibold text-xs pt-1'>
+        <div className='flex flex-row items-center justify-between w-full font-semibold text-xs pt-2'>
           {active &&
             <>
               <Link href="/">Business</Link>
