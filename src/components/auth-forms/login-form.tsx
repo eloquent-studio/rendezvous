@@ -5,6 +5,7 @@ import Input from "../props/input";
 import Button from "../props/button";
 import { GoogleOutlined } from "@ant-design/icons";
 import { signIn } from "next-auth/react"
+import Link from "next/link";
 
 const LoginForm = () => {
 
@@ -60,14 +61,24 @@ const LoginForm = () => {
             large
           />
           {/* onClick={variant === "user" ? userLogin : businessLogin} */}
-          <p className="my-4 pt-1 text-sm font-medium text-center">
-            Sign in as
-            <a
-              onClick={toggleVariant}
-              className="text-lime-500 transition duration-150 ease-in-out hover:text-lime-600 focus:text-lime-600 active:text-lime-700 cursor-pointer">
-              {variant === "user" ? " Seller?" : " User"}
-            </a>
-          </p>
+          <div className="my-2 sm:my-4 flex flex-col lg:flex-row items-center justify-center gap-1">
+            <p className="pt-1 text-sm font-medium text-center lg:w-1/2">
+              Don&apos;t have an account yet?
+              <button
+                onClick={toggleVariant}
+                className="text-lime-500 ml-1 py-1 sm:py-0 transition duration-150 ease-in-out hover:text-lime-600 focus:text-lime-600 active:text-lime-700 cursor-pointer">
+                {variant === "user" ? " Seller?" : " User"}
+              </button>
+            </p>
+            <p className=" pt-1 text-sm font-medium text-center lg:w-1/2">
+              Already have an account?
+              <Link
+                href="/register"
+                className="text-lime-500 ml-1 py-1 sm:py-0 transition duration-150 ease-in-out hover:text-lime-600 focus:text-lime-600 active:text-lime-700 cursor-pointer">
+                Register
+              </Link>
+            </p>
+          </div>
           {variant == "user" && <Button type="button" onClick={() => signIn('google')} fullWidth large className="flex items-center justify-center"><GoogleOutlined className="mr-0.5" />Log in with Google</Button>}
         </div>
       </form>
