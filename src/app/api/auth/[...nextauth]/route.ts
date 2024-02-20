@@ -26,10 +26,7 @@ export const authOptions: NextAuthOptions = {
                 });
                 if (!user) {
                     const newUser = {
-                        //@ts-ignore
-                        firstname: profile?.given_name,
-                        //@ts-ignore
-                        lastname: profile?.family_name,
+                        fullname: profile?.name,
                         email: profile?.email || '',
                         password: '--------------------',
                     };

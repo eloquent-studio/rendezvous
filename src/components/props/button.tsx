@@ -1,21 +1,23 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react'
 
 interface ButtonProps {
-  label: string
+  label?: string
   secondary?: boolean
   fullWidth?: boolean
   disabled?: boolean
   large?: boolean
-  type?: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+  type?: "submit" | "button"
   onClick?: () => void
+  children?: React.ReactNode
+  className?: string
 }
 
-const Button = ({ label, secondary, fullWidth, large, type, onClick, disabled }: ButtonProps) => {
+const Button = ({ label, secondary, fullWidth, large, type = "submit", onClick, disabled, children, className = "" }: ButtonProps) => {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      type="submit"
+      type={type}
       className={`rounded-full text-center text-semibold transition-all ease-in duration-500 text-sm border border-gray-950
     ${fullWidth ? 'w-full' : 'w-fit'} 
     ${secondary ? 'bg-transparent' : 'bg-zinc-100'} 
@@ -25,8 +27,9 @@ const Button = ({ label, secondary, fullWidth, large, type, onClick, disabled }:
     ${large ? 'font-bold' : 'font-bold'}
     ${large ? 'px-8' : 'px-4'}
     ${large ? 'py-2' : 'py-1'}
+    ${className}
     `} >
-      {label}
+      {label}{children}
     </button>
   )
 }

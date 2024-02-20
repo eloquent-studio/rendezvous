@@ -13,9 +13,9 @@ datasource db {
 model User {
   id         Int         @id @default(autoincrement())
   email      String      @unique
-  firstname  String?
-  lastname   String?
+  fullname   String?
   password   String
+  role       Role        @default(USER)
   ResetToken ResetToken?
 }
 
@@ -25,4 +25,9 @@ model ResetToken {
   userId    Int      @unique
   token     String   @unique
   createdAt DateTime @default(now())
+}
+
+enum Role {
+  USER
+  BUSINESS
 }
