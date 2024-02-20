@@ -9,10 +9,16 @@ const EXP_TIME = 24 * 60 * 60 * 30;
 
 const loginSchema = z.object({
     password: z
-        .string({ invalid_type_error: 'Password is required' })
-        .min(6, { message: 'Password is required' }),
+        .string({
+            invalid_type_error: 'Password is required',
+            required_error: 'Password is required',
+        })
+        .min(6, { message: 'Password must be minimum 6 characters' }),
     email: z
-        .string({ invalid_type_error: 'Email is required' })
+        .string({
+            invalid_type_error: 'Email is required',
+            required_error: 'Email is required',
+        })
         .email('This is not a valid email.'),
 });
 
@@ -49,7 +55,11 @@ export async function LogInAction(prevState: any, formData: FormData) {
 
         user.password = '';
 
-        const token = await createJwtToken({ id: user.id, email: user.email });
+        const token = await createJwtToken({
+            id: user.id,
+            email: user.email,
+            role: user.role,
+        });
 
         const cookieStore = cookies();
 
@@ -62,6 +72,23 @@ export async function LogInAction(prevState: any, formData: FormData) {
             maxAge: EXP_TIME,
         });
     } catch (err) {
+        if (err instanceof Error && err.name == 'ZodError') {
+            const errors = {
+                email: '',
+                password: '',
+            };
+
+            [...JSON.parse(err.message)].forEach((item) => {
+                if (item?.path[0] == 'email') {
+                    errors.email = item?.message || '';
+                }
+                if (item?.path[0] == 'password') {
+                    errors.password = item?.message || '';
+                }
+            });
+
+            return errors;
+        }
         return {
             email: '',
             password: '',

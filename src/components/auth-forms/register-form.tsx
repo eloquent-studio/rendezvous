@@ -108,6 +108,7 @@ const RegisterForm = ({ next }: { next: string }) => {
             <p className="pt-1 text-sm font-medium text-center lg:w-1/2">
               Become a
               <button
+                type="button"
                 onClick={toggleVariant}
                 className="text-lime-500 ml-1 py-1 sm:py-0 transition duration-150 ease-in-out hover:text-lime-600 focus:text-lime-600 active:text-lime-700 cursor-pointer">
                 {variant === "user" ? " Seller?" : " User"}

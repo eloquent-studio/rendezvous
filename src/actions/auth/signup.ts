@@ -64,6 +64,7 @@ export async function SignUpAction(prevState: any, formData: FormData) {
         const token = await createJwtToken({
             id: savedUser.id,
             email: savedUser.email,
+            role: savedUser.role,
         });
 
         const cookieStore = cookies();
@@ -77,7 +78,23 @@ export async function SignUpAction(prevState: any, formData: FormData) {
             maxAge: EXP_TIME,
         });
     } catch (err) {
-        console.log(err);
+        if (err instanceof Error && err.name == 'ZodError') {
+            const errors = {
+                email: '',
+                password: '',
+            };
+
+            [...JSON.parse(err.message)].forEach((item) => {
+                if (item?.path[0] == 'email') {
+                    errors.email = item?.message || '';
+                }
+                if (item?.path[0] == 'password') {
+                    errors.password = item?.message || '';
+                }
+            });
+
+            return errors;
+        }
         return {
             email: '',
             password: '',

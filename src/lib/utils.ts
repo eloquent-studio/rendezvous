@@ -1,7 +1,11 @@
 import { SignJWT } from 'jose';
 import { getJwtSecretKey } from '@/lib/auth';
 
-export async function createJwtToken(payload: { id: Number; email: string }) {
+export async function createJwtToken(payload: {
+    id: Number;
+    email: string;
+    role: string;
+}) {
     return await new SignJWT(payload)
         .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
