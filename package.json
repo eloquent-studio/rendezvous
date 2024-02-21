@@ -19,12 +19,14 @@
         "jose": "^5.2.2",
         "next": "14.0.4",
         "next-auth": "^4.24.6",
+        "nodemailer": "^6.9.9",
         "react": "^18",
         "react-dom": "^18",
         "zustand": "^4.4.7"
     },
     "devDependencies": {
         "@types/node": "^20",
+        "@types/nodemailer": "^6.4.14",
         "@types/react": "^18",
         "@types/react-dom": "^18",
         "autoprefixer": "^10.0.1",
