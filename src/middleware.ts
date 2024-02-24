@@ -46,7 +46,14 @@ export async function middleware(request: NextRequest) {
         return response;
     }
 
-    return NextResponse.next();
+    const headers = new Headers(request.headers);
+    headers.set('id', hasVerifiedToken.id);
+
+    return NextResponse.next({
+        request: {
+            headers,
+        },
+    });
 }
 
 export const config = {
