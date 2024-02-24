@@ -17,7 +17,7 @@ export async function verifyJwtToken(token: string) {
             getJwtSecretKey()
         );
 
-        return { email: payload?.email, id: payload?.id };
+        return { email: payload?.email, id: payload?.id, role: payload?.role };
     } catch (error) {
         return null;
     }

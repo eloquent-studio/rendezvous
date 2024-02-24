@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyJwtToken } from '@/lib/auth';
+import { ROLES } from './lib/constants';
 
 const AUTH_PAGES = ['/login', '/register', '/forgotpassword', '/resetpassword'];
+
+const BUSSINESS_PAGES = ['/dashboard'];
+
+const isBusinessPages = (url: string) =>
+    BUSSINESS_PAGES.some((page) => page.startsWith(url));
 
 const isAuthPages = (url: string) =>
     AUTH_PAGES.some((page) => page.startsWith(url));
@@ -11,6 +17,7 @@ export async function middleware(request: NextRequest) {
     const { value: token } = cookies.get('token') ?? { value: null };
 
     const hasVerifiedToken = token && (await verifyJwtToken(token));
+    console.log(hasVerifiedToken);
     const isAuthPageRequested = isAuthPages(nextUrl.pathname);
 
     if (isAuthPageRequested) {
@@ -24,7 +31,10 @@ export async function middleware(request: NextRequest) {
         return response;
     }
 
-    if (!hasVerifiedToken) {
+    if (
+        !hasVerifiedToken ||
+        (isBusinessPages(nextUrl.pathname) && hasVerifiedToken.role != ROLES[1])
+    ) {
         const searchParams = new URLSearchParams(nextUrl.searchParams);
         searchParams.set('next', nextUrl.pathname);
 
@@ -36,9 +46,22 @@ export async function middleware(request: NextRequest) {
         return response;
     }
 
-    return NextResponse.next();
+    const headers = new Headers(request.headers);
+    headers.set('id', hasVerifiedToken.id);
+
+    return NextResponse.next({
+        request: {
+            headers,
+        },
+    });
 }
 
 export const config = {
-    matcher: ['/login', '/register', '/forgotpassword', '/resetpassword'],
+    matcher: [
+        '/login',
+        '/register',
+        '/forgotpassword',
+        '/resetpassword',
+        '/dashboard/:path*',
+    ],
 };

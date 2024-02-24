@@ -22,13 +22,13 @@ export default function DashboardPage() {
             <div className="w-full flex flex-row justify-end items-end gap-4 font-medium text-gray-100 leading-none text-sm">
               <button type="button" className="bg-transparent font-medium text-xs px-4 py-1.5 text-blue-500 hover:underline inline-flex items-center" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
                 <svg className="w-2.5 h-2.5 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5.917 5.724 10.5 15 1.5" />
                 </svg>
                 Dismiss
               </button>
               <button type="button" className="font-medium text-xs px-4 py-1.5 text-center inline-flex items-center text-red-600 hover:underline">
                 <svg className="w-2 h-2 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                 </svg>
                 Cancel
               </button>
@@ -50,13 +50,13 @@ export default function DashboardPage() {
             <div className="w-full flex flex-row justify-end items-end gap-4 font-medium text-gray-100 leading-none text-sm">
               <button type="button" className="bg-transparent font-medium text-xs px-4 py-1.5 text-blue-500 hover:underline inline-flex items-center" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
                 <svg className="w-2.5 h-2.5 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5.917 5.724 10.5 15 1.5" />
                 </svg>
                 Dismiss
               </button>
               <button type="button" className="font-medium text-xs px-4 py-1.5 text-center inline-flex items-center text-red-600 hover:underline">
                 <svg className="w-2 h-2 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                 </svg>
                 Cancel
               </button>
@@ -78,13 +78,13 @@ export default function DashboardPage() {
             <div className="w-full flex flex-row justify-end items-end gap-4 font-medium text-gray-100 leading-none text-sm">
               <button type="button" className="bg-transparent font-medium text-xs px-4 py-1.5 text-blue-500 hover:underline inline-flex items-center" data-dismiss-target="#alert-additional-content-2" aria-label="Close">
                 <svg className="w-2.5 h-2.5 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5" />
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5.917 5.724 10.5 15 1.5" />
                 </svg>
                 Dismiss
               </button>
               <button type="button" className="font-medium text-xs px-4 py-1.5 text-center inline-flex items-center text-red-600 hover:underline">
                 <svg className="w-2 h-2 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                 </svg>
                 Cancel
               </button>
