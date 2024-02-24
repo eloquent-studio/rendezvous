@@ -7,6 +7,12 @@ export const fetchUser = createAsyncThunk(
         try {
             const user = await prisma.user.findUnique({
                 where: { id: id },
+                select: {
+                    id: true,
+                    email: true,
+                    fullname: true,
+                    role: true,
+                },
             });
             return user;
         } catch (error) {
