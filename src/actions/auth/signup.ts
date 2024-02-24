@@ -23,7 +23,6 @@ import { createJwtToken } from '@/lib/utils';
 import { redirect } from 'next/navigation';
 
 export async function SignUpAction(prevState: any, formData: FormData) {
-    console.log(formData);
     try {
         const isValidData = createSchema.parse({
             email: formData.get('email'),

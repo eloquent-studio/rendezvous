@@ -7,7 +7,10 @@ import BusinessSetting from "@/components/dashboard/settings/business";
 const NOTSELECTEDBUTTON = "rounded-full bg-slate-400 font-normal p-2 mx-4 flex items-center"
 const SELECTEDBUTTON = "rounded-l-full bg-slate-100 font-normal p-2 ml-4 flex items-center"
 
-export default function Tabbar() {
+export default function Tabbar({ user }: { user: any }) {
+
+    console.log("user", user)
+
     const [selectedBtn, SetSelectedBtn] = useState(-1)
 
     useEffect(() => {
@@ -41,7 +44,7 @@ export default function Tabbar() {
         <div className={`bg-slate-100 md:block w-full h-full ${selectedBtn >= 0 ? "block" : "hidden"}`}>
             <div className="max-w-xl p-2 md:p-4">
                 {
-                    selectedBtn == 0 && <ProfileSetting><BackButton onClick={() => SetSelectedBtn(-1)}></BackButton></ProfileSetting>
+                    selectedBtn == 0 && <ProfileSetting user={user}><BackButton onClick={() => SetSelectedBtn(-1)}></BackButton></ProfileSetting>
                 }
                 {
                     selectedBtn == 1 && <BusinessSetting><BackButton onClick={() => SetSelectedBtn(-1)}></BackButton></BusinessSetting>
