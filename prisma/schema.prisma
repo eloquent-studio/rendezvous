@@ -17,6 +17,10 @@ model User {
   password   String
   role       Role        @default(USER)
   ResetToken ResetToken?
+
+
+  isTwoFactorEnabled Boolean @default(false)
+  twoFactorConfirmation TwoFactorConfirmation?
 }
 
 model ResetToken {
@@ -30,4 +34,22 @@ model ResetToken {
 enum Role {
   USER
   BUSINESS
+}
+
+model TwoFactorToken {
+  id        Int      @id @default(autoincrement())
+  email String
+  token String @unique
+  expiresAt DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+  id        Int      @id @default(autoincrement())
+  userId Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
 }

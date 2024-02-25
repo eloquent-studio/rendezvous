@@ -28,7 +28,7 @@ const LoginForm = ({ next }: { next: string }) => {
   }, []);
 
   const [passwordShow, SetPasswordShow] = useState(false)
-
+  const [twoFactorAuth, SetTwoFactorAuth] = useState(false)
 
   return (
     <div className="flex flex-row justify-center items-center h-full w-screen">
@@ -42,7 +42,9 @@ const LoginForm = ({ next }: { next: string }) => {
           </p>
         </div>
         <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300"></div>
-        <div className="mb-6">
+        {!twoFactorAuth &&
+          <>
+            <div className="mb-6">
           <label
             htmlFor="email"
             className="block mb-2 text-sm font-medium">
@@ -79,12 +81,27 @@ const LoginForm = ({ next }: { next: string }) => {
             <p className="text-xs font-medium text-red-600">{state.password}</p>
           )}
         </div>
+          </>
+        }
+        {twoFactorAuth && 
+        <div className="mb-6">
+          <label
+            htmlFor="TFACode"
+            className="block mb-2 text-sm font-medium">
+            Email
+          </label>
+          <Input
+            placeholder="123456"
+            type="number"
+            name="TFACode"
+          />
+        </div> }
 
         <input type="hidden" value={next} name="next" />
 
         <div className="text-center">
           <Button
-            label="Sign In"
+            label={twoFactorAuth ? "Confirm" : "Sign In"}
             fullWidth
             large
           />
