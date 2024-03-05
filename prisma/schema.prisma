@@ -18,8 +18,9 @@ model User {
   role       Role        @default(USER)
   ResetToken ResetToken?
 
+  businessAccount BusinessAccount?
 
-  isTwoFactorEnabled Boolean @default(false)
+  isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
 }
 
@@ -38,16 +39,29 @@ enum Role {
 
 model TwoFactorToken {
   id        Int      @id @default(autoincrement())
-  email String
-  token String @unique
+  email     String
+  token     String   @unique
   expiresAt DateTime
 
   @@unique([email, token])
 }
 
 model TwoFactorConfirmation {
-  id        Int      @id @default(autoincrement())
+  id     Int @id @default(autoincrement())
   userId Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
+}
+
+model BusinessAccount {
+  id         Int     @id @default(autoincrement())
+  profession String
+  name       String
+  location   String?
+  image      String?
+  userId     Int
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
