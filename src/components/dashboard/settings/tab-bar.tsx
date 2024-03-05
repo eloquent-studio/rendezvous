@@ -7,7 +7,7 @@ import BusinessSetting from "@/components/dashboard/settings/business";
 const NOTSELECTEDBUTTON = "rounded-full bg-slate-400 font-normal p-2 mx-4 flex items-center"
 const SELECTEDBUTTON = "rounded-l-full bg-slate-100 font-normal p-2 ml-4 flex items-center"
 
-export default function Tabbar({ user }: { user: any }) {
+export default function Tabbar({ user, updatedInfo }: { user: any, updatedInfo: any }) {
 
     console.log("user", user)
 
@@ -47,7 +47,10 @@ export default function Tabbar({ user }: { user: any }) {
                     selectedBtn == 0 && <ProfileSetting user={user}><BackButton onClick={() => SetSelectedBtn(-1)}></BackButton></ProfileSetting>
                 }
                 {
-                    selectedBtn == 1 && <BusinessSetting><BackButton onClick={() => SetSelectedBtn(-1)}></BackButton></BusinessSetting>
+                    selectedBtn == 1 && <BusinessSetting
+                    user={user}
+                    updatedInfo={updatedInfo}
+                    ><BackButton onClick={() => SetSelectedBtn(-1)}></BackButton></BusinessSetting>
                 }
             </div>
         </div>
