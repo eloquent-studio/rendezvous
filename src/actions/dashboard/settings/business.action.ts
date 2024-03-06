@@ -1,13 +1,13 @@
-'use server';
+"use server";
 
-import { z } from 'zod';
-import prisma from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
+import { z } from "zod";
+import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 const createSchema = z.object({
   name: z.string().min(1),
   profession: z.string(),
-  location: z.string()
+  location: z.string(),
 });
 
 export async function UpdateBusinessDetails(
@@ -17,59 +17,67 @@ export async function UpdateBusinessDetails(
 ) {
   try {
     const isValidData = createSchema.parse({
-      name: formData.get('name'),
-      profession: formData.get('profession'),
-      location: formData.get('location'),
+      name: formData.get("name"),
+      profession: formData.get("profession"),
+      location: formData.get("location"),
     });
+
+    console.log("ISV", isValidData);
 
     const user = await prisma.user.findUnique({
       where: {
-      id: Number(userId),
-    },
+        id: Number(userId),
+      },
     });
 
-    console.log("USER::::", user)
+    if (!user) return { error: "User not found" };
 
-    const updated = await prisma.businessAccount.create({
-      data: {
+    const updated = await prisma.businessAccount.upsert({
+      where: {
+        userId: user.id,
+      },
+      create: {
         name: isValidData.name,
         location: isValidData.location,
         profession: isValidData.profession,
-        user: { connect: { id: Number(userId)}}
-      }
+        userId: user.id,
+      },
+      update: {
+        name: isValidData.name,
+        location: isValidData.location,
+        profession: isValidData.profession,
+      },
     });
 
-    console.log("UPDATED::::",updated)
+    console.log("UPDATED::::", updated);
   } catch (err) {
-    if (err instanceof Error && err.name == 'ZodError') {
+    console.log(err);
+    if (err instanceof Error && err.name == "ZodError") {
       const errors = {
-        email: '',
+        name: "",
       };
-        
+
       [...JSON.parse(err.message)].forEach((item) => {
-        if (item?.path[0] == 'email') {
-          errors.email = item?.message || '';
+        if (item?.path[0] == "name") {
+          errors.name = item?.message || "";
         }
       });
 
-        return errors;
+      return errors;
     }
     return {
-      email: '',
+      name: "",
     };
   }
 
-  revalidatePath('/dashboard/settings');
+  revalidatePath("/dashboard/settings");
 
   return {
-      email: '',
+    name: "",
   };
 }
 
-
-export async function GetBusinessDetails(
-  userId: Number,
-) {
+export async function GetBusinessDetails(userId: Number) {
   try {
     const user = await prisma.user.findUnique({
       where: {
@@ -77,16 +85,13 @@ export async function GetBusinessDetails(
       },
     });
 
-    console.log(user)
-
     const businessAccount = await prisma.businessAccount.findUnique({
-      where: { id: Number(userId)},
-      include: { user: true }
-    })
+      where: { id: Number(userId) },
+      include: { user: true },
+    });
 
-    console.log(businessAccount)
-    return businessAccount
+    return businessAccount;
   } catch (error) {
-    throw new Error("Failed to fetch business information!")
+    throw new Error("Failed to fetch business information!");
   }
 }

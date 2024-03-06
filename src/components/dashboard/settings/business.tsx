@@ -5,8 +5,8 @@ import { GetBusinessDetails, UpdateBusinessDetails } from "@/actions/dashboard/s
 import { useFormState } from "react-dom";
 import { SubmitButton } from "../submit-button";
 
-const initialState: { email: string } = {
-  email: "",
+const initialState: { name: string } = {
+  name: "",
 };
 
 export default function BusinessSetting({
@@ -18,7 +18,8 @@ export default function BusinessSetting({
   children: React.ReactNode,
   updatedInfo: any
 }) {
-  // console.log(updatedInfo)
+
+  console.log(updatedInfo)
 
   const updateUserWithId = UpdateBusinessDetails.bind(null, user.id)
 
@@ -30,15 +31,15 @@ export default function BusinessSetting({
         {children}
         <span className="ml-2 text-xl">Business Details</span>
       </div>
-      <form 
-      action={formAction}
-      className="space-y-2 border border-gray-300 rounded-sm p-4 m-2">
+      <form
+        action={formAction}
+        className="space-y-2 border border-gray-300 rounded-sm p-4 m-2">
         <div className="relative">
           <select
-          defaultValue={updatedInfo?.profession || ""}
-          name="profession"
-          id="profession" 
-          className="block pl-4 px-2.5 py-3 appearance-none w-full bg-transparent border border-gray-300 hover:border-gray-500 rounded leading-tight focus:outline-none focus:shadow-outline">
+            defaultValue={updatedInfo?.profession || ""}
+            name="profession"
+            id="profession"
+            className="block pl-4 px-2.5 py-3 appearance-none w-full bg-transparent border border-gray-300 hover:border-gray-500 rounded leading-tight focus:outline-none focus:shadow-outline">
             <option>Dentist</option>
             <option>Engineer</option>
             <option>Chemist</option>

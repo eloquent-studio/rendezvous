@@ -9,8 +9,6 @@ const SELECTEDBUTTON = "rounded-l-full bg-slate-100 font-normal p-2 ml-4 flex it
 
 export default function Tabbar({ user, updatedInfo }: { user: any, updatedInfo: any }) {
 
-    console.log("user", user)
-
     const [selectedBtn, SetSelectedBtn] = useState(-1)
 
     useEffect(() => {
@@ -48,8 +46,8 @@ export default function Tabbar({ user, updatedInfo }: { user: any, updatedInfo: 
                 }
                 {
                     selectedBtn == 1 && <BusinessSetting
-                    user={user}
-                    updatedInfo={updatedInfo}
+                        user={user}
+                        updatedInfo={updatedInfo}
                     ><BackButton onClick={() => SetSelectedBtn(-1)}></BackButton></BusinessSetting>
                 }
             </div>
