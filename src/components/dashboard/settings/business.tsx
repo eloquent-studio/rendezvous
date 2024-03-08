@@ -19,8 +19,6 @@ export default function BusinessSetting({
   updatedInfo: any
 }) {
 
-  console.log(updatedInfo)
-
   const updateUserWithId = UpdateBusinessDetails.bind(null, user.id)
 
   const [state, formAction] = useFormState(updateUserWithId, initialState)
@@ -36,22 +34,13 @@ export default function BusinessSetting({
         className="space-y-2 border border-gray-300 rounded-sm p-4 m-2">
         <div className="relative">
           <select
-            defaultValue={updatedInfo?.profession || ""}
-            name="profession"
             id="profession"
+            name="profession"
             className="block pl-4 px-2.5 py-3 appearance-none w-full bg-transparent border border-gray-300 hover:border-gray-500 rounded leading-tight focus:outline-none focus:shadow-outline">
-            <option>Dentist</option>
-            <option>Engineer</option>
-            <option>Chemist</option>
-            <option>Dentist</option>
-            <option>Engineer</option>
-            <option>Chemist</option>
-            <option>Dentist</option>
-            <option>Engineer</option>
-            <option>Chemist</option>
-            <option>Dentist</option>
-            <option>Engineer</option>
-            <option>Chemist</option>
+            {updatedInfo?.profession && <option>{updatedInfo.profession}</option>}
+            <option value="Dentist">Dentist</option>
+            <option value="Engineer">Engineer</option>
+            <option value="Chemist">Chemist</option>
           </select>
           <label
             htmlFor="profession"

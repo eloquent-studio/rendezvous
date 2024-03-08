@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 const createSchema = z.object({
-  name: z.string().min(1),
+  name: z.string(),
   profession: z.string(),
   location: z.string(),
 });
@@ -15,14 +15,13 @@ export async function UpdateBusinessDetails(
   prevState: any,
   formData: FormData
 ) {
+  console.log(formData);
   try {
     const isValidData = createSchema.parse({
       name: formData.get("name"),
       profession: formData.get("profession"),
       location: formData.get("location"),
     });
-
-    console.log("ISV", isValidData);
 
     const user = await prisma.user.findUnique({
       where: {
@@ -48,8 +47,6 @@ export async function UpdateBusinessDetails(
         profession: isValidData.profession,
       },
     });
-
-    console.log("UPDATED::::", updated);
   } catch (err) {
     console.log(err);
     if (err instanceof Error && err.name == "ZodError") {
@@ -86,8 +83,7 @@ export async function GetBusinessDetails(userId: Number) {
     });
 
     const businessAccount = await prisma.businessAccount.findUnique({
-      where: { id: Number(userId) },
-      include: { user: true },
+      where: { userId: Number(userId) },
     });
 
     return businessAccount;
