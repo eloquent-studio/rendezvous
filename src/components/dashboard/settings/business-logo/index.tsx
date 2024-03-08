@@ -1,11 +1,11 @@
 'use client';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { UpdateBusinessImage } from '@/actions/dashboard/settings/business';
 import styles from './style.module.css';
 
 export default function BusinessLogoUpdate() {
 
-    const loadFile: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const loadFile: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
         const inputElement = event.target as HTMLInputElement;
         const imageElement = document.getElementById('output') as HTMLImageElement;
 
@@ -17,8 +17,9 @@ export default function BusinessLogoUpdate() {
             const formData = new FormData();
             formData.append('image', file);
 
-            // FormData'yu kullanarak başka bir şey yapabilirsiniz.
-            // Örneğin, bu FormData'yı bir API'ye göndermek için kullanabilirsiniz.
+            const res = await UpdateBusinessImage(formData)
+
+            console.log(res)
         }
     };
 
@@ -26,9 +27,9 @@ export default function BusinessLogoUpdate() {
         <div className="mt-3 mb-3 border border-gray-300 max-w-[500px] space-y-2 rounded-sm p-4 m-2">
             <div>
                 <span className="text-lg">
-                    Business Details
+                    Business Logo
                 </span>
-                <p>Your logo will be displayed on the top left of the booking portal, and all customer notifications (optional)</p>
+                {/* <p>Your logo will be displayed on the top left of the booking portal, and all customer notifications (optional)</p> */}
             </div>
             <div className="h-[165px] w-[165px]">
                 <div className={styles.profilePic}>
@@ -55,7 +56,6 @@ export default function BusinessLogoUpdate() {
                         src={
                             `/1.jpg`
                         }
-                        // src={user?.photoUrl ? imageService + user?.photoUrl : `/12.jpg`}
                         id="output"
                         className={`${styles.profileImage}`}
                         width={165}

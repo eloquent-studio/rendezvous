@@ -8,6 +8,7 @@ const createSchema = z.object({
   name: z.string(),
   profession: z.string(),
   location: z.string(),
+  bio: z.string(),
 });
 
 export async function UpdateBusinessDetails(
@@ -15,12 +16,12 @@ export async function UpdateBusinessDetails(
   prevState: any,
   formData: FormData
 ) {
-  console.log(formData);
   try {
     const isValidData = createSchema.parse({
       name: formData.get("name"),
       profession: formData.get("profession"),
       location: formData.get("location"),
+      bio: formData.get("bio"),
     });
 
     const user = await prisma.user.findUnique({
@@ -40,11 +41,13 @@ export async function UpdateBusinessDetails(
         location: isValidData.location,
         profession: isValidData.profession,
         userId: user.id,
+        bio: isValidData.bio,
       },
       update: {
         name: isValidData.name,
         location: isValidData.location,
         profession: isValidData.profession,
+        bio: isValidData.bio,
       },
     });
   } catch (err) {
@@ -90,4 +93,14 @@ export async function GetBusinessDetails(userId: Number) {
   } catch (error) {
     throw new Error("Failed to fetch business information!");
   }
+}
+
+export async function UpdateBusinessImage(formData: FormData) {
+  console.log(formData);
+
+  //revalidatePath("/dashboard/settings");
+
+  return {
+    error: "",
+  };
 }

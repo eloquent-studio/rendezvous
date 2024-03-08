@@ -3,7 +3,7 @@ import store from "@/store";
 import Tabbar from "@/components/dashboard/settings/tab-bar";
 import { fetchUser } from '@/store/user';
 import { headers } from 'next/headers'
-import { GetBusinessDetails } from "@/actions/dashboard/settings/business.action";
+import { GetBusinessDetails } from "@/actions/dashboard/settings/business";
 
 export default async function Settings() {
     const headersList = headers()

@@ -62,6 +62,7 @@ model BusinessAccount {
   location   String?
   image      String?
   userId     Int
+  bio        String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

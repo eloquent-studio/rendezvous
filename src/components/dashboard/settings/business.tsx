@@ -1,7 +1,7 @@
 "use client";
 
 import BusinessLogoUpdate from "./business-logo";
-import { GetBusinessDetails, UpdateBusinessDetails } from "@/actions/dashboard/settings/business.action";
+import { GetBusinessDetails, UpdateBusinessDetails } from "@/actions/dashboard/settings/business";
 import { useFormState } from "react-dom";
 import { SubmitButton } from "../submit-button";
 
@@ -104,6 +104,8 @@ export default function BusinessSetting({
             Business Location
           </label>
         </div>
+
+        <textarea id="bio" name="bio" rows={4} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your logo will be displayed on the top left of the booking portal, and all customer notifications (optional)"></textarea>
 
         <SubmitButton>Update</SubmitButton>
       </form>
