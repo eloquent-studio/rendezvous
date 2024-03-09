@@ -58,7 +58,7 @@ model TwoFactorConfirmation {
 model BusinessAccount {
   id         Int     @id @default(autoincrement())
   profession String
-  name       String
+  name       String  @unique
   location   String?
   image      String?
   userId     Int

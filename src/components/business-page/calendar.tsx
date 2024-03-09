@@ -20,7 +20,7 @@ export default function Calendar({ onClick }: { onClick: React.MouseEventHandler
 
                                 <div className="">
                                     <div className="relative w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full dark:bg-gray-600">
-                                        <svg className="w-8 h-8 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                                        <svg className="w-8 h-8 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
                                         <span className="top-0 left-7 absolute w-[18px] h-[18px] text-center flex justify-center items-center bg-green-400 border-2 border-white dark:border-gray-800 rounded-full text-xs ">2</span>
                                     </div>
                                 </div>

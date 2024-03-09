@@ -8,9 +8,6 @@ const SecondaryNavbar = () => {
         <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center font-bold whitespace-nowrap">Rendezvous</span>
         </Link>
-        <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <span className="self-center font-bold whitespace-nowrap">Rendezvous</span>
-        </Link>
       </div>
     </nav>
 

@@ -91,7 +91,7 @@ export async function GetBusinessDetails(userId: Number) {
 
     return businessAccount;
   } catch (error) {
-    throw new Error("Failed to fetch business information!");
+    return null;
   }
 }
 
