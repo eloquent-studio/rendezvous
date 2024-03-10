@@ -19,7 +19,7 @@ const uploadImage = async function ({
 }: {
   fileName?: string;
   // fileBody: Buffer;
-  file: File | FormDataEntryValue;
+  file: File;
   fileContent?: string;
   bucketName?: string;
 }) {

@@ -3,8 +3,7 @@ import Image from 'next/image';
 import { UpdateBusinessImage } from '@/actions/dashboard/settings/business';
 import styles from './style.module.css';
 
-export default function BusinessLogoUpdate() {
-
+export default function BusinessLogoUpdate({ id, image }: { id: string, image: string }) {
     const loadFile: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
         const inputElement = event.target as HTMLInputElement;
         const imageElement = document.getElementById('output') as HTMLImageElement;
@@ -16,10 +15,9 @@ export default function BusinessLogoUpdate() {
 
             const formData = new FormData();
             formData.append('image', file);
+            formData.append("id", id)
 
-            const res = await UpdateBusinessImage(formData)
-
-            console.log(res)
+            await UpdateBusinessImage(formData)
         }
     };
 
@@ -53,9 +51,7 @@ export default function BusinessLogoUpdate() {
                         onChange={loadFile}
                     />
                     <Image
-                        src={
-                            `/1.jpg`
-                        }
+                        src={image ? process.env.NEXT_PUBLIC_AWS_BUCKET_URL + image : "/1.jpg"}
                         id="output"
                         className={`${styles.profileImage}`}
                         width={165}

@@ -3,6 +3,7 @@
 import { z } from "zod";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import uploadImage from "@/lib/upload-image";
 
 const createSchema = z.object({
   name: z.string(),
@@ -96,9 +97,34 @@ export async function GetBusinessDetails(userId: Number) {
 }
 
 export async function UpdateBusinessImage(formData: FormData) {
-  console.log(formData);
+  try {
+    const response = await uploadImage({
+      file: formData.get("image") as File,
+    });
 
-  //revalidatePath("/dashboard/settings");
+    if (!response || response?.result.$metadata.httpStatusCode != 200) {
+      return {
+        error: "Image not uploaded",
+      };
+    }
+
+    const id = Number(formData.get("id"));
+
+    const updated = await prisma.businessAccount.update({
+      where: {
+        id: id,
+      },
+      data: {
+        image: response.filePath,
+      },
+    });
+  } catch (error) {
+    return {
+      error: "Image not uploaded",
+    };
+  }
+
+  revalidatePath("/dashboard/settings");
 
   return {
     error: "",

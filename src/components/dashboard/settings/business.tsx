@@ -110,7 +110,7 @@ export default function BusinessSetting({
         <SubmitButton>Update</SubmitButton>
       </form>
 
-      <BusinessLogoUpdate />
+      <BusinessLogoUpdate id={updatedInfo?.id} image={updatedInfo?.image || ""} />
     </div>
   );
 }

@@ -8,6 +8,12 @@ const nextConfig = {
                 port: '',
                 pathname: '/api/**',
             },
+            {
+                protocol: "https",
+                hostname: "maoiproject.s3.eu-central-1.amazonaws.com",
+                port: "",
+                pathname: "/**",
+            },
         ],
     },
 
