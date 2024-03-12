@@ -5,9 +5,9 @@ import Image from "next/image";
 import React from "react";
 import { useState } from "react";
 
-export default function BusinessPage({ bussiness }: any) {
+export default function BusinessPage({ business }: any) {
   const [modal, SetModal] = useState(false);
-  console.log(bussiness);
+  console.log(business);
   return (
     <>
       <div className="w-full h-full mt-8">
@@ -17,8 +17,8 @@ export default function BusinessPage({ bussiness }: any) {
               <div className="me-3 shrink-0">
                 <Image
                   src={
-                    bussiness?.image
-                      ? process.env.NEXT_PUBLIC_AWS_BUCKET_URL + bussiness.image
+                    business?.image
+                      ? process.env.NEXT_PUBLIC_AWS_BUCKET_URL + business.image
                       : "/1.jpg"
                   }
                   height={192}
@@ -29,19 +29,19 @@ export default function BusinessPage({ bussiness }: any) {
               </div>
               <div>
                 <div className="mb-1 text-base font-semibold leading-none text-gray-900">
-                  <h1 className="uppercase">{bussiness?.name}</h1>
+                  <h1 className="uppercase">{business?.name}</h1>
                 </div>
-                {bussiness?.user?.fullname ? (
+                {business?.user?.fullname ? (
                   <p className="text-sm text-gray-600 font-semibold mb-2">
                     by{" "}
                     <span className="text-black">
-                      {bussiness.user.fullname}
+                      {business.user.fullname}
                     </span>
                   </p>
                 ) : null}
 
-                {bussiness?.bio && (
-                  <p className="mb-4 text-sm">{bussiness.bio}</p>
+                {business?.bio && (
+                  <p className="mb-4 text-sm">{business.bio}</p>
                 )}
                 <ul className="text-sm">
                   <li className="flex items-center mb-2">

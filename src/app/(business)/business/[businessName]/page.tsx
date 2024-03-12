@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import prisma from "@/lib/prisma";
 
 export default async function Page({ params }: { params: { businessName: string } }) {
-  const bussiness = await prisma.businessAccount.findUnique({
+  const business = await prisma.businessAccount.findUnique({
     where: {
       name: params.businessName
     },
@@ -16,7 +16,7 @@ export default async function Page({ params }: { params: { businessName: string 
       }
     }
   })
-  if (!bussiness)
+  if (!business)
     notFound()
-  return <BusinessPage bussiness={bussiness} />
+  return <BusinessPage business={business} />
 }
