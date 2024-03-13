@@ -2,6 +2,7 @@
 import Calendar from "@/components/business-page/calendar";
 import Button from "@/components/props/button";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 
@@ -84,12 +85,12 @@ export default function BusinessPage({ business }: any) {
                   </li>
                 </ul>
                 <div className="flex">
-                  <button
-                    type="button"
+                  <Link
+                    href={`/business/${business.name}/c`}
                     className="inline-flex items-center justify-center w-full px-5 py-2 mt-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
                   >
                     Contact
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
