@@ -1,19 +1,17 @@
 "use client";
-import Calendar from "@/components/business-page/calendar";
 import Button from "@/components/props/button";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 
-export default function BusinessPage({ business }: any) {
+export default function BusinessPage({ business, Calendar }: any) {
   const [modal, SetModal] = useState(false);
-  console.log(business);
   return (
     <>
       <div className="w-full h-full mt-8">
         <main className="max-w-screen-lg w-full h-full mx-auto pt-8 md:pt-0">
-          <div className="w-full flex flex-col gap-1 lg:gap-4 pt-4 h-full md:h-[50vh] justify-center p-4 md:p-0">
+          <div className="w-full flex flex-col gap-1 lg:gap-4 h-full md:h-[40vh] justify-center md:p-0">
             <div className="flex w-full items-center">
               <div className="me-3 shrink-0">
                 <Image
@@ -45,8 +43,8 @@ export default function BusinessPage({ business }: any) {
                   <p className="mb-4 text-sm">{business.bio}</p>
                 )}
                 <ul className="text-sm">
-                  <li className="flex items-center mb-2">
-                    <span className="me-2 font-semibold text-gray-400">
+                  <li className="flex items-center justify-start mb-2">
+                    <span className="me-2 font-semibold text-gray-400 w-5 h-5 flex justify-center items-center">
                       <svg
                         className="w-4 h-4"
                         aria-hidden="true"
@@ -63,11 +61,11 @@ export default function BusinessPage({ business }: any) {
                         />
                       </svg>
                     </span>
-                    <span className="text-blue-600 hover:underline">
-                      Dentist
+                    <span className="text-blue-600 hover:underline text-center">
+                      {business?.profession}
                     </span>
                   </li>
-                  <li className="flex items-start mb-2">
+                  <li className="flex items-center justify-start mb-2">
                     <span className="me-2 font-semibold text-gray-400">
                       <svg
                         className="w-5 h-5"
@@ -79,8 +77,8 @@ export default function BusinessPage({ business }: any) {
                         <path d="M360-440h80v-110h80v110h80v-190l-120-80-120 80v190Zm120 254q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" />
                       </svg>
                     </span>
-                    <span>
-                      16192 Coastal Highway Lewes, Delaware 19958 USA
+                    <span className="text-center">
+                      {/* 16192 Coastal Highway Lewes, Delaware 19958 USA */} {business?.location}
                     </span>
                   </li>
                 </ul>
@@ -96,16 +94,15 @@ export default function BusinessPage({ business }: any) {
             </div>
           </div>
           <div className="w-full h-full p-4 md:p-0 mt-4">
-            <Calendar onClick={() => SetModal(true)} />
+            {Calendar}
           </div>
         </main>
       </div>
       <div
         id="popup-modal"
         tabIndex={-1}
-        className={`${
-          modal ? "flex fixed" : "hidden"
-        } mx-auto z-50 justify-center items-center w-full inset-0 h-full bg-gray-900/40 backdrop-blur-sm backdrop-brightness-5`}
+        className={`${modal ? "flex fixed" : "hidden"
+          } mx-auto z-50 justify-center items-center w-full inset-0 h-full bg-gray-900/40 backdrop-blur-sm backdrop-brightness-5`}
       >
         <div className="relative p-4 w-full max-w-md max-h-full">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 p-4">
@@ -167,10 +164,9 @@ export default function BusinessPage({ business }: any) {
 const Appoint = ({ date, full }: { date: string; full?: boolean }) => {
   return (
     <button
-      className={`rounded-md px-3 py-2 hover border border-gray-300 hover:bg-lime-200 ${
-        full == true &&
+      className={`rounded-md px-3 py-2 hover border border-gray-300 hover:bg-lime-200 ${full == true &&
         "text-white bg-gray-300 rounded focus:outline-none hover:bg-gray-300"
-      }`}
+        }`}
       disabled={full}
     >
       {date}

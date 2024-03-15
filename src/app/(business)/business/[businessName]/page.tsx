@@ -2,6 +2,7 @@ import BusinessPage from "@/components/business-page";
 import { notFound } from "next/navigation";
 import prisma from "@/lib/prisma";
 import SecondaryNavbar from "@/components/business-page/secondary-navbar";
+import Calendar from "@/components/business-page/calendar";
 
 export default async function Page({
   params,
@@ -25,7 +26,7 @@ export default async function Page({
   return (
     <>
       <SecondaryNavbar />
-      <BusinessPage business={business} />
+      <BusinessPage business={business} Calendar={<Calendar />} />
     </>
   );
 }
