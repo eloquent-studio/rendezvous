@@ -23,10 +23,12 @@ export default async function Page({
     },
   });
   if (!business) notFound();
+
+  const username = params.businessName
   return (
     <>
       <SecondaryNavbar />
-      <BusinessPage business={business} Calendar={<Calendar />} />
+      <BusinessPage business={business} Calendar={<Calendar username={username} />} />
     </>
   );
 }
