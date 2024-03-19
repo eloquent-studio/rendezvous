@@ -11,8 +11,11 @@ function getDaysInMonth(year: number, month: number) {
 function getDayOfWeek(year: number, month: number, day: number) {
   return new Date(year, month, day).getDay();
 }
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
-export default function Calendar({ username }: { username: string }) {
+export default function Calendar() {
   function handlePrevMonth() {
     setCurrentDate((prevDate) => {
       const prevMonth =
