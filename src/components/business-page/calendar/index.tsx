@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -11,32 +11,39 @@ function getDaysInMonth(year: number, month: number) {
 function getDayOfWeek(year: number, month: number, day: number) {
   return new Date(year, month, day).getDay();
 }
-
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
-
 export default function Calendar() {
-
   function handlePrevMonth() {
-    setCurrentDate(prevDate => {
-      const prevMonth = prevDate.getMonth() === 0 ? 11 : prevDate.getMonth() - 1;
-      const prevYear = prevDate.getMonth() === 0 ? prevDate.getFullYear() - 1 : prevDate.getFullYear();
+    setCurrentDate((prevDate) => {
+      const prevMonth =
+        prevDate.getMonth() === 0 ? 11 : prevDate.getMonth() - 1;
+      const prevYear =
+        prevDate.getMonth() === 0
+          ? prevDate.getFullYear() - 1
+          : prevDate.getFullYear();
       return new Date(prevYear, prevMonth, 1);
     });
   }
 
   function handleNextMonth() {
-    setCurrentDate(prevDate => {
-      const nextMonth = prevDate.getMonth() === 11 ? 0 : prevDate.getMonth() + 1;
-      const nextYear = prevDate.getMonth() === 11 ? prevDate.getFullYear() + 1 : prevDate.getFullYear();
+    setCurrentDate((prevDate) => {
+      const nextMonth =
+        prevDate.getMonth() === 11 ? 0 : prevDate.getMonth() + 1;
+      const nextYear =
+        prevDate.getMonth() === 11
+          ? prevDate.getFullYear() + 1
+          : prevDate.getFullYear();
       return new Date(nextYear, nextMonth, 1);
     });
   }
 
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [groupedWeeks, SetGroupedWeeks] = useState<{ day: number; month: number; year: number; disabled: boolean; }[][]>([])
+  const [groupedWeeks, SetGroupedWeeks] = useState<
+    { day: number; month: number; year: number; disabled: boolean }[][]
+  >([]);
 
   useEffect(() => {
     const year = currentDate.getFullYear();
@@ -56,7 +63,7 @@ export default function Calendar() {
         day: startingDay + i,
         month: prevMonth,
         year: month === 0 && prevMonth === 11 ? year - 1 : year,
-        disabled: true
+        disabled: true,
       });
     }
 
@@ -65,7 +72,7 @@ export default function Calendar() {
         day: i,
         month,
         year,
-        disabled: false
+        disabled: false,
       });
     }
 
@@ -77,7 +84,7 @@ export default function Calendar() {
         day: i,
         month: nextMonth,
         year: month === 11 ? year + 1 : year,
-        disabled: true
+        disabled: true,
       });
     }
 
@@ -86,21 +93,55 @@ export default function Calendar() {
       tempGroupedWeeks.push(weeks.slice(i * 7, (i + 1) * 7));
     }
 
-    SetGroupedWeeks(tempGroupedWeeks)
+    SetGroupedWeeks(tempGroupedWeeks);
+  }, [currentDate]);
 
-  }, [currentDate])
-
-
+  const monthName = currentDate.toLocaleString('default', { month: 'long' });
 
   return (
     <>
-      <div className="w-full h-full overflow-y-auto overflow-x-auto flex flex-row justify-center items-center relative no-scrollbar bg-white">
+      <div className="w-full h-full overflow-auto flex flex-row justify-center items-center relative no-scrollbar bg-white">
         <div className="bg-white md:p-2 w-full no-scrollbar">
-          <p className="text-4xl font-bold text-gray-800 mb-2">{monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}</p>
-          <div className="w-full my-1 flex flex-row justify-between items-center">
-            <button className="p-2 px-4 border rounded" onClick={handlePrevMonth}>{"<- Previous Month"}</button>
-            <button className="p-2 px-4 border rounded" onClick={handleNextMonth}>{"Next Month ->"}</button>
-          </div>
+        {/* @ts-ignore */}
+        <p className="text-4xl font-bold text-gray-800 mb-8">{monthName} {currentDate.getFullYear()}</p>
+        <div className="w-full flex flex-row items-center gap-2 justify-end">
+          <button onClick={handlePrevMonth}>
+            <svg
+              className="w-2.5 h-2.5 rtl:rotate-180"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 1 1 5l4 4"
+              />
+            </svg>
+          </button>
+          <h1 className="">{monthName}</h1>
+          <button onClick={handleNextMonth}>
+            <svg
+              className="w-2.5 h-2.5 rtl:rotate-180"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+          </button>
+
+        </div>
           <div className="inline-flex flex-col items-start justify-start h-full w-full">
             <div className="flex overflow-x-auto items-start justify-start h-6">
               <p className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase">
@@ -125,19 +166,24 @@ export default function Calendar() {
                 Sun
               </p>
             </div>
-            <div className=" flex flex-col items-start justify-start">
-              {
-                groupedWeeks.map((item, index) =>
-                  <div className="inline-flex items-center justify-start h-full w-full" key={index}>
-                    {
-                      item?.map((element, i) => {
-                        return <CalendarItem day={element?.day} disabled={element?.disabled} key={element?.day} />
-                      })
-                    }
-                  </div>
-
-                )
-              }
+            <div className="flex flex-col items-start justify-start overflow-y-visible">
+              {groupedWeeks.map((item, index) => (
+                <div
+                  className="inline-flex items-center justify-start h-full w-full"
+                  key={index}
+                >
+                  {item?.map((element, i) => {
+                    return (
+                      <CalendarItem
+                        day={element?.day}
+                        disabled={element?.disabled}
+                        key={element?.day}
+                        username={username}
+                      />
+                    );
+                  })}
+                </div>
+              ))}
             </div>
           </div>
         </div>
