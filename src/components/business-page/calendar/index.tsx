@@ -12,6 +12,10 @@ function getDayOfWeek(year: number, month: number, day: number) {
   return new Date(year, month, day).getDay();
 }
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
 
 export default function Calendar() {
 
@@ -92,9 +96,11 @@ export default function Calendar() {
     <>
       <div className="w-full h-full overflow-y-auto overflow-x-auto flex flex-row justify-center items-center relative no-scrollbar bg-white">
         <div className="bg-white md:p-2 w-full no-scrollbar">
-          <p className="text-4xl font-bold text-gray-800 mb-8">March 2021</p>
-          <button onClick={handlePrevMonth}>Önceki Ay</button>
-          <button onClick={handleNextMonth}>Sonraki Ay</button>
+          <p className="text-4xl font-bold text-gray-800 mb-2">{monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}</p>
+          <div className="w-full my-1 flex flex-row justify-between items-center">
+            <button className="p-2 px-4 border rounded" onClick={handlePrevMonth}>{"<- Previous Month"}</button>
+            <button className="p-2 px-4 border rounded" onClick={handleNextMonth}>{"Next Month ->"}</button>
+          </div>
           <div className="inline-flex flex-col items-start justify-start h-full w-full">
             <div className="flex overflow-x-auto items-start justify-start h-6">
               <p className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase">

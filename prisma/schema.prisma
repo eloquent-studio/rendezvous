@@ -66,5 +66,17 @@ model BusinessAccount {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  ContactForm ContactForm[]
+
   @@unique([userId])
+}
+
+model ContactForm {
+  id         Int             @id @default(autoincrement())
+  mail       String
+  subject    String?
+  message    String?
+  createdAt  DateTime        @default(now())
+  businessId Int
+  bussiness  BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
 }
