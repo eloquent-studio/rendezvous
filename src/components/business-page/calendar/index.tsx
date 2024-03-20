@@ -15,7 +15,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
-export default function Calendar() {
+export default function Calendar({ username }: { username: string }) {
   function handlePrevMonth() {
     setCurrentDate((prevDate) => {
       const prevMonth =
@@ -102,46 +102,46 @@ export default function Calendar() {
     <>
       <div className="w-full h-full overflow-auto flex flex-row justify-center items-center relative no-scrollbar bg-white">
         <div className="bg-white md:p-2 w-full no-scrollbar">
-        {/* @ts-ignore */}
-        <p className="text-4xl font-bold text-gray-800 mb-8">{monthName} {currentDate.getFullYear()}</p>
-        <div className="w-full flex flex-row items-center gap-2 justify-end">
-          <button onClick={handlePrevMonth}>
-            <svg
-              className="w-2.5 h-2.5 rtl:rotate-180"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 1 1 5l4 4"
-              />
-            </svg>
-          </button>
-          <h1 className="">{monthName}</h1>
-          <button onClick={handleNextMonth}>
-            <svg
-              className="w-2.5 h-2.5 rtl:rotate-180"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 9 4-4-4-4"
-              />
-            </svg>
-          </button>
+          {/* @ts-ignore */}
+          <p className="text-4xl font-bold text-gray-800 mb-8">{monthName} {currentDate.getFullYear()}</p>
+          <div className="w-full flex flex-row items-center gap-2 justify-start">
+            <button onClick={handlePrevMonth}>
+              <svg
+                className="w-2.5 h-2.5 rtl:rotate-180"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 6 10"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 1 1 5l4 4"
+                />
+              </svg>
+            </button>
+            <h1 className="">{monthName}</h1>
+            <button onClick={handleNextMonth}>
+              <svg
+                className="w-2.5 h-2.5 rtl:rotate-180"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 6 10"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 9 4-4-4-4"
+                />
+              </svg>
+            </button>
 
-        </div>
+          </div>
           <div className="inline-flex flex-col items-start justify-start h-full w-full">
             <div className="flex overflow-x-auto items-start justify-start h-6">
               <p className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase">
