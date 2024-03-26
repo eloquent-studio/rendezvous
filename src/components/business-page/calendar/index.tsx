@@ -11,9 +11,6 @@ function getDaysInMonth(year: number, month: number) {
 function getDayOfWeek(year: number, month: number, day: number) {
   return new Date(year, month, day).getDay();
 }
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
 
 export default function Calendar({ username }: { username: string }) {
   function handlePrevMonth() {
@@ -96,14 +93,15 @@ export default function Calendar({ username }: { username: string }) {
     SetGroupedWeeks(tempGroupedWeeks);
   }, [currentDate]);
 
-  const monthName = currentDate.toLocaleString('default', { month: 'long' });
+  const monthName = currentDate.toLocaleString("default", { month: "long" });
 
   return (
     <>
       <div className="w-full h-full overflow-auto flex flex-row justify-center items-center relative no-scrollbar bg-white">
         <div className="bg-white md:p-2 w-full no-scrollbar">
-          {/* @ts-ignore */}
-          <p className="text-4xl font-bold text-gray-800 mb-8">{monthName} {currentDate.getFullYear()}</p>
+          <p className="text-4xl font-bold text-gray-800 mb-8">
+            {monthName} {currentDate.getFullYear()}
+          </p>
           <div className="w-full flex flex-row items-center gap-2 justify-start">
             <button onClick={handlePrevMonth}>
               <svg
@@ -140,50 +138,34 @@ export default function Calendar({ username }: { username: string }) {
                 />
               </svg>
             </button>
-
           </div>
           <div className="inline-flex flex-col items-start justify-start h-full w-full">
             <div className="flex overflow-x-auto items-start justify-start h-6">
-              <p className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase">
-                Mon
-              </p>
-              <p className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase">
-                Tue
-              </p>
-              <p className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase">
-                Wed
-              </p>
-              <p className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase">
-                Thu
-              </p>
-              <p className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase">
-                Fri
-              </p>
-              <p className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase">
-                Sat
-              </p>
-              <p className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase">
-                Sun
-              </p>
+              {[...Array(7)].map((_, i) => (
+                <p
+                  key={i}
+                  className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase"
+                >
+                  {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i]}
+                </p>
+              ))}
             </div>
             <div className="flex flex-col items-start justify-start overflow-y-visible">
-              {groupedWeeks.map((item, index) => (
+              {groupedWeeks.map((week, index) => (
                 <div
                   className="inline-flex items-center justify-start h-full w-full"
                   key={index}
                 >
-                  {item?.map((element, i) => {
-                    return (
-                      <CalendarItem
-                        year={element?.year}
-                        month={element?.month}
-                        day={element?.day}
-                        disabled={element?.disabled}
-                        key={element?.day}
-                        username={username}
-                      />
-                    );
-                  })}
+                  {week.map((dayInfo) => (
+                    <CalendarItem
+                      key={`${dayInfo.year}-${dayInfo.month}-${dayInfo.day}`}
+                      year={dayInfo.year}
+                      month={dayInfo.month}
+                      day={dayInfo.day}
+                      disabled={dayInfo.disabled}
+                      username={username}
+                    />
+                  ))}
                 </div>
               ))}
             </div>

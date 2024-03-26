@@ -4,19 +4,25 @@ import React, { useRef, useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CompleteSubmit } from "./submit-button";
 import { GuestRendevous } from "@/actions/business/guest-rendevous";
-import { useFormState } from "react-dom"
+import { useFormState } from "react-dom";
 
-const initialState: { error: string, success: "" } = {
+const initialState: { error: string; success:"" } = {
   error: "",
   success: "",
-}
+};
 
-export default function TimeModal({ date }: { date: String }) {
+export default function TimeModal({
+  date,
+  businessName,
+}: {
+  date: String;
+  businessName: string;
+}) {
   const overlay = useRef<HTMLDivElement>(null);
   const wrapper = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const [time, SetTime] = useState("")
+  const [time, setTime] = useState("");
 
   const onDismiss = useCallback(() => {
     router.back();
@@ -33,10 +39,10 @@ export default function TimeModal({ date }: { date: String }) {
   );
 
   const onClick = (date: string) => {
-    SetTime(date)
-  }
+    setTime(date);
+  };
 
-  const [state, formAction] = useFormState(GuestRendevous, initialState)
+  const [state, formAction] = useFormState(GuestRendevous, initialState);
 
   const BodyContent = (
     <div className="flex flex-col gap-4">
@@ -59,12 +65,6 @@ export default function TimeModal({ date }: { date: String }) {
               <Appoint date={"16:00"} onClick={onClick} />
               <Appoint date={"17:00"} onClick={onClick} />
             </div>
-            {/* <button
-              type="submit"
-              className="text-white bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none block"
-            >
-              Complete
-            </button> */}
           </form>
         </div>
         <div className="w-full h-full md:h-[65vh]">
@@ -106,10 +106,10 @@ export default function TimeModal({ date }: { date: String }) {
             </li>
           </ol> */}
           <form action={formAction}>
-            <div className="mb-6">
+            <div className="mb-4">
               <label
                 htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Your email
               </label>
@@ -117,76 +117,81 @@ export default function TimeModal({ date }: { date: String }) {
                 type="email"
                 id="email"
                 name="email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="name@company.com"
                 required
               />
             </div>
-            <div className="mb-6">
+            <div className="mb-4">
               <label
-                htmlFor="name"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="fullName"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Full Name
               </label>
               <input
                 type="text"
-                id="fullname"
-                name="fullname"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                id="fullName"
+                name="fullName"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Full Name"
                 required
               />
             </div>
-            <div className="mb-6">
-              <label
-                htmlFor="Number"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Number
-              </label>
-              <input
-                type="text"
-                id="number"
-                name="number"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="+1234 456 6788"
-                required
-              />
+            <div className="mb-4">
+              <div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="phoneNumber"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    pattern="[0-9]{10}"
+                    placeholder="1234567890"
+                    required
+                  />
+                </div>
+              </div>
             </div>
             <div className="mb-2">
               <label
                 htmlFor="message"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 text-sm font-medium text-gray-900"
               >
                 Your message
               </label>
               <textarea
                 id="message"
                 name="message"
-                rows={4}
-                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                rows={2}
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Your message..."
               ></textarea>
             </div>
-            {/* <div className="py-2">
+            <div className="py-2">
             {state.error && (
               <p className="text-xs font-medium text-red-600">{state.error}</p>
             )}
             {state.success && (
               <p className="text-xs font-medium text-green-600">{state.success}</p>
             )}
-          </div> */}
+          </div>
 
             <input type="hidden" name="date" value={date as string} />
             <input type="hidden" name="time" value={time} />
+            <input type="hidden" name="businessName" value={businessName} />
 
             <CompleteSubmit />
           </form>
         </div>
-
       </div>
-    </div >
+    </div>
   );
 
   return (
@@ -227,15 +232,26 @@ export default function TimeModal({ date }: { date: String }) {
   );
 }
 
-const Appoint = ({ date, full, onClick }: { date: string; full?: boolean, onClick: (date: string) => void }) => {
+const Appoint = ({
+  date,
+  full,
+  onClick,
+}: {
+  date: string;
+  full?: boolean;
+  onClick: (date: string) => void;
+}) => {
   return (
     <button
       type="button"
-      className={`border border-gray-300 hover:bg-lime-200 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none block ${full == true &&
+      className={`border border-gray-300 hover:bg-lime-200 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none block ${
+        full == true &&
         "text-white bg-gray-300 rounded focus:outline-none hover:bg-gray-300"
-        }`}
+      }`}
       disabled={full}
-      onClick={() => { onClick(date) }}
+      onClick={() => {
+        onClick(date);
+      }}
     >
       {date}
     </button>
