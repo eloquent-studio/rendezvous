@@ -2,6 +2,7 @@
 
 import React, { useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { CompleteSubmit } from "./submit-button";
 
 export default function TimeModal() {
   const overlay = useRef<HTMLDivElement>(null);
@@ -24,12 +25,35 @@ export default function TimeModal() {
 
   const BodyContent = (
     <div className="flex flex-col gap-4">
-      <header className="w-full h-full mb-4">
+      {/* <header className="w-full h-full">
         <h1 className="uppercase font-medium text-xl">select time </h1>
-      </header>
+      </header> */}
       <div className="w-full h-full flex flex-col md:flex-row gap-8 md:gap-4">
-        <div className="w-full h-full md:h-[65vh] p-4">
-          <ol className="relative text-gray-500 border-s border-gray-200">
+        <div className="w-full h-full md:h-[65vh]">
+          <header className="">
+            <h1 className="uppercase font-medium text-xl">Select Time </h1>
+          </header>
+          <form className="">
+            <div className="w-full h-full grid grid-flow-row gap-1">
+              <Appoint date={"09:00"} />
+              <Appoint date={"10:00"} />
+              <Appoint date={"11:00"} />
+              <Appoint date={"13:00"} />
+              <Appoint date={"14:00"} full={true} />
+              <Appoint date={"15:00"} />
+              <Appoint date={"16:00"} />
+              <Appoint date={"17:00"} />
+            </div>
+            {/* <button
+              type="submit"
+              className="text-white bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none block"
+            >
+              Complete
+            </button> */}
+          </form>
+        </div>
+        <div className="w-full h-full md:h-[65vh]">
+          {/* <ol className="relative text-gray-500 border-s border-gray-200">
             <li className="mb-10 ms-6">
               <span className="absolute flex items-center justify-center w-8 h-8 bg-green-100 rounded-full -start-4 ring-4 ring-white">
                 <h1 className="font-extrabold">✓</h1>
@@ -65,27 +89,85 @@ export default function TimeModal() {
               </span>
               <h3 className="font-medium leading-tight">Complete</h3>
             </li>
-          </ol>
-        </div>
-        <div className="w-full h-full md:h-[65vh]">
-          <form className="mb-6">
-            <div className="w-full h-full grid grid-flow-row gap-1">
-              <Appoint date={"09:00"} />
-              <Appoint date={"10:00"} />
-              <Appoint date={"11:00"} />
-              <Appoint date={"13:00"} />
-              <Appoint date={"14:00"} full={true} />
+          </ol> */}
+          <form>
+            <div className="mb-6">
+              <label
+                htmlFor="email"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Your email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="name@company.com"
+                required
+              />
             </div>
-            <button
-              type="submit"
-              className="text-white bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none block"
-            >
-              Complete
-            </button>
+            <div className="mb-6">
+              <label
+                htmlFor="name"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Full Name
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Full Name"
+                required
+              />
+            </div>
+            <div className="mb-6">
+              <label
+                htmlFor="Number"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Number
+              </label>
+              <input
+                type="text"
+                id="number"
+                name="number"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="+1234 456 6788"
+                required
+              />
+            </div>
+            <div className="mb-2">
+              <label
+                htmlFor="message"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Your message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Your message..."
+              ></textarea>
+            </div>
+            {/* <div className="py-2">
+            {state.error && (
+              <p className="text-xs font-medium text-red-600">{state.error}</p>
+            )}
+            {state.success && (
+              <p className="text-xs font-medium text-green-600">{state.success}</p>
+            )}
+          </div> */}
+            <CompleteSubmit />
           </form>
         </div>
+
       </div>
-    </div>
+    </div >
   );
 
   return (
@@ -129,10 +211,9 @@ export default function TimeModal() {
 const Appoint = ({ date, full }: { date: string; full?: boolean }) => {
   return (
     <button
-      className={`border border-gray-300 hover:bg-lime-200 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none block ${
-        full == true &&
+      className={`border border-gray-300 hover:bg-lime-200 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none block ${full == true &&
         "text-white bg-gray-300 rounded focus:outline-none hover:bg-gray-300"
-      }`}
+        }`}
       disabled={full}
     >
       {date}
