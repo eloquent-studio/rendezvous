@@ -14,9 +14,9 @@ export default function CalendarItem({
   disabled?: boolean;
   username: string;
   month: number;
-  year: number,
+  year: number;
 }) {
-  const [today, setToday] = useState<number>();
+  const [today, setToday] = useState<number>(0);
   const dayView = day < 10 ? "0" + day : day;
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function CalendarItem({
     setToday(currentDate);
   }, []);
 
-  if (disabled) {
+  if (disabled || new Date(year, month, day) <= new Date(new Date().setDate(new Date().getDate() - 1))) {
     return (
       <div>
         <div className="flex items-start justify-start w-32 md:w-36 p-2 h-32 flex-col relative border border-gray-200 bg-gray-100">
@@ -37,7 +37,10 @@ export default function CalendarItem({
   }
 
   return (
-    <Link href={`/business/${username}/t?date=${year}-${month + 1}-${day}`} className="hover:bg-gray-50">
+    <Link
+      href={`/business/${username}/t?date=${year}-${month + 1}-${day}`}
+      className="hover:bg-gray-50"
+    >
       <div
         className="flex items-start justify-start w-32 md:w-36 p-2 h-32 flex-col relative border border-gray-200"
         data-id={day}
@@ -45,7 +48,7 @@ export default function CalendarItem({
         <p
           className={
             today === day
-              ? "bg-sky-600 px-2 py-1 rounded-full text-white"
+              ? "bg-sky-600 px-2 py-1.5 rounded-full text-white"
               : "hover:bg-gray-50 text-sm font-medium text-gray-800"
           }
         >
