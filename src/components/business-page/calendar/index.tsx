@@ -175,6 +175,8 @@ export default function Calendar({ username }: { username: string }) {
                   {item?.map((element, i) => {
                     return (
                       <CalendarItem
+                        year={element?.year}
+                        month={element?.month}
                         day={element?.day}
                         disabled={element?.disabled}
                         key={element?.day}

@@ -66,7 +66,8 @@ model BusinessAccount {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  ContactForm ContactForm[]
+  ContactForm     ContactForm[]
+  GuestRendezvous GuestRendezvous[]
 
   @@unique([userId])
 }
@@ -79,4 +80,16 @@ model ContactForm {
   createdAt  DateTime        @default(now())
   businessId Int
   bussiness  BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}
+
+model GuestRendezvous {
+  id           Int             @id @default(autoincrement())
+  fullName     String?
+  email        String
+  phoneNumber  String?
+  message      String?
+  rendezvousAt DateTime
+  businessId   Int
+  bussiness    BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  createdAt    DateTime        @default(now())
 }

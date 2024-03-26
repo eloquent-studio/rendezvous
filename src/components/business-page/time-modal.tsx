@@ -1,13 +1,22 @@
 "use client";
 
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CompleteSubmit } from "./submit-button";
+import { GuestRendevous } from "@/actions/business/guest-rendevous";
+import { useFormState } from "react-dom"
 
-export default function TimeModal() {
+const initialState: { error: string, success: "" } = {
+  error: "",
+  success: "",
+}
+
+export default function TimeModal({ date }: { date: String }) {
   const overlay = useRef<HTMLDivElement>(null);
   const wrapper = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  const [time, SetTime] = useState("")
 
   const onDismiss = useCallback(() => {
     router.back();
@@ -23,6 +32,12 @@ export default function TimeModal() {
     [onDismiss, overlay]
   );
 
+  const onClick = (date: string) => {
+    SetTime(date)
+  }
+
+  const [state, formAction] = useFormState(GuestRendevous, initialState)
+
   const BodyContent = (
     <div className="flex flex-col gap-4">
       {/* <header className="w-full h-full">
@@ -35,14 +50,14 @@ export default function TimeModal() {
           </header>
           <form className="">
             <div className="w-full h-full grid grid-flow-row gap-1">
-              <Appoint date={"09:00"} />
-              <Appoint date={"10:00"} />
-              <Appoint date={"11:00"} />
-              <Appoint date={"13:00"} />
-              <Appoint date={"14:00"} full={true} />
-              <Appoint date={"15:00"} />
-              <Appoint date={"16:00"} />
-              <Appoint date={"17:00"} />
+              <Appoint date={"09:00"} onClick={onClick} />
+              <Appoint date={"10:00"} onClick={onClick} />
+              <Appoint date={"11:00"} onClick={onClick} />
+              <Appoint date={"13:00"} onClick={onClick} />
+              <Appoint date={"14:00"} full={true} onClick={onClick} />
+              <Appoint date={"15:00"} onClick={onClick} />
+              <Appoint date={"16:00"} onClick={onClick} />
+              <Appoint date={"17:00"} onClick={onClick} />
             </div>
             {/* <button
               type="submit"
@@ -90,7 +105,7 @@ export default function TimeModal() {
               <h3 className="font-medium leading-tight">Complete</h3>
             </li>
           </ol> */}
-          <form>
+          <form action={formAction}>
             <div className="mb-6">
               <label
                 htmlFor="email"
@@ -115,9 +130,9 @@ export default function TimeModal() {
                 Full Name
               </label>
               <input
-                type="email"
-                id="email"
-                name="email"
+                type="text"
+                id="fullname"
+                name="fullname"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Full Name"
                 required
@@ -162,6 +177,10 @@ export default function TimeModal() {
               <p className="text-xs font-medium text-green-600">{state.success}</p>
             )}
           </div> */}
+
+            <input type="hidden" name="date" value={date as string} />
+            <input type="hidden" name="time" value={time} />
+
             <CompleteSubmit />
           </form>
         </div>
@@ -208,13 +227,15 @@ export default function TimeModal() {
   );
 }
 
-const Appoint = ({ date, full }: { date: string; full?: boolean }) => {
+const Appoint = ({ date, full, onClick }: { date: string; full?: boolean, onClick: (date: string) => void }) => {
   return (
     <button
+      type="button"
       className={`border border-gray-300 hover:bg-lime-200 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none block ${full == true &&
         "text-white bg-gray-300 rounded focus:outline-none hover:bg-gray-300"
         }`}
       disabled={full}
+      onClick={() => { onClick(date) }}
     >
       {date}
     </button>

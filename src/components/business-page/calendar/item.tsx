@@ -5,12 +5,16 @@ import { useEffect, useState } from "react";
 
 export default function CalendarItem({
   day,
+  month,
   disabled = false,
   username,
+  year,
 }: {
   day: number;
   disabled?: boolean;
   username: string;
+  month: number;
+  year: number,
 }) {
   const [today, setToday] = useState<number>();
   const dayView = day < 10 ? "0" + day : day;
@@ -33,7 +37,7 @@ export default function CalendarItem({
   }
 
   return (
-    <Link href={`/business/${username}/t`} className="hover:bg-gray-50">
+    <Link href={`/business/${username}/t?date=${year}-${month + 1}-${day}`} className="hover:bg-gray-50">
       <div
         className="flex items-start justify-start w-32 md:w-36 p-2 h-32 flex-col relative border border-gray-200"
         data-id={day}

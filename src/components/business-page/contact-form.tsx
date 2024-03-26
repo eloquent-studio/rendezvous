@@ -4,7 +4,6 @@ import { SendContact } from "@/actions/business/contact"
 import { useFormState } from "react-dom"
 import { ContactSubmit } from "./contact-submit"
 import { useEffect, useRef } from "react"
-import { error } from "console"
 
 const initialState: { error: string, success: "" } = {
     error: "",
