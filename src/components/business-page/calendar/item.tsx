@@ -21,11 +21,15 @@ export default function CalendarItem({
   console.log(rndv);
 
   const [today, setToday] = useState<number>(0);
+  const [thisMonth, setThisMonth] = useState<number>(0);
+
   const dayView = day < 10 ? "0" + day : day;
 
   useEffect(() => {
     const currentDate = new Date().getDate();
+    const currentMonth = new Date().getMonth();
     setToday(currentDate);
+    setThisMonth(currentMonth)
   }, []);
 
   const hasRendezvous = rndv.some(
@@ -62,7 +66,7 @@ export default function CalendarItem({
       >
         <p
           className={
-            today === day
+            today === day && thisMonth === month
               ? "bg-sky-600 px-2 py-1.5 rounded-full text-white"
               : "hover:bg-gray-50 text-sm font-medium text-gray-800"
           }

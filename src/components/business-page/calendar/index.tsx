@@ -102,7 +102,7 @@ export default function Calendar({ username, rndv }: { username: string, rndv: a
           <p className="text-4xl font-bold text-gray-800 mb-8">
             {monthName} {currentDate.getFullYear()}
           </p>
-          <div className="w-full flex flex-row items-center gap-2 justify-start">
+          <div className="w-full flex flex-row items-center gap-2 justify-end">
             <button onClick={handlePrevMonth}>
               <svg
                 className="w-2.5 h-2.5 rtl:rotate-180"
