@@ -12,7 +12,7 @@ function getDayOfWeek(year: number, month: number, day: number) {
   return new Date(year, month, day).getDay();
 }
 
-export default function Calendar({ username }: { username: string }) {
+export default function Calendar({ username, rndv }: { username: string, rndv: any }) {
   function handlePrevMonth() {
     setCurrentDate((prevDate) => {
       const prevMonth =
@@ -102,7 +102,7 @@ export default function Calendar({ username }: { username: string }) {
           <p className="text-4xl font-bold text-gray-800 mb-8">
             {monthName} {currentDate.getFullYear()}
           </p>
-          <div className="w-full flex flex-row items-center gap-2 justify-start">
+          <div className="w-full flex flex-row items-center gap-2 justify-end">
             <button onClick={handlePrevMonth}>
               <svg
                 className="w-2.5 h-2.5 rtl:rotate-180"
@@ -164,6 +164,7 @@ export default function Calendar({ username }: { username: string }) {
                       day={dayInfo.day}
                       disabled={dayInfo.disabled}
                       username={username}
+                      rndv={rndv}
                     />
                   ))}
                 </div>

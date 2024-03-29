@@ -3,10 +3,10 @@
 import React, { useRef, useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CompleteSubmit } from "./submit-button";
-import { GuestRendevous } from "@/actions/business/guest-rendevous";
+import { GuestRendezvous } from "@/actions/business/guest-rendezvous";
 import { useFormState } from "react-dom";
 
-const initialState: { error: string; success:"" } = {
+const initialState: { error: string; success: "" } = {
   error: "",
   success: "",
 };
@@ -14,9 +14,11 @@ const initialState: { error: string; success:"" } = {
 export default function TimeModal({
   date,
   businessName,
+  rndv,
 }: {
   date: String;
   businessName: string;
+  rndv: any;
 }) {
   const overlay = useRef<HTMLDivElement>(null);
   const wrapper = useRef<HTMLDivElement>(null);
@@ -42,7 +44,16 @@ export default function TimeModal({
     setTime(date);
   };
 
-  const [state, formAction] = useFormState(GuestRendevous, initialState);
+  const full = (time: string) => {
+    const isFull = rndv.some((item: any) => {
+      const rndvDate = new Date(item.rendezvousAt);
+      const rndvHour = rndvDate.getHours().toString().padStart(2, "0");
+      return rndvHour === time;
+    });
+    return isFull;
+  };
+
+  const [state, formAction] = useFormState(GuestRendezvous, initialState);
 
   const BodyContent = (
     <div className="flex flex-col gap-4">
@@ -56,14 +67,14 @@ export default function TimeModal({
           </header>
           <form className="">
             <div className="w-full h-full grid grid-flow-row gap-1">
-              <Appoint date={"09:00"} onClick={onClick} />
-              <Appoint date={"10:00"} onClick={onClick} />
-              <Appoint date={"11:00"} onClick={onClick} />
-              <Appoint date={"13:00"} onClick={onClick} />
-              <Appoint date={"14:00"} full={true} onClick={onClick} />
-              <Appoint date={"15:00"} onClick={onClick} />
-              <Appoint date={"16:00"} onClick={onClick} />
-              <Appoint date={"17:00"} onClick={onClick} />
+              <Appoint date={"09:00"} isFull={full("09")} onClick={onClick} />
+              <Appoint date={"10:00"} isFull={full("10")} onClick={onClick} />
+              <Appoint date={"11:00"} isFull={full("11")} onClick={onClick} />
+              <Appoint date={"13:00"} isFull={full("13")} onClick={onClick} />
+              <Appoint date={"14:00"} isFull={full("14")} onClick={onClick} />
+              <Appoint date={"15:00"} isFull={full("15")} onClick={onClick} />
+              <Appoint date={"16:00"} isFull={full("16")} onClick={onClick} />
+              <Appoint date={"17:00"} isFull={full("17")} onClick={onClick} />
             </div>
           </form>
         </div>
@@ -169,19 +180,23 @@ export default function TimeModal({
               <textarea
                 id="message"
                 name="message"
-                rows={2}
+                rows={3}
                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Your message..."
               ></textarea>
             </div>
             <div className="py-2">
-            {state.error && (
-              <p className="text-xs font-medium text-red-600">{state.error}</p>
-            )}
-            {state.success && (
-              <p className="text-xs font-medium text-green-600">{state.success}</p>
-            )}
-          </div>
+              {state.error && (
+                <p className="text-xs font-medium text-red-600">
+                  {state.error}
+                </p>
+              )}
+              {state.success && (
+                <p className="text-xs font-medium text-green-600">
+                  {state.success}
+                </p>
+              )}
+            </div>
 
             <input type="hidden" name="date" value={date as string} />
             <input type="hidden" name="time" value={time} />
@@ -234,21 +249,22 @@ export default function TimeModal({
 
 const Appoint = ({
   date,
-  full,
   onClick,
+  isFull,
 }: {
   date: string;
-  full?: boolean;
   onClick: (date: string) => void;
+  isFull: boolean;
 }) => {
   return (
     <button
       type="button"
-      className={`border border-gray-300 hover:bg-lime-200 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none block ${
-        full == true &&
-        "text-white bg-gray-300 rounded focus:outline-none hover:bg-gray-300"
+      className={`rounded w-full focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 mb-2 block focus:outline-none border border-gray-300 ${
+        isFull
+          ? "text-white bg-gray-300 cursor-not-allowed hover:bg-gray-300"
+          : "hover:bg-gray-200 "
       }`}
-      disabled={full}
+      disabled={isFull}
       onClick={() => {
         onClick(date);
       }}

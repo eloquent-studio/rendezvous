@@ -26,7 +26,7 @@ const createGuestRendezvousSchema = z.object({
   businessName: z.string()
 });
 
-export async function GuestRendevous(prevState: any, formData: FormData) {
+export async function GuestRendezvous(prevState: any, formData: FormData) {
   try {
     console.log(formData)
     const isValidData = createGuestRendezvousSchema.parse({
@@ -136,7 +136,7 @@ export async function GuestRendevous(prevState: any, formData: FormData) {
   // revalidatePath("/dashboard/settings");
 
   return {
-    error: "Error while submit",
+    error: "Submitted Successfully!",
     success: "",
   };
 }
