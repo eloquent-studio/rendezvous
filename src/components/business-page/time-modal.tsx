@@ -3,7 +3,7 @@
 import React, { useRef, useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CompleteSubmit } from "./submit-button";
-import { GuestRendevous } from "@/actions/business/guest-rendevous";
+import { GuestRendezvous } from "@/actions/business/guest-rendezvous";
 import { useFormState } from "react-dom";
 
 const initialState: { error: string; success: "" } = {
@@ -53,7 +53,7 @@ export default function TimeModal({
     return isFull;
   };
 
-  const [state, formAction] = useFormState(GuestRendevous, initialState);
+  const [state, formAction] = useFormState(GuestRendezvous, initialState);
 
   const BodyContent = (
     <div className="flex flex-col gap-4">
