@@ -9,13 +9,17 @@ export default function CalendarItem({
   disabled = false,
   username,
   year,
+  rndv,
 }: {
   day: number;
   disabled?: boolean;
   username: string;
   month: number;
   year: number;
+  rndv: any;
 }) {
+  console.log(rndv);
+
   const [today, setToday] = useState<number>(0);
   const dayView = day < 10 ? "0" + day : day;
 
@@ -24,7 +28,18 @@ export default function CalendarItem({
     setToday(currentDate);
   }, []);
 
-  if (disabled || new Date(year, month, day) <= new Date(new Date().setDate(new Date().getDate() - 1))) {
+  const hasRendezvous = rndv.some(
+    (item: any) =>
+      new Date(item.rendezvousAt).getDate() === day &&
+      new Date(item.rendezvousAt).getMonth() === month &&
+      new Date(item.rendezvousAt).getFullYear() === year
+  );
+
+  if (
+    disabled ||
+    new Date(year, month, day) <=
+      new Date(new Date().setDate(new Date().getDate() - 1))
+  ) {
     return (
       <div>
         <div className="flex items-start justify-start w-32 md:w-36 p-2 h-32 flex-col relative border border-gray-200 bg-gray-100">
@@ -54,8 +69,16 @@ export default function CalendarItem({
         >
           {dayView}
         </p>
-
-        <div className=""></div>
+        {hasRendezvous
+          ? rndv.map((rnd: any) => (
+              <p
+                key={rnd.id}
+                className="w-full px-1 py-0.5 bg-lime-600 text-white rounded mt-1"
+              >
+                {rnd.rendezvousAt.getHours().toString()}:00
+              </p>
+            ))
+          : null}
       </div>
     </Link>
   );

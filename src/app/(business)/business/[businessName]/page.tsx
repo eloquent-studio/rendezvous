@@ -25,10 +25,18 @@ export default async function Page({
   if (!business) notFound();
 
   const username = params.businessName
+
+  const rndv = await prisma?.guestRendezvous.findMany({
+    select: {
+      id: true,
+      rendezvousAt: true
+    }
+  })
+
   return (
     <>
       <SecondaryNavbar />
-      <BusinessPage business={business} Calendar={<Calendar username={username} />} />
+      <BusinessPage business={business} Calendar={<Calendar username={username} rndv={rndv}/>} />
     </>
   );
 }
