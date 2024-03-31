@@ -12,9 +12,12 @@ const createGuestRendezvousSchema = z.object({
     })
     .email("This is not a valid email."),
   message: z.string(),
-  phoneNumber: z.string().trim().refine(phone => phone.length === 10, {
-    message: 'Phone number must be 10 characters'
-  }),
+  phoneNumber: z
+    .string()
+    .trim()
+    .refine((phone) => phone.length === 10, {
+      message: "Phone number must be 10 characters",
+    }),
   // countryCode: z.string({
   //   required_error: "Country Code is required",
   // }),
@@ -23,12 +26,12 @@ const createGuestRendezvousSchema = z.object({
   }),
   date: z.string(),
   time: z.string(),
-  businessName: z.string()
+  businessName: z.string(),
 });
 
 export async function GuestRendezvous(prevState: any, formData: FormData) {
   try {
-    console.log(formData)
+    console.log(formData);
     const isValidData = createGuestRendezvousSchema.parse({
       email: formData.get("email"),
       businessName: formData.get("businessName"),
@@ -40,8 +43,8 @@ export async function GuestRendezvous(prevState: any, formData: FormData) {
     });
 
     const business = await prisma.businessAccount.findUnique({
-      where: { name: isValidData.businessName }
-    })
+      where: { name: isValidData.businessName },
+    });
 
     if (!business)
       return {
@@ -49,29 +52,28 @@ export async function GuestRendezvous(prevState: any, formData: FormData) {
         success: "",
       };
 
-
     const dateInfo = {
-      name: 'date',
-      value: isValidData.date
+      name: "date",
+      value: isValidData.date,
     };
 
     const timeInfo = {
-      name: 'time',
-      value: isValidData.time
+      name: "time",
+      value: isValidData.time,
     };
 
     // Parse date
-    const dateParts = dateInfo.value.split(' ');
+    const dateParts = dateInfo.value.split(" ");
     const dateString = `${dateParts[1]} ${dateParts[2]} ${dateParts[3]}`; // 'Mar 26 2024'
     const dateObj = new Date(dateString);
 
     // Parse time
-    const timeParts = timeInfo.value.split(':');
+    const timeParts = timeInfo.value.split(":");
     const hours = parseInt(timeParts[0], 10);
     const minutes = parseInt(timeParts[1], 10);
 
     // Set time to the date object
-    console.log(hours)
+    console.log(hours);
     dateObj.setHours(hours, minutes);
 
     console.log(dateObj.toLocaleTimeString());
@@ -86,7 +88,7 @@ export async function GuestRendezvous(prevState: any, formData: FormData) {
     //   value: isValidData.phoneNumber
     // };
 
-    // const phoneString = `${countryCode}${phone}`; 
+    // const phoneString = `${countryCode}${phone}`;
 
     // console.log(phoneString)
 
@@ -99,12 +101,12 @@ export async function GuestRendezvous(prevState: any, formData: FormData) {
         phoneNumber: isValidData.phoneNumber,
         rendezvousAt: dateObj,
         createdAt: new Date(Date.now()),
-      }
-    })
+      },
+    });
 
     const result = await sendMail({
       email: isValidData.email,
-      subject: 'Rendezvous Confirmation',
+      subject: "Rendezvous Confirmation",
       text: null,
       html: `<div>Dear ${isValidData.fullName},<br />
       This is to confirm the details of your rendezvous with <strong>${isValidData.businessName}</strong>. Thank you for trusting Rendezvous. We wanted to let you know that we have successfully received your rendezvous request. Here are the rendezvous details. You can check below.
@@ -121,22 +123,20 @@ export async function GuestRendezvous(prevState: any, formData: FormData) {
 
     if (!result)
       return {
-        email: '',
-        error: 'Email could not be sent',
-        message: '',
+        error: "Email could not be sent",
+        success: false,
       };
+    return {
+      error: "",
+      success: true,
+    };
   } catch (error) {
     console.log(error);
     return {
       error: "Error while submit",
-      success: "",
+      success: false,
     };
   }
 
   // revalidatePath("/dashboard/settings");
-
-  return {
-    error: "Submitted Successfully!",
-    success: "",
-  };
 }

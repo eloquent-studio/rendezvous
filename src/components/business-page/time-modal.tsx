@@ -6,9 +6,9 @@ import { CompleteSubmit } from "./submit-button";
 import { GuestRendezvous } from "@/actions/business/guest-rendezvous";
 import { useFormState } from "react-dom";
 
-const initialState: { error: string; success: "" } = {
+const initialState: { error: ""; success: boolean } = {
   error: "",
-  success: "",
+  success: false,
 };
 
 export default function TimeModal({
@@ -67,14 +67,14 @@ export default function TimeModal({
           </header>
           <form className="">
             <div className="w-full h-full grid grid-flow-row gap-1">
-              <Appoint date={"09:00"} isFull={full("09")} onClick={onClick} />
-              <Appoint date={"10:00"} isFull={full("10")} onClick={onClick} />
-              <Appoint date={"11:00"} isFull={full("11")} onClick={onClick} />
-              <Appoint date={"13:00"} isFull={full("13")} onClick={onClick} />
-              <Appoint date={"14:00"} isFull={full("14")} onClick={onClick} />
-              <Appoint date={"15:00"} isFull={full("15")} onClick={onClick} />
-              <Appoint date={"16:00"} isFull={full("16")} onClick={onClick} />
-              <Appoint date={"17:00"} isFull={full("17")} onClick={onClick} />
+              <Appoint date={"09:00"} isFull={full("09")} onClick={onClick} time={time} />
+              <Appoint date={"10:00"} isFull={full("10")} onClick={onClick} time={time} />
+              <Appoint date={"11:00"} isFull={full("11")} onClick={onClick} time={time} />
+              <Appoint date={"13:00"} isFull={full("13")} onClick={onClick} time={time} />
+              <Appoint date={"14:00"} isFull={full("14")} onClick={onClick} time={time} />
+              <Appoint date={"15:00"} isFull={full("15")} onClick={onClick} time={time} />
+              <Appoint date={"16:00"} isFull={full("16")} onClick={onClick} time={time} />
+              <Appoint date={"17:00"} isFull={full("17")} onClick={onClick} time={time} />
             </div>
           </form>
         </div>
@@ -241,7 +241,19 @@ export default function TimeModal({
         ref={wrapper}
         className="flex flex-col absolute h-[95%] w-full bottom-0 bg-white rounded-t-3xl lg:px-40 px-8 py-16 overflow-auto"
       >
-        {BodyContent}
+        {state.success ?
+          <div className="w-full h-full flex items-center justify-center flex-col  sm:flex-row">
+            <span className="text-lime-300"><svg className="fill-current" xmlns="http://www.w3.org/2000/svg" height="80" viewBox="0 -960 960 960" width="80"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" /></svg></span>
+            <div className="flex flex-col items-center sm:items-start text-lg">
+              <div>
+                The transaction is successful.
+              </div>
+              <div className="text-center">
+                Rendezvous information will be sent to your e-mail.
+              </div>
+            </div>
+          </div>
+          : BodyContent}
       </div>
     </div>
   );
@@ -251,19 +263,20 @@ const Appoint = ({
   date,
   onClick,
   isFull,
+  time
 }: {
   date: string;
   onClick: (date: string) => void;
   isFull: boolean;
+  time: string;
 }) => {
   return (
     <button
       type="button"
-      className={`rounded w-full focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 mb-2 block focus:outline-none border border-gray-300 ${
-        isFull
-          ? "text-white bg-gray-300 cursor-not-allowed hover:bg-gray-300"
-          : "hover:bg-gray-200 "
-      }`}
+      className={`rounded w-full focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 mb-2 block focus:outline-none border border-gray-300 focus:border-none ${isFull
+        ? "text-white bg-gray-300 cursor-not-allowed hover:bg-gray-300"
+        : "hover:bg-gray-200 "
+        }  ${time == date ? "bg-lime-300" : ""}`}
       disabled={isFull}
       onClick={() => {
         onClick(date);
