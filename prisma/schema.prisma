@@ -22,6 +22,8 @@ model User {
 
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
+
+  rendezvous Rendezvous[]
 }
 
 model ResetToken {
@@ -68,6 +70,7 @@ model BusinessAccount {
 
   ContactForm     ContactForm[]
   GuestRendezvous GuestRendezvous[]
+  Rendevous       Rendezvous[]
 
   @@unique([userId])
 }
@@ -92,4 +95,20 @@ model GuestRendezvous {
   businessId   Int
   bussiness    BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
   createdAt    DateTime        @default(now())
+}
+
+model Rendezvous {
+  id           Int      @id @default(autoincrement())
+  fullName     String?
+  email        String
+  phoneNumber  String?
+  message      String?
+  rendezvousAt DateTime
+  createdAt    DateTime @default(now())
+
+  businessId Int
+  userId     Int
+
+  bussiness BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

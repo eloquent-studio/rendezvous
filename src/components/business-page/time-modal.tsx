@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { CompleteSubmit } from "./submit-button";
 import { GuestRendezvous } from "@/actions/business/guest-rendezvous";
 import { useFormState } from "react-dom";
+import { UserRendezvous } from "@/actions/business/user-rendezvous";
 
 const initialState: { error: ""; success: boolean } = {
   error: "",
@@ -15,11 +16,17 @@ export default function TimeModal({
   date,
   businessName,
   rndv,
+  user,
+  id
 }: {
   date: String;
   businessName: string;
   rndv: any;
+  user: any;
+  id: any
 }) {
+  console.log(user)
+  
   const overlay = useRef<HTMLDivElement>(null);
   const wrapper = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -55,6 +62,9 @@ export default function TimeModal({
 
   const [state, formAction] = useFormState(GuestRendezvous, initialState);
 
+  const [stateu, formAction2] = useFormState(UserRendezvous, initialState);
+
+
   const BodyContent = (
     <div className="flex flex-col gap-4">
       {/* <header className="w-full h-full">
@@ -62,11 +72,11 @@ export default function TimeModal({
       </header> */}
       <div className="w-full h-full flex flex-col md:flex-row gap-8 md:gap-4">
         <div className="w-full h-full md:h-[65vh]">
-          <header className="">
+          <header>
             <h1 className="uppercase font-medium text-xl">Select Time </h1>
           </header>
-          <form className="">
-            <div className="w-full h-full grid grid-flow-row gap-1">
+          <form>
+            <div className={`${user? "order-1": ""} w-full h-full grid grid-flow-row gap-1`}>
               <Appoint date={"09:00"} isFull={full("09")} onClick={onClick} time={time} />
               <Appoint date={"10:00"} isFull={full("10")} onClick={onClick} time={time} />
               <Appoint date={"11:00"} isFull={full("11")} onClick={onClick} time={time} />
@@ -78,45 +88,60 @@ export default function TimeModal({
             </div>
           </form>
         </div>
-        <div className="w-full h-full md:h-[65vh]">
-          {/* <ol className="relative text-gray-500 border-s border-gray-200">
-            <li className="mb-10 ms-6">
-              <span className="absolute flex items-center justify-center w-8 h-8 bg-green-100 rounded-full -start-4 ring-4 ring-white">
-                <h1 className="font-extrabold">✓</h1>
-              </span>
-              <h3 className="font-medium leading-tight">Business Name</h3>
-              <p className="text-sm">Dentist</p>
-            </li>
-            <li className="mb-10 ms-6">
-              <span className="absolute flex items-center justify-center w-8 h-8 bg-green-100 rounded-full -start-4 ring-4 ring-white">
-                <h1 className="font-extrabold">✓</h1>
-              </span>
-              <h3 className="font-medium leading-tight">Select Date</h3>
-              <p className="text-sm">Mar 12, 2024</p>
-            </li>
-            <li className="mb-10 ms-6">
-              <span className="absolute flex items-center justify-center w-8 h-8 bg-green-100 rounded-full -start-4 ring-4 ring-white">
-                <h1 className="font-extrabold">✓</h1>
-              </span>
-              <h3 className="font-medium leading-tight">Select Time</h3>
-              <p className="text-sm">Select a suitable time for you!</p>
-            </li>
-            <li className="ms-6">
-              <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white">
-                <svg
-                  className="w-3.5 h-3.5 text-gray-500"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 18 20"
-                >
-                  <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z" />
-                </svg>
-              </span>
-              <h3 className="font-medium leading-tight">Complete</h3>
-            </li>
-          </ol> */}
-          <form action={formAction}>
+        <div className="w-full h-full flex justify-center items-center">
+          {user ? 
+        <form action={formAction2} className="w-full">
+          <ol className={`${user? "order-2 ml-8": ""} relative text-gray-500 border-s border-gray-200`}>
+          <li className="mb-10 ms-6">
+            <span className="absolute flex items-center justify-center w-8 h-8 bg-green-100 rounded-full -start-4 ring-4 ring-white">
+              <h1 className="font-extrabold">✓</h1>
+            </span>
+            <h3 className="font-medium leading-tight">Business Name</h3>
+            <p className="text-sm">Dentist</p>
+          </li>
+          <li className="mb-10 ms-6">
+            <span className="absolute flex items-center justify-center w-8 h-8 bg-green-100 rounded-full -start-4 ring-4 ring-white">
+              <h1 className="font-extrabold">✓</h1>
+            </span>
+            <h3 className="font-medium leading-tight">Select Date</h3>
+            <p className="text-sm">Mar 12, 2024</p>
+          </li>
+          <li className="mb-10 ms-6">
+            <span className="absolute flex items-center justify-center w-8 h-8 bg-green-100 rounded-full -start-4 ring-4 ring-white">
+              <h1 className="font-extrabold">✓</h1>
+            </span>
+            <h3 className="font-medium leading-tight">Select Time</h3>
+            <p className="text-sm">Select a suitable time for you!</p>
+          </li>
+          <li className="ms-6">
+            <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white">
+              <svg
+                className="w-3.5 h-3.5 text-gray-500"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 18 20"
+              >
+                <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2ZM7 2h4v3H7V2Zm5.7 8.289-3.975 3.857a1 1 0 0 1-1.393 0L5.3 12.182a1.002 1.002 0 1 1 1.4-1.436l1.328 1.289 3.28-3.181a1 1 0 1 1 1.392 1.435Z" />
+              </svg>
+            </span>
+            <h3 className="font-medium leading-tight">Complete</h3>
+          </li>
+        </ol>
+
+
+        <input type="hidden" name="date" value={date as string} />
+        <input type="hidden" name="time" value={time} />
+        <input type="hidden" name="businessName" value={businessName} />
+        <input type="hidden" name="userId" value={id} />
+        <input type="hidden" name="email" value={user.email} />
+        <input type="hidden" name="fullName" value={user.fullname} />
+
+        <div className="p-4">
+          <CompleteSubmit />
+        </div>
+      </form>
+        : <form action={formAction}>
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -203,7 +228,7 @@ export default function TimeModal({
             <input type="hidden" name="businessName" value={businessName} />
 
             <CompleteSubmit />
-          </form>
+          </form>}
         </div>
       </div>
     </div>
