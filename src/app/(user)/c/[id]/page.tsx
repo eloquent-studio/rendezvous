@@ -4,6 +4,7 @@ import Link from "next/link";
 import prisma from "@/lib/prisma";
 import LogoutButton from "@/components/props/logout-button";
 import Image from "next/image";
+import { getUserRendezvous } from "@/actions/business/user-rendezvous";
 
 export default async function UserProfilePage({ params }: { params: any }) {
   const userId = params.id;
@@ -13,11 +14,14 @@ export default async function UserProfilePage({ params }: { params: any }) {
     select: { email: true, fullname: true },
   });
 
+  const userRendezvous = await getUserRendezvous(userId);
+
   return (
     <>
       <SecondaryNavbar />
       <main className="w-full h-full">
         <div className="max-w-screen-lg mx-auto flex flex-col md:flex-row my-16 p-4 md:p-0 gap-4">
+          <div></div>
           <aside className="w-full md:w-1/3 h-[75vh] flex flex-col items-center justify-center gap-4 border rounded bg-gray-50">
             <div className="w-full h-full px-3 py-4 overflow-y-auto">
               <div className="space-y-2 flex flex-col justify-center items-center mt-8">
@@ -131,7 +135,7 @@ export default async function UserProfilePage({ params }: { params: any }) {
                       Business Info
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      Position
+                      Location
                     </th>
                     <th scope="col" className="px-6 py-3">
                       Date
@@ -142,40 +146,57 @@ export default async function UserProfilePage({ params }: { params: any }) {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white border-b hover:bg-gray-50">
-                    <th
-                      scope="row"
-                      className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap"
+                  {userRendezvous.map((rendezvous) => (
+                    <tr
+                      key={rendezvous.id}
+                      className="bg-white border-b hover:bg-gray-50"
                     >
-                      <Image
-                        height={40}
-                        width={40}
-                        className="w-10 h-10 rounded-full"
-                        src="/1.jpg"
-                        alt="business image"
-                      />
-                      <div className="ps-3">
-                        <div className="text-base font-semibold">Neil Sims</div>
-                        <div className="font-normal text-gray-500">
-                          neil.sims@flowbite.com
-                        </div>
-                      </div>
-                    </th>
-                    <td className="px-6 py-4">React Developer</td>
-                    <td className="px-6 py-4">
-                      <span>
-                        16.04.2024 - 11:00
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <button
-                        type="button"
-                        className="font-medium text-red-600 hover:underline"
+                      <th
+                        scope="row"
+                        className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap"
                       >
-                        Cancel
-                      </button>
-                    </td>
-                  </tr>
+                        <Image
+                          height={40}
+                          width={40}
+                          className="w-10 h-10 rounded-full object-cover"
+                          src={
+                            rendezvous.bussiness?.image
+                              ? process.env.NEXT_PUBLIC_AWS_BUCKET_URL +
+                                rendezvous.bussiness.image
+                              : `https://ui-avatars.com/api/?name=${"MustafaKemal"}`
+                          }
+                          alt="business image"
+                        />
+                        <div className="ps-3">
+                          <div className="text-base font-semibold">
+                            {rendezvous.bussiness.name}
+                          </div>
+                          <div className="font-normal text-gray-500">
+                            {rendezvous.bussiness.profession}
+                          </div>
+                        </div>
+                      </th>
+                      <td className="px-6 py-4">
+                        {rendezvous.bussiness.location}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span>
+                          {rendezvous.rendezvousAt.toLocaleDateString()} -{" "}
+                          {rendezvous.rendezvousAt
+                            .toTimeString()
+                            .substring(0, 5)}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        <button
+                          type="button"
+                          className="font-medium text-red-600 hover:underline"
+                        >
+                          Cancel
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

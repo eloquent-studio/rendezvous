@@ -112,3 +112,13 @@ export async function UserRendezvous(prevState: any, formData: FormData) {
 
   redirect(`/c/${Number(isValidData.userId)}`);
 }
+
+export async function getUserRendezvous(userId: string) {
+  const userRendezvous = await prisma.rendezvous.findMany({
+    where: { userId: Number(userId)},
+    include: { bussiness: { select: { name: true, location: true, profession: true, image: true }} }
+  })
+
+  return userRendezvous
+}
+
