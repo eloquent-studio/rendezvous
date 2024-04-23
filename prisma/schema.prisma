@@ -23,7 +23,7 @@ model User {
   isTwoFactorEnabled    Boolean                @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
 
-  rendezvous Rendezvous[]
+  rendezvous   Rendezvous[]
   notification Notification[]
 }
 
@@ -72,7 +72,7 @@ model BusinessAccount {
   ContactForm     ContactForm[]
   GuestRendezvous GuestRendezvous[]
   Rendevous       Rendezvous[]
-  Notification Notification[]
+  Notification    Notification[]
 
   @@unique([userId])
 }
@@ -84,7 +84,7 @@ model ContactForm {
   message    String?
   createdAt  DateTime        @default(now())
   businessId Int
-  bussiness  BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  business   BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
 }
 
 model GuestRendezvous {
@@ -93,9 +93,10 @@ model GuestRendezvous {
   email        String
   phoneNumber  String?
   message      String?
+  isCancelled  Boolean         @default(false)
   rendezvousAt DateTime
   businessId   Int
-  bussiness    BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  business     BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
   createdAt    DateTime        @default(now())
 }
 
@@ -105,24 +106,24 @@ model Rendezvous {
   email        String
   phoneNumber  String?
   message      String?
+  isCancelled  Boolean  @default(false)
   rendezvousAt DateTime
   createdAt    DateTime @default(now())
 
   businessId Int
   userId     Int
 
-  bussiness BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
-  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  business BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-
 model Notification {
-  id        Int      @id @default(autoincrement())
-  body      String
-  createdAt DateTime @default(now())
-  userId    Int
+  id         Int      @id @default(autoincrement())
+  body       String
+  createdAt  DateTime @default(now())
+  userId     Int
   businessId Int
 
-  bussiness BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  business BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

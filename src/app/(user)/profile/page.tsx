@@ -5,24 +5,26 @@ import prisma from "@/lib/prisma";
 import LogoutButton from "@/components/props/logout-button";
 import Image from "next/image";
 import { getUserRendezvous } from "@/actions/business/user-rendezvous";
+import { headers } from "next/headers";
+import CancelButton from "@/components/props/cancel-button";
 
-export default async function UserProfilePage({ params }: { params: any }) {
-  const userId = params.id;
+export default async function UserProfilePage() {
+  const headersList = headers();
+  const userId = headersList.get("id");
 
   const user = await prisma.user.findUnique({
     where: { id: Number(userId) },
     select: { email: true, fullname: true },
   });
 
-  const userRendezvous = await getUserRendezvous(userId);
+  const userRendezvous = await getUserRendezvous(userId!);
 
   return (
     <>
       <SecondaryNavbar />
       <main className="w-full h-full">
         <div className="max-w-screen-lg mx-auto flex flex-col md:flex-row my-16 p-4 md:p-0 gap-4">
-          <div></div>
-          <aside className="w-full md:w-1/3 h-[75vh] flex flex-col items-center justify-center gap-4 border rounded bg-gray-50">
+          <aside className="w-full md:w-1/4 h-[75vh] flex flex-col items-center justify-center gap-4 border rounded bg-gray-50">
             <div className="w-full h-full px-3 py-4 overflow-y-auto">
               <div className="space-y-2 flex flex-col justify-center items-center mt-8">
                 <h1 className="font-bold">{user?.fullname}</h1>
@@ -125,7 +127,7 @@ export default async function UserProfilePage({ params }: { params: any }) {
               </ul>
             </div>
           </aside>
-          <div className="w-full md:w-2/3 h-full flex flex-col items-center justify-center gap-4">
+          <div className="w-full md:w-3/4 h-full flex flex-col items-center justify-center gap-4">
             {/* <h1>Rendezvouses</h1> */}
             <div className="relative overflow-x-auto shadow sm:rounded-lg">
               <table className="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -149,7 +151,11 @@ export default async function UserProfilePage({ params }: { params: any }) {
                   {userRendezvous.map((rendezvous) => (
                     <tr
                       key={rendezvous.id}
-                      className="bg-white border-b hover:bg-gray-50"
+                      className={`${
+                        rendezvous.isCancelled
+                          ? "bg-gray-200 cursor-not-allowed opacity-50"
+                          : "bg-white border-b hover:bg-gray-50"
+                      }`}
                     >
                       <th
                         scope="row"
@@ -160,24 +166,24 @@ export default async function UserProfilePage({ params }: { params: any }) {
                           width={40}
                           className="w-10 h-10 rounded-full object-cover"
                           src={
-                            rendezvous.bussiness?.image
+                            rendezvous.business?.image
                               ? process.env.NEXT_PUBLIC_AWS_BUCKET_URL +
-                                rendezvous.bussiness.image
+                                rendezvous.business.image
                               : `https://ui-avatars.com/api/?name=${"MustafaKemal"}`
                           }
                           alt="business image"
                         />
                         <div className="ps-3">
                           <div className="text-base font-semibold">
-                            {rendezvous.bussiness.name}
+                            {rendezvous.business.name}
                           </div>
                           <div className="font-normal text-gray-500">
-                            {rendezvous.bussiness.profession}
+                            {rendezvous.business.profession}
                           </div>
                         </div>
                       </th>
                       <td className="px-6 py-4">
-                        {rendezvous.bussiness.location}
+                        {rendezvous.business.location}
                       </td>
                       <td className="px-6 py-4">
                         <span>
@@ -188,12 +194,11 @@ export default async function UserProfilePage({ params }: { params: any }) {
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <button
-                          type="button"
-                          className="font-medium text-red-600 hover:underline"
-                        >
-                          Cancel
-                        </button>
+                        <CancelButton
+                          userId={userId!}
+                          businessId={String(rendezvous.businessId)}
+                          cancelled={rendezvous.isCancelled}
+                        />
                       </td>
                     </tr>
                   ))}

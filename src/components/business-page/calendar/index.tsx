@@ -12,7 +12,7 @@ function getDayOfWeek(year: number, month: number, day: number) {
   return new Date(year, month, day).getDay();
 }
 
-export default function Calendar({ username, rndv }: { username: string, rndv: any }) {
+export default function Calendar({ username, rndv, urndv }: { username: string, rndv: any, urndv: any }) {
   function handlePrevMonth() {
     setCurrentDate((prevDate) => {
       const prevMonth =
@@ -165,6 +165,7 @@ export default function Calendar({ username, rndv }: { username: string, rndv: a
                       disabled={dayInfo.disabled}
                       username={username}
                       rndv={rndv}
+                      urndv={urndv}
                     />
                   ))}
                 </div>
