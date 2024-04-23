@@ -153,3 +153,14 @@ export async function cancelRendezvous(userId: string, businessId: string) {
   revalidatePath(`/profile`)
   return canceled
 }
+
+export async function getUserRendezvouses() {
+  const rendezvouses = await prisma?.rendezvous.findMany({
+    select: {
+      id: true,
+      rendezvousAt: true,
+    },
+  });
+
+  return rendezvouses
+}

@@ -140,3 +140,14 @@ export async function GuestRendezvous(prevState: any, formData: FormData) {
 
   // revalidatePath("/dashboard/settings");
 }
+
+export async function getGuestRendezvouses() {
+  const guestRendezvouses = await prisma?.guestRendezvous.findMany({
+    select: {
+      id: true,
+      rendezvousAt: true,
+    },
+  });
+
+  return guestRendezvouses
+}
