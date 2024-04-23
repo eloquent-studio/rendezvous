@@ -24,6 +24,7 @@ model User {
   twoFactorConfirmation TwoFactorConfirmation?
 
   rendezvous Rendezvous[]
+  notification Notification[]
 }
 
 model ResetToken {
@@ -71,6 +72,7 @@ model BusinessAccount {
   ContactForm     ContactForm[]
   GuestRendezvous GuestRendezvous[]
   Rendevous       Rendezvous[]
+  Notification Notification[]
 
   @@unique([userId])
 }
@@ -111,4 +113,16 @@ model Rendezvous {
 
   bussiness BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
   user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  body      String
+  createdAt DateTime @default(now())
+  userId    Int
+  businessId Int
+
+  bussiness BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
