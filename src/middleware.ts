@@ -63,6 +63,7 @@ export const config = {
         '/forgotpassword',
         '/resetpassword',
         '/dashboard/:path*',
-        '/business/:path*'
+        '/business/:path*',
+        '/profile/:path*'
     ],
 };
