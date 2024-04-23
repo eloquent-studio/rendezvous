@@ -10,6 +10,7 @@ export default function CalendarItem({
   username,
   year,
   rndv,
+  urndv,
 }: {
   day: number;
   disabled?: boolean;
@@ -17,9 +18,8 @@ export default function CalendarItem({
   month: number;
   year: number;
   rndv: any;
+  urndv: any;
 }) {
-  console.log(rndv);
-
   const [today, setToday] = useState<number>(0);
   const [thisMonth, setThisMonth] = useState<number>(0);
 
@@ -29,15 +29,24 @@ export default function CalendarItem({
     const currentDate = new Date().getDate();
     const currentMonth = new Date().getMonth();
     setToday(currentDate);
-    setThisMonth(currentMonth)
+    setThisMonth(currentMonth);
   }, []);
 
-  const hasRendezvous = rndv.some(
-    (item: any) =>
-      new Date(item.rendezvousAt).getDate() === day &&
-      new Date(item.rendezvousAt).getMonth() === month &&
-      new Date(item.rendezvousAt).getFullYear() === year
-  );
+  const hasRendezvous = (rndv && urndv).some((item: any) => {
+    if (!item.isCancelled) {
+      const rendezvousDate = new Date(item.rendezvousAt);
+      console.log("Aaaaaaa");
+      return (
+        rendezvousDate.getDate() === day &&
+        rendezvousDate.getMonth() === month &&
+        rendezvousDate.getFullYear() === year
+      );
+    } else {
+      return false;
+    }
+  });
+
+  console.log(hasRendezvous);
 
   if (
     disabled ||
@@ -74,13 +83,14 @@ export default function CalendarItem({
           {dayView}
         </p>
         {hasRendezvous
-          ? rndv.map((rnd: any) => (
-              <p
-                key={rnd.id}
-                className="w-full px-1 py-0.5 bg-lime-600 text-white rounded mt-1"
-              >
-                {rnd.rendezvousAt.getHours().toString()}:00
-              </p>
+          ? (rndv && urndv).map((rnd: any) => (
+              <span key={rnd.id} className="w-full">
+                {rnd.isCancelled === false ? (
+                  <p className="w-full px-1 py-0.5 bg-lime-600 text-white rounded mt-1">
+                    {rnd.rendezvousAt.getHours().toString()}:00
+                  </p>
+                ) : null}
+              </span>
             ))
           : null}
       </div>

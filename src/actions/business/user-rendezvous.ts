@@ -159,6 +159,7 @@ export async function getUserRendezvouses() {
     select: {
       id: true,
       rendezvousAt: true,
+      isCancelled: true
     },
   });
 

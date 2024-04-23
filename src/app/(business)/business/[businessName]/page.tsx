@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import prisma from "@/lib/prisma";
 import SecondaryNavbar from "@/components/business-page/secondary-navbar";
 import Calendar from "@/components/business-page/calendar";
+import { getGuestRendezvouses } from "@/actions/business/guest-rendezvous";
+import { getUserRendezvouses } from "@/actions/business/user-rendezvous";
 
 export default async function Page({
   params,
@@ -24,19 +26,21 @@ export default async function Page({
   });
   if (!business) notFound();
 
-  const username = params.businessName
+  const username = params.businessName;
 
-  const rndv = await prisma?.guestRendezvous.findMany({
-    select: {
-      id: true,
-      rendezvousAt: true
-    }
-  })
+  const rndv = await getGuestRendezvouses();
+  const urndv = await getUserRendezvouses();
+
+  console.log(rndv)
+  console.log(urndv)
 
   return (
     <>
       <SecondaryNavbar />
-      <BusinessPage business={business} Calendar={<Calendar username={username} rndv={rndv}/>} />
+      <BusinessPage
+        business={business}
+        Calendar={<Calendar username={username} rndv={rndv} urndv={urndv} />}
+      />
     </>
   );
 }

@@ -55,10 +55,14 @@ export default function TimeModal({
 
   const full = (time: string, dateString: any) => {
     const isFull = (urndv || rndv).some((item: any) => {
-      const rndvDate = new Date(item.rendezvousAt);
-      const rndvDay = rndvDate.getDate().toString();
-      const rndvHour = rndvDate.getHours().toString().padStart(2, "0");
-      return rndvHour === time && rndvDay === dateString.substring(7, 9);
+      if (!item.isCancelled) {
+        const rndvDate = new Date(item.rendezvousAt);
+        const rndvDay = rndvDate.getDate().toString();
+        const rndvHour = rndvDate.getHours().toString().padStart(2, "0");
+        return rndvHour === time && rndvDay === dateString.substring(7, 9);
+      } else {
+        return false;
+      }
     });
     return isFull;
   };
