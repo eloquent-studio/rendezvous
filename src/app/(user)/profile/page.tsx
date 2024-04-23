@@ -166,24 +166,24 @@ export default async function UserProfilePage() {
                           width={40}
                           className="w-10 h-10 rounded-full object-cover"
                           src={
-                            rendezvous.bussiness?.image
+                            rendezvous.business?.image
                               ? process.env.NEXT_PUBLIC_AWS_BUCKET_URL +
-                                rendezvous.bussiness.image
+                                rendezvous.business.image
                               : `https://ui-avatars.com/api/?name=${"MustafaKemal"}`
                           }
                           alt="business image"
                         />
                         <div className="ps-3">
                           <div className="text-base font-semibold">
-                            {rendezvous.bussiness.name}
+                            {rendezvous.business.name}
                           </div>
                           <div className="font-normal text-gray-500">
-                            {rendezvous.bussiness.profession}
+                            {rendezvous.business.profession}
                           </div>
                         </div>
                       </th>
                       <td className="px-6 py-4">
-                        {rendezvous.bussiness.location}
+                        {rendezvous.business.location}
                       </td>
                       <td className="px-6 py-4">
                         <span>

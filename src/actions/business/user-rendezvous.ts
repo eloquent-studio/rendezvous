@@ -117,7 +117,7 @@ export async function UserRendezvous(prevState: any, formData: FormData) {
 export async function getUserRendezvous(userId: string) {
   const userRendezvous = await prisma.rendezvous.findMany({
     where: { userId: Number(userId) },
-    include: { bussiness: { select: { name: true, location: true, profession: true, image: true } } }
+    include: { business: { select: { name: true, location: true, profession: true, image: true } } }
   })
 
   return userRendezvous

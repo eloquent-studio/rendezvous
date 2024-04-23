@@ -84,7 +84,7 @@ model ContactForm {
   message    String?
   createdAt  DateTime        @default(now())
   businessId Int
-  bussiness  BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  business   BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
 }
 
 model GuestRendezvous {
@@ -96,7 +96,7 @@ model GuestRendezvous {
   isCancelled  Boolean         @default(false)
   rendezvousAt DateTime
   businessId   Int
-  bussiness    BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  business     BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
   createdAt    DateTime        @default(now())
 }
 
@@ -113,8 +113,8 @@ model Rendezvous {
   businessId Int
   userId     Int
 
-  bussiness BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
-  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  business BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Notification {
@@ -124,6 +124,6 @@ model Notification {
   userId     Int
   businessId Int
 
-  bussiness BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
-  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  business BusinessAccount @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
