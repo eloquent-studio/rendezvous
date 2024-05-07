@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import CalendarItem from "./item";
 
 function getDaysInMonth(year: number, month: number) {
@@ -12,7 +11,7 @@ function getDayOfWeek(year: number, month: number, day: number) {
   return new Date(year, month, day).getDay();
 }
 
-export default function Calendar({ username, rndv, urndv }: { username: string, rndv: any, urndv: any }) {
+export default function Calendar({ rndv, urndv }: { rndv: any, urndv: any }) {
   function handlePrevMonth() {
     setCurrentDate((prevDate) => {
       const prevMonth =
@@ -97,48 +96,50 @@ export default function Calendar({ username, rndv, urndv }: { username: string, 
 
   return (
     <>
-      <div className="w-full h-full overflow-auto flex flex-row justify-center items-center relative no-scrollbar bg-white">
-        <div className="bg-white md:p-2 w-full no-scrollbar">
-          <p className="text-4xl font-bold text-gray-800 mb-8">
-            {monthName} {currentDate.getFullYear()}
-          </p>
-          <div className="w-full flex flex-row items-center gap-2 justify-end">
-            <button onClick={handlePrevMonth}>
-              <svg
-                className="w-2.5 h-2.5 rtl:rotate-180"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 1 1 5l4 4"
-                />
-              </svg>
-            </button>
-            <h1 className="">{monthName}</h1>
-            <button onClick={handleNextMonth}>
-              <svg
-                className="w-2.5 h-2.5 rtl:rotate-180"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m1 9 4-4-4-4"
-                />
-              </svg>
-            </button>
-          </div>
+      <div className="w-full h-full overflow-auto flex flex-row justify-center items-center relative no-scrollbar pt-0 md:pt-48">
+        <div className="md:p-2 w-full no-scrollbar">
+          {/* <div className="w-full flex flex-row justify-between items-center mb-8">
+            <p className="text-4xl font-bold text-gray-800">
+              {monthName} {currentDate.getFullYear()}
+            </p>
+          </div> */}
+            <div className="w-full flex flex-row items-center gap-2 justify-start mb-8">
+              <button onClick={handlePrevMonth}>
+                <svg
+                  className="w-3 h-3 rtl:rotate-180 text-gray-500"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 6 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 1 1 5l4 4"
+                  />
+                </svg>
+              </button>
+              <h1 className="font-medium text-xl uppercase">{monthName}</h1>
+              <button onClick={handleNextMonth}>
+                <svg
+                  className="w-3 h-3 rtl:rotate-180 text-gray-500"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 6 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 9 4-4-4-4"
+                  />
+                </svg>
+              </button>
+            </div>
           <div className="inline-flex flex-col items-start justify-start h-full w-full">
             <div className="flex overflow-x-auto items-start justify-start h-6">
               {[...Array(7)].map((_, i) => (
@@ -163,9 +164,9 @@ export default function Calendar({ username, rndv, urndv }: { username: string, 
                       month={dayInfo.month}
                       day={dayInfo.day}
                       disabled={dayInfo.disabled}
-                      username={username}
                       rndv={rndv}
                       urndv={urndv}
+                      currentDate={currentDate}
                     />
                   ))}
                 </div>

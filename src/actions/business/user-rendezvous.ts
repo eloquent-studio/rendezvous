@@ -165,3 +165,21 @@ export async function getUserRendezvouses() {
 
   return rendezvouses
 }
+
+
+export async function getUserRendezvousInfo() {
+  const rendezvouses = await prisma?.rendezvous.findMany({
+    orderBy: {
+      rendezvousAt: 'desc'
+    },
+    include: { 
+      business: {
+        select: {
+          name: true
+        }
+      }
+    }
+  });
+
+  return rendezvouses;
+}

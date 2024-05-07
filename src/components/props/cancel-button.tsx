@@ -16,7 +16,6 @@ export default function CancelButton({
     <button
       type="button"
       onClick={async () => {
-        alert("CLICKED");
         await cancelRendezvous(userId, businessId);
       }}
       className={`font-medium text-red-600 ${

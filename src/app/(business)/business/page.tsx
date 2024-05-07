@@ -2,8 +2,11 @@ import Link from "next/link";
 import React from "react";
 import Card from "@/components/business-page/card";
 import SecondaryNavbar from "@/components/business-page/secondary-navbar";
+import { getBusinesses } from "@/actions/business/business";
 
-export default function BusinessesPage() {
+export default async function BusinessesPage() {
+  const businesses = await getBusinesses()
+
   return (
     <>
       <SecondaryNavbar />
@@ -99,14 +102,9 @@ export default function BusinessesPage() {
               </form>
             </nav>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
+              {businesses.map((business) => (
+                <Card business={business} key={business.id}/>
+              ))}
             </div>
           </div>
         </main>

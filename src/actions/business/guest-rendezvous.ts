@@ -152,3 +152,9 @@ export async function getGuestRendezvouses() {
 
   return guestRendezvouses
 }
+
+export async function getGuestRendezvousInfo() {
+  const guestRendezvouses = await prisma?.guestRendezvous.findMany();
+
+  return guestRendezvouses
+}
