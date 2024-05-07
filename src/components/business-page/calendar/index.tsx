@@ -93,7 +93,7 @@ export default function Calendar({ username, rndv, urndv }: { username: string, 
     SetGroupedWeeks(tempGroupedWeeks);
   }, [currentDate]);
 
-  const monthName = currentDate.toLocaleString("default", { month: "long" });
+  const monthName = currentDate.toLocaleString("en-US", { month: "long" });
 
   return (
     <>
