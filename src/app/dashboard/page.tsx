@@ -106,7 +106,8 @@ export default async function DashboardPage() {
                 </h3>
                 <div className="w-full flex flex-row justify-between items-center font-medium leading-none text-sm mb-4">
                   <time className="block mb-2 leading-none">
-                    {formattedTodaysDate} - {dates}
+                    {formattedTodaysDate} -{" "}
+                    {today.rendezvousAt.toTimeString().substring(0, 5)}
                   </time>
                   <p className="block mb-2">{today.fullName}</p>
                   {/* <span>45$</span> */}
