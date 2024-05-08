@@ -197,8 +197,8 @@ const LoginForm = ({ next }: { next: string }) => {
                 </svg>
               )}
               {variant === "user"
-                ? "Sign in as a seller"
-                : " Sign in as an user"}
+                ? "Sign in as a business"
+                : " Sign in as a customer"}
             </Button>
             {variant == "user" && (
               <Button

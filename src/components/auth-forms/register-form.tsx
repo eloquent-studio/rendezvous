@@ -180,8 +180,8 @@ const RegisterForm = ({ next }: { next: string }) => {
                 </svg>
               )}
               {variant === "user"
-                ? "Sign up as a seller"
-                : " Sign up as an user"}
+                ? "Sign up as a business"
+                : " Sign up as a customer"}
             </Button>
             {variant == "user" && (
               <Button
