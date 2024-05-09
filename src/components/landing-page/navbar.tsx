@@ -1,58 +1,77 @@
-"use client"
+"use client";
 
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
 const Navbar = () => {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
 
   const isActive = () => {
-    window.scrollY > 0 ? setActive(true) : setActive(false)
-  }
+    window.scrollY > 0 ? setActive(true) : setActive(false);
+  };
 
   useEffect(() => {
-    window.addEventListener("scroll", isActive)
+    window.addEventListener("scroll", isActive);
 
     return () => {
-      window.removeEventListener("scroll", isActive)
-    }
-  }, [])
+      window.removeEventListener("scroll", isActive);
+    };
+  }, []);
 
   return (
-    <div className={active ? "bg-white text-black fixed w-full top-0 left-0 z-20" : "bg-gray-950 text-white transition-all ease duration-500 fixed w-full top-0 left-0 z-20"}>
-      <div className='max-w-screen-lg mx-auto p-2 lg:px-0'>
-        <div className='flex flex-row justify-between items-center mb-2'>
-          <div>
-            <Link href="/">
-              <span className='uppercase font-bold'>logo</span>
-              <span className='text-slate-400 font-extrabold'>.</span>
-            </Link>
-          </div>
-          <div className='flex flex-row items-center justify-end'>
-            <Link href="/register">
-              <button
-                type="button"
-                className="border border-slate-100 py-0.5 md:py-1 px-3 md:px-4 text-xs font-bold focus:outline-none bg-transparent rounded-lg hover:text-slate-100 hover:bg-slate-900 hover:border-slate-950 focus:z-10 focus:ring-4 focus:ring-gray-200 duration-500 transition-all ease-in"
+    <nav
+      className={`transition-all ease-in-out duration-500 fixed w-full top-0 left-0 z-[100] ${
+        active
+          ? "bg-gray-50 text-black border-b border-gray-300"
+          : "bg-gray-950 text-white border-none"
+      }`}
+    >
+      <div className="max-w-screen-lg mx-auto lg:px-0">
+        <div className="flex flex-row justify-between items-center px-4 py-3 md:px-0">
+          <Link href="/" className="text-start font-bold text-lg">
+            Rendezvous
+          </Link>
+          {active && (
+            <div className="w-fit flex flex-row items-center justify-end gap-4 text-sm font-medium">
+              <Link
+                href="/login"
+                className={`duration-200 transition-all ease-in ${
+                  active ? "hover:text-black/70" : "hover:text-white/80"
+                }`}
               >
-                Join
-              </button>
-            </Link>
-          </div>
+                Sign In
+              </Link>
+              <Link
+                href="/register"
+                className={`duration-200 transition-all ease-in ${
+                  active ? "hover:text-black/70" : "hover:text-white/80"
+                }`}
+              >
+                Join Us
+              </Link>
+            </div>
+          )}
         </div>
-        <hr className='min-w-full' />
-        <div className='flex flex-row items-center justify-between w-full font-semibold text-xs pt-2'>
-          {active &&
+      </div>
+      <div
+        className={`transition-all ease-in-out duration-500 w-full  ${
+          active ? "border-t border-gray-300" : " order-none"
+        }`}
+      >
+        <div className="max-w-screen-lg mx-auto flex flex-row items-center justify-between w-full font-bold text-xs py-2 px-4 md:px-0 text-black/80">
+          {active && (
             <>
-              <Link href="/">Business</Link>
+              <Link href="/">Be a Seller</Link>
               <Link href="/">Become a Part</Link>
               <Link href="/">Rendezvous</Link>
               <Link href="/">Source</Link>
+              <Link href="/">Contact</Link>
             </>
-          }
+          )}
         </div>
       </div>
-    </div>
-  )
-}
+    </nav>
+  );
+};
 
-export default Navbar
+export default Navbar;
