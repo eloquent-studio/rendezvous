@@ -14,8 +14,10 @@ const HeroBanner = () => {
               <span>Everyone</span>
             </h1>
             <h3 className="text-base text-zinc-100 p-4">
-              Find the right <i>rendezvous</i>, right away. Our <b>Rendezvous</b>{" "}
-               management software is fit for professionals, service-based local businesses, and mid-large enterprises across multiple industries.
+              Find the right <i>rendezvous</i>, right away. Our{" "}
+              <b>Rendezvous</b> management software is fit for professionals,
+              service-based local businesses, and mid-large enterprises across
+              multiple industries.
             </h3>
             <div className="w-fit h-fit flex flex-col md:flex-row justify-center items-center gap-4">
               <Link
@@ -48,9 +50,9 @@ const HeroBanner = () => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M14 5l7 7m0 0l-7 7m7-7H3"
                     ></path>
                   </svg>

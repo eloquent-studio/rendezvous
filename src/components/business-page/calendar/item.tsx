@@ -45,8 +45,6 @@ export default function CalendarItem({
     }
   });
 
-  console.log(hasRendezvous);
-
   if (
     disabled ||
     new Date(year, month, day) <=
@@ -84,7 +82,7 @@ export default function CalendarItem({
               <span key={rnd.id} className="w-full">
                 {rnd.isCancelled === false ? (
                   <p className="w-full px-1 py-0.5 bg-lime-600 text-white rounded mt-1">
-                    {rnd.rendezvousAt.getHours().toString()}:00
+                    {`${year}-0${month + 1}-${day}` === rnd.rendezvousAt.toISOString().split('T')[0] && `${rnd.rendezvousAt.getHours().toString()}:00`}
                   </p>
                 ) : null}
               </span>
