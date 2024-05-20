@@ -4,6 +4,7 @@ import Card from "@/components/business-page/card";
 import SecondaryNavbar from "@/components/business-page/secondary-navbar";
 import { getBusinesses } from "@/actions/business/business";
 import SearchBar from "@/components/business-page/search";
+import Pagination from "@/components/business-page/pagination";
 
 export default async function BusinessesPage({
   searchParams,
@@ -21,7 +22,7 @@ export default async function BusinessesPage({
   return (
     <>
       <SecondaryNavbar />
-      <div className="max-w-screen-lg mx-auto h-full mt-16 p-2 md:p-0">
+      <div className="max-w-screen-lg mx-auto h-full my-16 p-2 md:p-0">
         <div className="w-full h-48 bg-blue-950 rounded-md">
           <div className="w-full h-full p-8 md:p-2 text-white flex flex-col items-center justify-center gap-4">
             <div>
@@ -50,6 +51,7 @@ export default async function BusinessesPage({
                 <Card business={business} key={business.id} />
               ))}
             </div>
+            <Pagination count={count}/>
           </div>
         </main>
       </div>

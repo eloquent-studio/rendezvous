@@ -12,7 +12,7 @@ const SearchBar = ({ placeholder }: { placeholder: string }) => {
   const handleSearch = useDebouncedCallback((e: any) => {
     const params = new URLSearchParams(searchParams);
 
-    params.set("page", "1");
+    params.set("page", String(1));
 
     if (e.target.value) {
       e.target.value.length > 2 && params.set("q", e.target.value);
