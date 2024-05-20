@@ -5,10 +5,10 @@ import Image from "next/image";
 interface Business {
   id: number,
   name: string,
-  profession?: string,
-  location?: string,
-  image?: string,
-  bio?: string
+  profession?: string | null,
+  location?: string | null, 
+  image?: string | null,
+  bio?: string | null
 }
 interface BusinessProps {
   business: Business
