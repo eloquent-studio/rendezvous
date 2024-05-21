@@ -164,8 +164,22 @@ export default function Calendar({ username, rndv, urndv }: { username: string, 
                       day={dayInfo.day}
                       disabled={dayInfo.disabled}
                       username={username}
-                      rndv={rndv}
-                      urndv={urndv}
+                      rndv={rndv?.filter((item: any) => {
+                        const rendezvousDate = new Date(item.rendezvousAt);
+                        return (
+                          rendezvousDate.getDate() === dayInfo.day &&
+                          (rendezvousDate.getMonth()) === dayInfo.month &&
+                          rendezvousDate.getFullYear() === dayInfo.year
+                        );
+                      })}
+                      urndv={urndv?.filter((item: any) => {
+                        const rendezvousDate = new Date(item.rendezvousAt);
+                        return (
+                          rendezvousDate.getDate() === dayInfo.day &&
+                          (rendezvousDate.getMonth()) === dayInfo.month &&
+                          rendezvousDate.getFullYear() === dayInfo.year
+                        );
+                      })}
                     />
                   ))}
                 </div>

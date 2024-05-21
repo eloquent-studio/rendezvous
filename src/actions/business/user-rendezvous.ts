@@ -1,12 +1,10 @@
-"use server"
-
+"use server";
 
 import { z } from "zod";
 import prisma from "@/lib/prisma";
 import sendMail from "@/lib/send-mail";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-
 
 const createUserRendezvousSchema = z.object({
   userId: z.string(),
@@ -36,7 +34,6 @@ export async function UserRendezvous(prevState: any, formData: FormData) {
   });
 
   console.log(isValidData.userId);
-
 
   const business = await prisma.businessAccount.findUnique({
     where: { name: isValidData.businessName },
@@ -110,29 +107,31 @@ export async function UserRendezvous(prevState: any, formData: FormData) {
       success: false,
     };
 
-
   redirect(`/profile`);
 }
 
 export async function getUserRendezvous(userId: string) {
   const userRendezvous = await prisma.rendezvous.findMany({
     where: { userId: Number(userId) },
-    include: { business: { select: { name: true, location: true, profession: true, image: true } } }
-  })
+    include: {
+      business: {
+        select: { name: true, location: true, profession: true, image: true },
+      },
+    },
+  });
 
-  return userRendezvous
+  return userRendezvous;
 }
-
 
 export async function cancelRendezvous(userId: string, businessId: string) {
   const rendezvous = await prisma.rendezvous.findFirst({
     where: {
       userId: Number(userId),
       businessId: Number(businessId),
-    }
+    },
   });
 
-  console.log(rendezvous)
+  console.log(rendezvous);
 
   if (!rendezvous) {
     throw new Error("Rendezvous not found");
@@ -140,45 +139,46 @@ export async function cancelRendezvous(userId: string, businessId: string) {
 
   const canceled = await prisma.rendezvous.update({
     where: {
-      id: rendezvous.id
+      id: rendezvous.id,
     },
     data: {
-      isCancelled: true
+      isCancelled: true,
     },
   });
 
-  console.log(canceled)
+  console.log(canceled);
 
-
-  revalidatePath(`/profile`)
-  return canceled
+  revalidatePath(`/profile`);
+  return canceled;
 }
 
-export async function getUserRendezvouses() {
+export async function getUserRendezvouses(id: number) {
   const rendezvouses = await prisma?.rendezvous.findMany({
+    where: {
+      businessId: id,
+    },
     select: {
       id: true,
       rendezvousAt: true,
-      isCancelled: true
+      isCancelled: true,
     },
   });
 
-  return rendezvouses
+  return rendezvouses;
 }
-
 
 export async function getUserRendezvousInfo() {
   const rendezvouses = await prisma?.rendezvous.findMany({
     orderBy: {
-      rendezvousAt: 'desc'
+      rendezvousAt: "desc",
     },
-    include: { 
+    include: {
       business: {
         select: {
-          name: true
-        }
-      }
-    }
+          name: true,
+        },
+      },
+    },
   });
 
   return rendezvouses;

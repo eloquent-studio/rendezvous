@@ -6,6 +6,7 @@ import { CompleteSubmit } from "./submit-button";
 import { GuestRendezvous } from "@/actions/business/guest-rendezvous";
 import { useFormState } from "react-dom";
 import { UserRendezvous } from "@/actions/business/user-rendezvous";
+import Link from "next/link";
 
 const initialState: { error: ""; success: boolean } = {
   error: "",
@@ -83,9 +84,7 @@ export default function TimeModal({
           </header>
           <form>
             <div
-              className={`${
-                user ? "order-1" : ""
-              } w-full h-full grid grid-flow-row gap-1`}
+              className={`w-full h-full grid grid-flow-row gap-1`}
             >
               <Appoint
                 date={"09:00"}
@@ -138,13 +137,11 @@ export default function TimeModal({
             </div>
           </form>
         </div>
-        <div className="w-full h-full flex justify-center items-center">
-          {user ? (
+        <div className="w-full h-full flex justify-center items-center p-0 md:px-4">
+          {id ? (
             <form action={formAction2} className="w-full">
               <ol
-                className={`${
-                  user ? "order-2 ml-8" : ""
-                } relative text-gray-500 border-s border-gray-200`}
+                className={"ml-8 relative w-fulltext-gray-500 border-s border-gray-200"}
               >
                 <li className="mb-10 ms-6">
                   <span className="absolute flex items-center justify-center w-8 h-8 bg-green-100 rounded-full -start-4 ring-4 ring-white">
@@ -195,7 +192,7 @@ export default function TimeModal({
               </div>
             </form>
           ) : (
-            <form action={formAction}>
+            <form action={formAction} className="w-full">
               <div className="mb-4">
                 <label
                   htmlFor="email"
@@ -249,7 +246,7 @@ export default function TimeModal({
                   </div>
                 </div>
               </div>
-              <div className="mb-2">
+              <div className="mb-">
                 <label
                   htmlFor="message"
                   className="block mb-2 text-sm font-medium text-gray-900"
@@ -259,7 +256,7 @@ export default function TimeModal({
                 <textarea
                   id="message"
                   name="message"
-                  rows={3}
+                  rows={2}
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Your message..."
                 ></textarea>
@@ -276,6 +273,16 @@ export default function TimeModal({
                   </p>
                 )}
               </div>
+              <span className="font-base text-sm w-full flex flex-row justify-end items-center gap-2 mb-3">Don&apos;t have an account?
+                <Link
+                  href={`/register?next=/business/${businessName}`}
+                  className="font-semibold hover:underline"
+                >
+                  Sign Up Now!
+                </Link>
+              </span>
+
+
 
               <input type="hidden" name="date" value={date as string} />
               <input type="hidden" name="time" value={time} />
@@ -363,11 +370,10 @@ const Appoint = ({
   return (
     <button
       type="button"
-      className={`rounded w-full focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 mb-2 block focus:outline-none border border-gray-300 focus:border-none ${
-        isFull
-          ? "text-white bg-gray-300 cursor-not-allowed hover:bg-gray-300"
-          : "hover:bg-gray-200 "
-      }  ${time == date ? "bg-lime-300" : ""}`}
+      className={`rounded w-full focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 mb-2 block focus:outline-none border border-gray-300 focus:border-none ${isFull
+        ? "text-white bg-gray-300 cursor-not-allowed hover:bg-gray-300"
+        : "hover:bg-gray-200 "
+        }  ${time == date ? "bg-lime-300" : ""}`}
       disabled={isFull}
       onClick={() => {
         onClick(date);

@@ -4,7 +4,6 @@ import { useState, useCallback } from "react";
 import Input from "../props/input";
 import Link from "next/link";
 import Button from "../props/button";
-import { GoogleOutlined } from "@ant-design/icons";
 import { signIn } from "next-auth/react";
 import { SignUpAction } from "@/actions/auth/signup";
 import { useFormState } from "react-dom";
@@ -128,7 +127,7 @@ const RegisterForm = ({ next }: { next: string }) => {
         </div>
 
         <input type="hidden" value={variant} name="role" id="role" />
-        <input type="hidden" value={next} name="next" />
+        <input type="hidden" value={next ? next : (variant == "business" ? "/dashboard" : "/")} name="next" />
 
         <div className="text-center">
           <Button fullWidth large secondary>

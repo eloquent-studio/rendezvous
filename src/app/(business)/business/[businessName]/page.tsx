@@ -28,8 +28,8 @@ export default async function Page({
 
   const username = params.businessName;
 
-  const rndv = await getGuestRendezvouses();
-  const urndv = await getUserRendezvouses();
+  const rndv = await getGuestRendezvouses(business.id);
+  const urndv = await getUserRendezvouses(business.id);
 
   console.log(rndv)
   console.log(urndv)

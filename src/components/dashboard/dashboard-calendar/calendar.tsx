@@ -103,43 +103,43 @@ export default function Calendar({ rndv, urndv }: { rndv: any, urndv: any }) {
               {monthName} {currentDate.getFullYear()}
             </p>
           </div> */}
-            <div className="w-full flex flex-row items-center gap-2 justify-start mb-8">
-              <button onClick={handlePrevMonth}>
-                <svg
-                  className="w-3 h-3 rtl:rotate-180 text-gray-500"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 1 1 5l4 4"
-                  />
-                </svg>
-              </button>
-              <h1 className="font-medium text-xl uppercase">{monthName}</h1>
-              <button onClick={handleNextMonth}>
-                <svg
-                  className="w-3 h-3 rtl:rotate-180 text-gray-500"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 9 4-4-4-4"
-                  />
-                </svg>
-              </button>
-            </div>
+          <div className="w-full flex flex-row items-center gap-2 justify-start mb-8">
+            <button onClick={handlePrevMonth}>
+              <svg
+                className="w-3 h-3 rtl:rotate-180 text-gray-500"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 6 10"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 1 1 5l4 4"
+                />
+              </svg>
+            </button>
+            <h1 className="font-medium text-xl uppercase">{monthName}</h1>
+            <button onClick={handleNextMonth}>
+              <svg
+                className="w-3 h-3 rtl:rotate-180 text-gray-500"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 6 10"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 9 4-4-4-4"
+                />
+              </svg>
+            </button>
+          </div>
           <div className="inline-flex flex-col items-start justify-start h-full w-full">
             <div className="flex overflow-x-auto items-start justify-start h-6">
               {[...Array(7)].map((_, i) => (
@@ -164,8 +164,22 @@ export default function Calendar({ rndv, urndv }: { rndv: any, urndv: any }) {
                       month={dayInfo.month}
                       day={dayInfo.day}
                       disabled={dayInfo.disabled}
-                      rndv={rndv}
-                      urndv={urndv}
+                      rndv={rndv?.filter((item: any) => {
+                        const rendezvousDate = new Date(item.rendezvousAt);
+                        return (
+                          rendezvousDate.getDate() === dayInfo.day &&
+                          (rendezvousDate.getMonth()) === dayInfo.month &&
+                          rendezvousDate.getFullYear() === dayInfo.year
+                        );
+                      })}
+                      urndv={urndv?.filter((item: any) => {
+                        const rendezvousDate = new Date(item.rendezvousAt);
+                        return (
+                          rendezvousDate.getDate() === dayInfo.day &&
+                          (rendezvousDate.getMonth()) === dayInfo.month &&
+                          rendezvousDate.getFullYear() === dayInfo.year
+                        );
+                      })}
                       currentDate={currentDate}
                     />
                   ))}

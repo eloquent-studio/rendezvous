@@ -141,20 +141,23 @@ export async function GuestRendezvous(prevState: any, formData: FormData) {
   // revalidatePath("/dashboard/settings");
 }
 
-export async function getGuestRendezvouses() {
+export async function getGuestRendezvouses(id: number) {
   const guestRendezvouses = await prisma?.guestRendezvous.findMany({
+    where: {
+      businessId: id,
+    },
     select: {
       id: true,
       rendezvousAt: true,
-      isCancelled: true
+      isCancelled: true,
     },
   });
 
-  return guestRendezvouses
+  return guestRendezvouses;
 }
 
 export async function getGuestRendezvousInfo() {
-  const guestRendezvouses = await prisma?.guestRendezvous.findMany();
+  const guestRendezvouses = await prisma?.guestRendezvous.findMany({});
 
-  return guestRendezvouses
+  return guestRendezvouses;
 }

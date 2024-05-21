@@ -11,9 +11,8 @@ export default async function DashboardPage() {
   const month = today.getMonth() + 1;
   const day = today.getDate();
 
-  const todayDate = `${year}-${month < 10 ? "0" + month : month}-${
-    day < 10 ? "0" + day : day
-  }`;
+  const todayDate = `${year}-${month < 10 ? "0" + month : month}-${day < 10 ? "0" + day : day
+    }`;
 
   const monthIndex = today.getMonth();
   const monthName = months[monthIndex];
@@ -42,9 +41,9 @@ export default async function DashboardPage() {
       )
         .toString()
         .padStart(2, "0")}-${rendezvousDate
-        .getDate()
-        .toString()
-        .padStart(2, "0")}`;
+          .getDate()
+          .toString()
+          .padStart(2, "0")}`;
       if (formattedDate === todayDate) {
         todaysRendezvous.push(item);
       }
@@ -64,9 +63,9 @@ export default async function DashboardPage() {
       )
         .toString()
         .padStart(2, "0")}-${rendezvousDate
-        .getDate()
-        .toString()
-        .padStart(2, "0")}`;
+          .getDate()
+          .toString()
+          .padStart(2, "0")}`;
       if (formattedDate === todayDate) {
         todaysRendezvous.push(item);
       }
@@ -84,11 +83,10 @@ export default async function DashboardPage() {
               <li
                 key={today.id}
                 className={`mb-10 ms-8
-              ${
-                today.isCancelled
-                  ? "text-gray-500 cursor-not-allowed"
-                  : "text-white cursor-pointer"
-              }`}
+              ${today.isCancelled
+                    ? "text-gray-500 cursor-not-allowed"
+                    : "text-white cursor-pointer"
+                  }`}
               >
                 <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3">
                   <svg
@@ -167,11 +165,10 @@ export default async function DashboardPage() {
                   </button> */}
                   {/* <DismissButton today={today}/> */}
                   <div
-                    className={`font-medium text-xs px-4 py-1.5 text-center inline-flex items-center text-red-600 ${
-                      today.isCancelled
-                        ? "cursor-not-allowed"
-                        : "hover:underline cursor-pointer"
-                    }`}
+                    className={`font-medium text-xs px-4 py-1.5 text-center inline-flex items-center text-red-600 ${today.isCancelled
+                      ? "cursor-not-allowed"
+                      : "hover:underline cursor-pointer"
+                      }`}
                   >
                     <svg
                       className="w-2 h-2 me-1"

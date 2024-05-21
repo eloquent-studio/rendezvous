@@ -3,17 +3,17 @@
 import prisma from "@/lib/prisma";
 
 export async function getBusinesses(q: string, page: any) {
-  const ITEM_PER_PAGE = 12
+  const ITEM_PER_PAGE = 3;
 
   try {
     const count = await prisma.businessAccount.count({
       where: {
         name: {
           contains: q,
-          mode: "insensitive"
-        }
-      }
-    })
+          mode: "insensitive",
+        },
+      },
+    });
 
     const businesses = await prisma?.businessAccount.findMany({
       where: {
@@ -21,28 +21,28 @@ export async function getBusinesses(q: string, page: any) {
           {
             name: {
               contains: q,
-              mode: "insensitive"
-            }
+              mode: "insensitive",
+            },
           },
           {
             location: {
               contains: q,
-              mode: "insensitive"
-            }
+              mode: "insensitive",
+            },
           },
           {
             profession: {
               contains: q,
-              mode: "insensitive"
-            }
+              mode: "insensitive",
+            },
           },
           {
             bio: {
               contains: q,
-              mode: "insensitive"
-            }
+              mode: "insensitive",
+            },
           },
-        ]
+        ],
       },
       take: ITEM_PER_PAGE,
       skip: ITEM_PER_PAGE * (page - 1),
@@ -52,16 +52,16 @@ export async function getBusinesses(q: string, page: any) {
         profession: true,
         location: true,
         image: true,
-        bio: true
-      }
-  
+        bio: true,
+      },
+
       // orderBy: {
       //   name: 'desc'
       // }
     });
-  
-    return { count, businesses }
+
+    return { count, businesses };
   } catch (error) {
-    throw new Error("Failed to fetch!")
+    throw new Error("Failed to fetch!");
   }
 }
