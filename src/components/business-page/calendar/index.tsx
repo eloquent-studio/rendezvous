@@ -12,7 +12,15 @@ function getDayOfWeek(year: number, month: number, day: number) {
   return new Date(year, month, day).getDay();
 }
 
-export default function Calendar({ username, rndv, urndv }: { username: string, rndv: any, urndv: any }) {
+export default function Calendar({
+  username,
+  rndv,
+  urndv,
+}: {
+  username: string;
+  rndv: any;
+  urndv: any;
+}) {
   function handlePrevMonth() {
     setCurrentDate((prevDate) => {
       const prevMonth =
@@ -96,98 +104,96 @@ export default function Calendar({ username, rndv, urndv }: { username: string, 
   const monthName = currentDate.toLocaleString("en-US", { month: "long" });
 
   return (
-    <>
-      <div className="w-full h-full overflow-auto flex flex-row justify-center items-center relative no-scrollbar bg-white">
-        <div className="bg-white md:p-2 w-full no-scrollbar">
-          <p className="text-4xl font-bold text-gray-800 mb-8">
-            {monthName} {currentDate.getFullYear()}
-          </p>
-          <div className="w-full flex flex-row items-center gap-2 justify-end">
-            <button onClick={handlePrevMonth}>
-              <svg
-                className="w-2.5 h-2.5 rtl:rotate-180"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
+    <div className="w-full h-full overflow-auto flex flex-row justify-center items-center relative no-scrollbar bg-white py-8">
+      <div className="bg-white w-full no-scrollbar">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+          {monthName} {currentDate.getFullYear()}
+        </h1>
+        <div className="w-full flex flex-row items-center gap-2 justify-end pr-4">
+          <button onClick={handlePrevMonth}>
+            <svg
+              className="w-2.5 h-2.5 rtl:rotate-180"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 1 1 5l4 4"
+              />
+            </svg>
+          </button>
+          <h3>{monthName}</h3>
+          <button onClick={handleNextMonth}>
+            <svg
+              className="w-2.5 h-2.5 rtl:rotate-180"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 6 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m1 9 4-4-4-4"
+              />
+            </svg>
+          </button>
+        </div>
+        <div className="inline-flex flex-col items-start justify-start h-full w-full">
+          <div className="flex overflow-x-auto items-start justify-start h-6">
+            {[...Array(7)].map((_, i) => (
+              <p
+                key={i}
+                className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase"
               >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 1 1 5l4 4"
-                />
-              </svg>
-            </button>
-            <h1 className="">{monthName}</h1>
-            <button onClick={handleNextMonth}>
-              <svg
-                className="w-2.5 h-2.5 rtl:rotate-180"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m1 9 4-4-4-4"
-                />
-              </svg>
-            </button>
+                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i]}
+              </p>
+            ))}
           </div>
-          <div className="inline-flex flex-col items-start justify-start h-full w-full">
-            <div className="flex overflow-x-auto items-start justify-start h-6">
-              {[...Array(7)].map((_, i) => (
-                <p
-                  key={i}
-                  className="w-32 md:w-36 h-full text-sm font-semibold text-gray-800 uppercase"
-                >
-                  {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i]}
-                </p>
-              ))}
-            </div>
-            <div className="flex flex-col items-start justify-start overflow-y-visible">
-              {groupedWeeks.map((week, index) => (
-                <div
-                  className="inline-flex items-center justify-start h-full w-full"
-                  key={index}
-                >
-                  {week.map((dayInfo) => (
-                    <CalendarItem
-                      key={`${dayInfo.year}-${dayInfo.month}-${dayInfo.day}`}
-                      year={dayInfo.year}
-                      month={dayInfo.month}
-                      day={dayInfo.day}
-                      disabled={dayInfo.disabled}
-                      username={username}
-                      rndv={rndv?.filter((item: any) => {
-                        const rendezvousDate = new Date(item.rendezvousAt);
-                        return (
-                          rendezvousDate.getDate() === dayInfo.day &&
-                          (rendezvousDate.getMonth()) === dayInfo.month &&
-                          rendezvousDate.getFullYear() === dayInfo.year
-                        );
-                      })}
-                      urndv={urndv?.filter((item: any) => {
-                        const rendezvousDate = new Date(item.rendezvousAt);
-                        return (
-                          rendezvousDate.getDate() === dayInfo.day &&
-                          (rendezvousDate.getMonth()) === dayInfo.month &&
-                          rendezvousDate.getFullYear() === dayInfo.year
-                        );
-                      })}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
+          <div className="flex flex-col items-start justify-start overflow-y-visible">
+            {groupedWeeks.map((week, index) => (
+              <div
+                className="inline-flex items-center justify-start h-full w-full"
+                key={index}
+              >
+                {week.map((dayInfo) => (
+                  <CalendarItem
+                    key={`${dayInfo.year}-${dayInfo.month}-${dayInfo.day}`}
+                    year={dayInfo.year}
+                    month={dayInfo.month}
+                    day={dayInfo.day}
+                    disabled={dayInfo.disabled}
+                    username={username}
+                    rndv={rndv?.filter((item: any) => {
+                      const rendezvousDate = new Date(item.rendezvousAt);
+                      return (
+                        rendezvousDate.getDate() === dayInfo.day &&
+                        rendezvousDate.getMonth() === dayInfo.month &&
+                        rendezvousDate.getFullYear() === dayInfo.year
+                      );
+                    })}
+                    urndv={urndv?.filter((item: any) => {
+                      const rendezvousDate = new Date(item.rendezvousAt);
+                      return (
+                        rendezvousDate.getDate() === dayInfo.day &&
+                        rendezvousDate.getMonth() === dayInfo.month &&
+                        rendezvousDate.getFullYear() === dayInfo.year
+                      );
+                    })}
+                  />
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

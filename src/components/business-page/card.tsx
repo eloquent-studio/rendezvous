@@ -21,12 +21,12 @@ const Card = ({business}: BusinessProps) => {
         <div className="h-48 relative w-full">
           <Image
             fill
-            className="absolute rounded-t-2xl object-contain object-center"
+            className="absolute rounded-t-2xl object-contain object-center h-full w-full"
             src={
               business?.image
                 ? process.env.NEXT_PUBLIC_AWS_BUCKET_URL +
                   business.image
-                : `https://ui-avatars.com/api/?name=${"MustafaKemal"}`
+                : "/anonymous.webp"
             }
             alt="image"
           />
@@ -35,12 +35,12 @@ const Card = ({business}: BusinessProps) => {
           <div className="w-full h-full flex flex-col items-start justify-normal gap-1 px-4 pt-2">
             <Link
               href={`/business/${business.name}`}
-              className="w-full text-lg font-semibold tracking-tight text-gray-900 truncate"
+              className="w-full text-lg font-semibold tracking-tight text-gray-900 truncate hover:underline"
             >
               {business.name}
             </Link>
             <span
-            className="text-xs font-medium tracking-tight text-gray-800 w-full line-clamp-2"
+            className={`text-xs font-medium tracking-tight text-gray-800 w-full line-clamp-1 ${business.bio ? "p-0" : "py-2"}`}
             >
               {business.bio}
             </span>
@@ -67,10 +67,7 @@ const Card = ({business}: BusinessProps) => {
               <span className="font-semibold">{business.profession}</span>
             </div>
           </div>
-          <div className="w-full flex items-center justify-between border-t p-4 bg-gray-100  rounded-b-2xl">
-            <span className="flex flex-row items-center justify-center text-gray-700 text-xs font-medium">
-              From<p className="ml-1 font-bold text-black text-sm">$3,499</p>
-            </span>
+          <div className="w-full flex items-center justify-end border-t p-4 bg-gray-100  rounded-b-2xl">
             <Link
               href={`/business/${business.name}`}
               className="flex flex-row gap-0.5 items-center text-blue-900 hover:text-blue-950 font-semibold text-sm text-center"
