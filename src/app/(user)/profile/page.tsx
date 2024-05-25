@@ -169,7 +169,7 @@ export default async function UserProfilePage() {
                             rendezvous.business?.image
                               ? process.env.NEXT_PUBLIC_AWS_BUCKET_URL +
                                 rendezvous.business.image
-                              : `https://ui-avatars.com/api/?name=${"MustafaKemal"}`
+                              : "/anonymous.webp"
                           }
                           alt="business image"
                         />

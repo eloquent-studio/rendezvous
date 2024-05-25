@@ -26,7 +26,7 @@ const Card = ({business}: BusinessProps) => {
               business?.image
                 ? process.env.NEXT_PUBLIC_AWS_BUCKET_URL +
                   business.image
-                : `https://ui-avatars.com/api/?name=${"MustafaKemal"}`
+                : "/anonymous.webp"
             }
             alt="image"
           />

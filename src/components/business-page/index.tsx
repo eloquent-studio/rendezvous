@@ -18,7 +18,7 @@ export default function BusinessPage({ business, Calendar }: any) {
                   src={
                     business?.image
                       ? process.env.NEXT_PUBLIC_AWS_BUCKET_URL + business.image
-                      : "/1.jpg"
+                      : "/anonymous.webp"
                   }
                   height={192}
                   width={192}
