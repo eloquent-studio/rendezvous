@@ -1,32 +1,29 @@
-'use client'
-import { useFormStatus } from 'react-dom'
-import { ReloadIcon } from "@radix-ui/react-icons"
+"use client";
+import { useFormStatus } from "react-dom";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 export function ContactSubmit() {
-    const { pending } = useFormStatus()
+  const { pending } = useFormStatus();
 
-    return (
-        <>
-            {
-                pending
-                    ?
-                    <button
-                        disabled={pending}
-                        type="submit"
-                        className="flex flex-row justify-center items-center  text-white bg-blue-400 hover:bg-blue-400 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none"
-                    >
-                        <ReloadIcon className="mr-1 h-4 w-4 animate-spin" />
-                        Send message
-                    </button>
-
-                    :
-                    <button
-                        type="submit"
-                        className="text-white bg-blue-700 hover:bg-blue-800 w-full focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none block"
-                    >
-                        Send message
-                    </button>
-            }
-        </>
-    )
+  return (
+    <>
+      {pending ? (
+        <button
+          disabled={pending}
+          type="submit"
+          className="w-full inline-flex items-center justify-center py-2 mt-2 text-sm text-center font-medium bg-gray-900 text-white rounded-md focus:outline-none hover:bg-gray-950 focus:z-10 focus:ring-4 focus:ring-gray-200 disabled:text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          <ReloadIcon className="mr-1 h-4 w-4 animate-spin" />
+          Send Message
+        </button>
+      ) : (
+        <button
+          type="submit"
+          className="w-full inline-flex items-center justify-center py-2 mt-2 text-sm text-center font-medium bg-gray-900 text-white border border-gray-900 rounded-md focus:outline-none hover:bg-gray-950 focus:z-10 focus:ring-4 focus:ring-gray-200"
+        >
+          Send Message
+        </button>
+      )}
+    </>
+  );
 }

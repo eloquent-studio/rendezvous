@@ -1,10 +1,23 @@
 "use client";
 
-import React, { useState, useRef, useCallback } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import ContactForm from "./contact-form";
 
-export default function ContactModal({ businessName }: { businessName: string }) {
+interface ContactProps {
+  name: string;
+  location: string | null;
+  email: string;
+}
+interface ContactModalProps {
+  info: ContactProps | null;
+  businessName: string;
+}
+
+export default function ContactModal({
+  businessName,
+  info,
+}: ContactModalProps) {
   const overlay = useRef<HTMLDivElement>(null);
   const wrapper = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -28,11 +41,11 @@ export default function ContactModal({ businessName }: { businessName: string })
 
   const BodyContent = (
     <div className="flex flex-col gap-4">
-      <header className="w-full h-full mb-4">
+      <div className="w-full h-full mb-4">
         <h1 className="uppercase font-medium text-xl">contact</h1>
-      </header>
-      <div className="w-full h-full flex flex-col md:flex-row gap-8 md:gap-4">
-        <div className="w-full h-full md:h-[65vh] p-4">
+      </div>
+      <main className="w-full h-full flex flex-col md:flex-row gap-8 md:gap-4 px-4">
+        <section className="w-full h-full md:h-[65vh]">
           <ol className="relative text-gray-500 border-s border-gray-200">
             <li className="mb-10 ms-6">
               <span className="absolute flex items-center justify-center w-8 h-8 bg-green-100 rounded-full -start-4 ring-4 ring-white">
@@ -48,7 +61,7 @@ export default function ContactModal({ businessName }: { businessName: string })
                 </svg>
               </span>
               <h3 className="font-medium leading-tight">Business Name</h3>
-              <p className="text-sm">Dentist Job</p>
+              <p className="text-sm text-gray-700 font-medium">{info?.name}</p>
             </li>
             <li className="mb-10 ms-6">
               <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white">
@@ -63,22 +76,7 @@ export default function ContactModal({ businessName }: { businessName: string })
                 </svg>
               </span>
               <h3 className="font-medium leading-tight">Business Email</h3>
-              <p className="text-sm">business@email.com</p>
-            </li>
-            <li className="mb-10 ms-6">
-              <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white">
-                <svg
-                  className="w-3.5 h-3.5 text-gray-500"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 18 20"
-                >
-                  <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
-                </svg>
-              </span>
-              <h3 className="font-medium leading-tight">Phone Number</h3>
-              <p className="text-sm">+123 4567 89 12</p>
+              <p className="text-sm text-gray-700 font-medium">{info?.email}</p>
             </li>
             <li className="ms-6">
               <span className="absolute flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full -start-4 ring-4 ring-white">
@@ -93,14 +91,16 @@ export default function ContactModal({ businessName }: { businessName: string })
                 </svg>
               </span>
               <h3 className="font-medium leading-tight">Location</h3>
-              <p className="text-sm">16192 Coastal Highway Lewes, Delaware 19958 USA</p>
+              <p className="text-sm text-gray-700 font-medium">
+                {info?.location}
+              </p>
             </li>
           </ol>
-        </div>
-        <div className="w-full h-full md:h-[65vh]">
+        </section>
+        <section className="w-full h-full md:h-[65vh]">
           <ContactForm businessName={businessName} />
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 
