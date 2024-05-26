@@ -8,7 +8,7 @@ const HeroBanner = () => {
         <div className="w-full h-[50vh] flex flex-col justify-center items-center mt-16 p-4 md:p-0">
           <div className="w-full h-full flex flex-col justify-center items-center gap-2.5">
             <h1 className="w-full flex flex-row justify-between items-center text-xl tracking-tighter font-bold text-gray-100 md:text-4xl lg:text-5xl uppercase">
-              <span className="text-indigo-500">Rendezvous</span>
+              <span className="text-blue-700">Rendezvous</span>
               <span>Management</span>
               <span>For</span>
               <span>Everyone</span>
@@ -80,15 +80,16 @@ const HeroBanner = () => {
             </div>
           </div>
         </div>
-        <div className="group relative m-9 flex h-[50vh] md:h-[80vh] w-full rounded-3xl px-4 md:p-0">
-          <div className="z-10 h-full w-full overflow-hidden rounded-xl border border-gray-950 opacity-70 transition duration-500 ease-in-out group-hover:opacity-100">
+        <div className="group relative m-8 flex h-[50vh] md:h-[80vh] w-full rounded-3xl px-4 md:p-0">
+          <div className="z-10 h-full w-full overflow-hidden rounded-xl border border-gray-950 opacity-70 transition duration-500 ease-in-out group-hover:opacity-100 relative">
             <Image
-              height={256}
-              width={512}
-              src="/1.jpg"
+              fill
+              src="/screenshot.png"
               alt="project image"
-              className="animate-fade-in block h-full w-full scale-100 transform object-cover object-center opacity-100 transition duration-500 group-hover:scale-110"
+              className="animate-fade-in block w-full h-full scale-100 transform object-cover object-center opacity-100 transition duration-500 group-hover:scale-110 absolute"
             />
+            {/* <img src="/screenshot.png" alt="project image"
+              className="animate-fade-in block w-full h-full scale-100 transform object-cover object-center opacity-100 transition duration-500 group-hover:scale-110" /> */}
           </div>
         </div>
       </div>
