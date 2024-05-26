@@ -28,29 +28,17 @@ const Navbar = () => {
     >
       <div className="max-w-screen-lg mx-auto lg:px-0">
         <div className="flex flex-row justify-between items-center px-4 py-3 md:px-0">
-          <Link href="/" className="text-start font-bold text-lg">
-            Rendezvous
+          <Link href="/" className="text-start font-bold text-2xl">
+            R.
           </Link>
-          {active && (
-            <div className="w-fit flex flex-row items-center justify-end gap-4 text-sm font-medium">
-              <Link
-                href="/login"
-                className={`duration-200 transition-all ease-in ${
-                  active ? "hover:text-black/70" : "hover:text-white/80"
-                }`}
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/register"
-                className={`duration-200 transition-all ease-in ${
-                  active ? "hover:text-black/70" : "hover:text-white/80"
-                }`}
-              >
-                Join Us
-              </Link>
-            </div>
-          )}
+          <Link
+            href="/login"
+            className={`text-sm duration-200 transition-all ease-in ${
+              active ? "hover:text-black/70" : "hover:text-white/80"
+            }`}
+          >
+            ✜ Sign In
+          </Link>
         </div>
       </div>
       <div
