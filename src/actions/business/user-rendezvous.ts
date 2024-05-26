@@ -161,6 +161,7 @@ export async function getUserRendezvouses(id: number) {
       id: true,
       rendezvousAt: true,
       isCancelled: true,
+      email: true
     },
   });
 

@@ -150,6 +150,7 @@ export async function getGuestRendezvouses(id: number) {
       id: true,
       rendezvousAt: true,
       isCancelled: true,
+      email: true
     },
   });
 

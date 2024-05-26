@@ -1,29 +1,32 @@
-import { getGuestRendezvousInfo } from "@/actions/business/guest-rendezvous";
-import { getUserRendezvousInfo } from "@/actions/business/user-rendezvous";
+import { getGuestRendezvouses } from "@/actions/business/guest-rendezvous";
+import { getUserRendezvouses } from "@/actions/business/user-rendezvous";
 import CancelButton from "@/components/props/cancel-button";
-import DismissButton from "@/components/props/dismiss-button";
 import { months } from "@/lib/data";
+import { headers } from "next/headers";
 
 export default async function DashboardPage() {
+  const headersList = headers();
+  const id = headersList.get("id");
+
   // Get today's date
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
   const day = today.getDate();
 
-  const todayDate = `${year}-${month < 10 ? "0" + month : month}-${day < 10 ? "0" + day : day
-    }`;
+  const todayDate = `${year}-${month < 10 ? "0" + month : month}-${
+    day < 10 ? "0" + day : day
+  }`;
 
   const monthIndex = today.getMonth();
   const monthName = months[monthIndex];
   const formattedTodaysDate = `${monthName} ${day}, ${year}`;
 
-  const rndv = await getGuestRendezvousInfo();
-  const urndv = await getUserRendezvousInfo();
-
   const todaysRendezvous = [] as any;
-
   const dates = [] as any;
+
+  const rndv = await getUserRendezvouses(Number(id));
+  const urndv = await getGuestRendezvouses(Number(id));
 
   // Check if rendezvous data is available
   if (rndv && urndv) {
@@ -41,9 +44,9 @@ export default async function DashboardPage() {
       )
         .toString()
         .padStart(2, "0")}-${rendezvousDate
-          .getDate()
-          .toString()
-          .padStart(2, "0")}`;
+        .getDate()
+        .toString()
+        .padStart(2, "0")}`;
       if (formattedDate === todayDate) {
         todaysRendezvous.push(item);
       }
@@ -63,9 +66,9 @@ export default async function DashboardPage() {
       )
         .toString()
         .padStart(2, "0")}-${rendezvousDate
-          .getDate()
-          .toString()
-          .padStart(2, "0")}`;
+        .getDate()
+        .toString()
+        .padStart(2, "0")}`;
       if (formattedDate === todayDate) {
         todaysRendezvous.push(item);
       }
@@ -77,16 +80,20 @@ export default async function DashboardPage() {
   return (
     <div className="w-full h-screen">
       <div className="container max-w-screen-sm min-h-[90vh] py-4 px-8 mx-auto bg-black/80 flex flex-col m-4">
+        <time className="block leading-none self-end text-white">
+          {formattedTodaysDate}
+        </time>
         <ol className="relative border-s border-gray-200">
-          {todaysRendezvous ? (
+          {todaysRendezvous.length > 0 ? (
             todaysRendezvous.map((today: any) => (
               <li
                 key={today.id}
                 className={`mb-10 ms-8
-              ${today.isCancelled
-                    ? "text-gray-500 cursor-not-allowed"
-                    : "text-white cursor-pointer"
-                  }`}
+              ${
+                today.isCancelled
+                  ? "text-gray-500 cursor-not-allowed"
+                  : "text-white cursor-pointer"
+              }`}
               >
                 <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3">
                   <svg
@@ -104,7 +111,6 @@ export default async function DashboardPage() {
                 </h3>
                 <div className="w-full flex flex-row justify-between items-center font-medium leading-none text-sm mb-4">
                   <time className="block mb-2 leading-none">
-                    {formattedTodaysDate} -{" "}
                     {today.rendezvousAt.toTimeString().substring(0, 5)}
                   </time>
                   <p className="block mb-2">{today.fullName}</p>
@@ -165,10 +171,11 @@ export default async function DashboardPage() {
                   </button> */}
                   {/* <DismissButton today={today}/> */}
                   <div
-                    className={`font-medium text-xs px-4 py-1.5 text-center inline-flex items-center text-red-600 ${today.isCancelled
-                      ? "cursor-not-allowed"
-                      : "hover:underline cursor-pointer"
-                      }`}
+                    className={`font-medium text-xs px-4 py-1.5 text-center inline-flex items-center text-red-600 ${
+                      today.isCancelled
+                        ? "cursor-not-allowed"
+                        : "hover:underline cursor-pointer"
+                    }`}
                   >
                     <svg
                       className="w-2 h-2 me-1"
@@ -195,7 +202,7 @@ export default async function DashboardPage() {
               </li>
             ))
           ) : (
-            <div className="w-full flex flex-row items-center gap-1">
+            <div className="w-full flex flex-row items-center gap-1 ml-1">
               <svg
                 className="w-4 h-4 text-gray-200"
                 aria-hidden="true"
@@ -206,7 +213,7 @@ export default async function DashboardPage() {
                 <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
                 <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
               </svg>
-              <p className="text-sm">No rendezvouses yet</p>
+              <p className="text-sm text-white">No rendezvouses yet</p>
             </div>
           )}
         </ol>

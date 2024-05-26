@@ -31,18 +31,28 @@ const Navbar = () => {
           <Link href="/" className="text-start font-bold text-2xl">
             R.
           </Link>
+          <div className="flex flex-row justify-center items-center gap-4">
+          <Link
+            href="/business"
+            className={`text-sm duration-200 transition-all ease-in border-e py-1 px-4 hover:underline ${
+              active ? "hover:text-black/70 border-zinc-500" : "hover:text-white/80 border-zinc-300"
+            }`}
+          >
+            Businesses
+          </Link>
           <Link
             href="/login"
-            className={`text-sm duration-200 transition-all ease-in ${
+            className={`text-sm duration-200 transition-all ease-in hover:underline ${
               active ? "hover:text-black/70" : "hover:text-white/80"
             }`}
           >
-            ✜ Sign In
+            Sign In
           </Link>
+          </div>
         </div>
       </div>
       <div
-        className={`transition-all ease-in-out duration-500 w-full  ${
+        className={`transition-all ease-in-out duration-500 w-full ${
           active ? "border-t border-gray-300" : " order-none"
         }`}
       >
