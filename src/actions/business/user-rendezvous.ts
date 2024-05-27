@@ -73,7 +73,7 @@ export async function UserRendezvous(prevState: any, formData: FormData) {
 
   console.log(dateObj.toLocaleTimeString());
 
-  await prisma.rendezvous.create({
+  const rendezvous = await prisma.rendezvous.create({
     data: {
       userId: Number(isValidData.userId),
       email: isValidData.email,
@@ -83,6 +83,29 @@ export async function UserRendezvous(prevState: any, formData: FormData) {
       createdAt: new Date(Date.now()),
     },
   });
+
+  try {
+    if (business.id) {
+      await prisma.notification.create({
+        data: {
+          body: `New booking from ${rendezvous.fullName} at ${rendezvous.rendezvousAt}`,
+          businessId: business.id,
+        },
+        include: { business: true }
+      })
+
+      await prisma.businessAccount.update({
+        where: {
+          id: business.id
+        },
+        data: {
+          hasNotifications: true
+        }
+      });
+    }
+  } catch (error) {
+    throw new Error("Failed!")
+  }
 
   const result = await sendMail({
     email: isValidData.email,

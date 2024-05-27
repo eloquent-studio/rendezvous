@@ -54,13 +54,13 @@ export default function TimeModal({
     setTime(date);
   };
 
-  const full = (time: string, dateString: any) => {
+  const full = (time: string, dateString: string) => {
     const isFull = (urndv || rndv).some((item: any) => {
       if (!item.isCancelled) {
         const rndvDate = new Date(item.rendezvousAt);
-        const rndvDay = rndvDate.getDate().toString();
+        const rndvDay = rndvDate.getDate().toString().padStart(2, "0");
         const rndvHour = rndvDate.getHours().toString().padStart(2, "0");
-        return rndvHour === time && rndvDay === dateString.substring(7, 9);
+        return rndvHour === time && rndvDay === dateString.substring(8, 10);
       } else {
         return false;
       }
@@ -367,12 +367,15 @@ const Appoint = ({
   isFull: boolean;
   time: string;
 }) => {
+  console.log("TIME"+time)
+  console.log("DATE"+date)
+
   return (
     <button
       type="button"
       className={`rounded w-full focus:ring-4 focus:ring-blue-300 font-medium text-sm px-5 py-2.5 mb-2 block focus:outline-none border border-gray-300 focus:border-none ${isFull
         ? "text-white bg-gray-300 cursor-not-allowed hover:bg-gray-300"
-        : "hover:bg-gray-200 "
+        : "hover:bg-gray-200"
         }  ${time == date ? "bg-lime-300" : ""}`}
       disabled={isFull}
       onClick={() => {
