@@ -3,25 +3,28 @@
 import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 
-export const getNotifications = async (businessId: string) => {
-  try {
-    const notifications = await prisma.notification.findMany({
-      where: { businessId: Number(businessId) },
-      orderBy: { createdAt: 'desc' }
-    })
+export const getNotifications = async (businessId: number) => {
+  console.log(businessId)
+  const notifications = await prisma.notification.findMany({
+    where: { businessId: Number(businessId) },
+    orderBy: { createdAt: 'desc' }
+  })
 
-    await prisma.businessAccount.update({
-      where: { id: Number(businessId) },
-      data: { hasNotifications: false }
-    })
+    // Check if the business account exists before updating
+    const businessAccount = await prisma.businessAccount.findUnique({
+      where: { id: Number(businessId) }
+  })
 
-    // revalidatePath(path)
-
-    return notifications ?? []
-    
-  } catch (error) {
-    return []
+  if (businessAccount) {
+      await prisma.businessAccount.update({
+          where: { id: Number(businessId) },
+          data: { hasNotifications: false }
+      })
+  } else {
+      console.error(`Business account with id ${businessId} not found.`)
   }
+
+  return notifications ?? []
 }
 export const deleteNotification = async (notificationId: string) => {
   await prisma.notification.delete({

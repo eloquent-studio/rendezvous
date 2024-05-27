@@ -13,10 +13,10 @@ export default async function DashboardLayout({
 
     const avatar = await prisma.businessAccount.findUnique({
         where: { userId: Number(id) },
-        select: { image: true }
+        select: { image: true, id: true }
     })
 
-    const notifications = await getNotifications(id!)
+    const notifications = await getNotifications(Number(avatar?.id!))
     const count = notifications?.length ?? 0
 
     return <div className="h-full bg-dashboard-bg bg-cover">

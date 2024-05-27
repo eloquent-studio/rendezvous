@@ -1,12 +1,24 @@
 import { getNotifications } from "@/actions/business/notification";
 import Link from "next/link";
 import { headers } from "next/headers";
+import prisma from '@/lib/prisma'
 
 export default async function Notification() {
   const headersList = headers();
-  const businessId = headersList.get("id");
+  const id = headersList.get("id");
+
+  const user = await prisma?.businessAccount.findUnique({
+    where: { userId: Number(id) },
+    select: { id: true }
+  });
+
+  const businessId = user?.id
+
+  console.log("business ID"+ businessId)
 
   const not = await getNotifications(businessId!);
+
+  console.log(not)
 
   return (
     <div className="flex flex-row w-full h-full">

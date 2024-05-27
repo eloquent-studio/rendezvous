@@ -8,6 +8,11 @@ export default async function DashboardPage() {
   const headersList = headers();
   const id = headersList.get("id");
 
+  const user = await prisma?.businessAccount.findUnique({
+    where: { userId: Number(id) },
+    select: { id: true }
+  });
+
   // Get today's date
   const today = new Date();
   const year = today.getFullYear();
@@ -25,9 +30,10 @@ export default async function DashboardPage() {
   const todaysRendezvous = [] as any;
   const dates = [] as any;
 
-  const rndv = await getUserRendezvouses(Number(id));
-  const urndv = await getGuestRendezvouses(Number(id));
+  const rndv = await getUserRendezvouses(user?.id!);
+  const urndv = await getGuestRendezvouses(user?.id!);
 
+  console.log(urndv);
   // Check if rendezvous data is available
   if (rndv && urndv) {
     rndv.forEach((item) => {
