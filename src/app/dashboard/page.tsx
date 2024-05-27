@@ -83,7 +83,7 @@ export default async function DashboardPage() {
         <time className="block leading-none self-end text-white">
           {formattedTodaysDate}
         </time>
-        <ol className="relative border-s border-gray-200">
+        <ol className="relative border-s border-gray-200 mt-4">
           {todaysRendezvous.length > 0 ? (
             todaysRendezvous.map((today: any) => (
               <li
@@ -107,13 +107,13 @@ export default async function DashboardPage() {
                   </svg>
                 </span>
                 <h3 className="flex items-center mb-2 font-semibold uppercase">
-                  {today.business.name}
+                  {today.fullName}
                 </h3>
                 <div className="w-full flex flex-row justify-between items-center font-medium leading-none text-sm mb-4">
                   <time className="block mb-2 leading-none">
                     {today.rendezvousAt.toTimeString().substring(0, 5)}
                   </time>
-                  <p className="block mb-2">{today.fullName}</p>
+                  <p className="block mb-2">{today.email}</p>
                   {/* <span>45$</span> */}
                   {today.phoneNumber && (
                     <div className="w-fit flex flex-row items-center gap-1">
