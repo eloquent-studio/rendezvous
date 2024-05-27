@@ -16,7 +16,8 @@ export default async function DashboardLayout({
         select: { image: true }
     })
 
-    const count = (await getNotifications(id!)).length
+    const notifications = await getNotifications(id!)
+    const count = notifications?.length ?? 0
 
     return <div className="h-full bg-dashboard-bg bg-cover">
         <div className="w-full h-screen overflow-hidden flex flex-row bg-black bg-opacity-20">

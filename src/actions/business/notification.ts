@@ -4,6 +4,7 @@ import prisma from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 
 export const getNotifications = async (businessId: string) => {
+  try {
     const notifications = await prisma.notification.findMany({
       where: { businessId: Number(businessId) },
       orderBy: { createdAt: 'desc' }
@@ -16,9 +17,12 @@ export const getNotifications = async (businessId: string) => {
 
     // revalidatePath(path)
 
-    return notifications
+    return notifications ?? []
+    
+  } catch (error) {
+    return []
+  }
 }
-
 export const deleteNotification = async (notificationId: string) => {
   await prisma.notification.delete({
     where: { id: Number(notificationId) }

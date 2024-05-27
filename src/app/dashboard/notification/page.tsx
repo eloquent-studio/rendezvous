@@ -38,7 +38,7 @@ export default async function Notification() {
               </div>
             ))
           ) : (
-            <span>No Notifications yet.</span>
+            <span className="p-4 text-sm">No Notifications yet.</span>
           )}
         </div>
         {/* <a href="#" className="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100">

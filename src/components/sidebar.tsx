@@ -5,6 +5,7 @@ import Link from "next/link";
 import useMobile from "@/hooks/useMobile";
 import { usePathname } from "next/navigation";
 import CloseSvg from "./icons/close-svg";
+import { LogOutAction } from "@/actions/auth/logout";
 
 const SelectedStyle =
   "relative p-1.5 text-blue-500 transition-colors duration-200 bg-blue-100 rounded";
@@ -13,7 +14,7 @@ const NonSelectedStyle =
 
 interface SidebarProps {
   image: string | null;
-  count: number
+  count: number;
 }
 export default function Sidebar({ image, count }: SidebarProps) {
   // const { onOpen: onOpenNotification } = useNotification()
@@ -144,8 +145,11 @@ export default function Sidebar({ image, count }: SidebarProps) {
                   d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
                 />
               </svg>
-              {count > 0 ? <span className="absolute -top-1 -right-2 text-xs text-white bg-sky-600 px-1.5 py-0.5 rounded-full">{count}</span> : null}
-              
+              {count > 0 ? (
+                <span className="absolute -top-1 -right-2 text-xs text-white bg-sky-600 px-1.5 py-0.5 rounded-full">
+                  {count}
+                </span>
+              ) : null}
             </Link>
 
             <Link
@@ -174,6 +178,24 @@ export default function Sidebar({ image, count }: SidebarProps) {
                 />
               </svg>
             </Link>
+
+            <button
+              type="submit"
+              className={result == "logout" ? SelectedStyle : NonSelectedStyle}
+              onClick={async () => {
+                await LogOutAction();
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#374151"
+              >
+                <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
+              </svg>
+            </button>
           </div>
           <div className="mt-auto">
             <button
