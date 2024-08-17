@@ -72,25 +72,7 @@ export async function GuestRendezvous(prevState: any, formData: FormData) {
     const hours = parseInt(timeParts[0], 10);
     const minutes = parseInt(timeParts[1], 10);
 
-    // Set time to the date object
-    console.log(hours);
     dateObj.setHours(hours, minutes);
-
-    console.log(dateObj.toLocaleTimeString());
-
-    // const countryCode = {
-    //   name: 'countryCode',
-    //   value: isValidData.countryCode
-    // };
-
-    // const phone = {
-    //   name: 'phoneNumber',
-    //   value: isValidData.phoneNumber
-    // };
-
-    // const phoneString = `${countryCode}${phone}`;
-
-    // console.log(phoneString)
 
     const rendezvous = await prisma.guestRendezvous.create({
       data: {
@@ -103,29 +85,6 @@ export async function GuestRendezvous(prevState: any, formData: FormData) {
         createdAt: new Date(Date.now()),
       },
     });
-
-    try {
-      if (business.id) {
-        await prisma.notification.create({
-          data: {
-            body: `New booking from ${rendezvous.fullName} at ${rendezvous.rendezvousAt}`,
-            businessId: business.id,
-          },
-          include: { business: true }
-        })
-
-        await prisma.businessAccount.update({
-          where: {
-            id: business.id
-          },
-          data: {
-            hasNotifications: true
-          }
-        });
-      }
-    } catch (error) {
-      throw new Error("Failed!")
-    }
 
     const result = await sendMail({
       email: isValidData.email,
@@ -154,7 +113,6 @@ export async function GuestRendezvous(prevState: any, formData: FormData) {
       success: true,
     };
   } catch (error) {
-    console.log(error);
     return {
       error: "Error while submit",
       success: false,
@@ -173,7 +131,7 @@ export async function getGuestRendezvouses(id: number) {
       id: true,
       rendezvousAt: true,
       isCancelled: true,
-      email: true
+      email: true,
     },
   });
 

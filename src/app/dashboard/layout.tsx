@@ -1,7 +1,6 @@
 import Sidebar from "@/components/sidebar"
 import { headers } from 'next/headers'
 import prisma from '@/lib/prisma'
-import { getNotifications } from "@/actions/business/notification"
 
 export default async function DashboardLayout({
     children,
@@ -16,12 +15,11 @@ export default async function DashboardLayout({
         select: { image: true, id: true }
     })
 
-    const notifications = await getNotifications(Number(avatar?.id!))
-    const count = notifications?.length ?? 0
+
 
     return <div className="h-full bg-dashboard-bg bg-cover">
         <div className="w-full h-screen overflow-hidden flex flex-row bg-black bg-opacity-20">
-            <Sidebar image={avatar?.image ?? null} count={count}/>
+            <Sidebar image={avatar?.image ?? null} />
             <div className="w-full">{children}</div>
         </div>
     </div>

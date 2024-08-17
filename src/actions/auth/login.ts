@@ -168,5 +168,6 @@ export async function LogInAction(prevState: any, formData: FormData) {
   }
 
   const nextUrl = formData.get("next") as string;
-  redirect(nextUrl ? nextUrl : "/");
+  console.log(nextUrl);
+  redirect(nextUrl ? nextUrl : "/business");
 }

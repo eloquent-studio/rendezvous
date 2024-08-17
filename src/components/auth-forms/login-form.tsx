@@ -139,7 +139,7 @@ const LoginForm = ({ next }: { next: string }) => {
           </div>
         )}
 
-        <input type="hidden" value={next ? next : (variant == "business" ? "/dashboard" : "/")} name="next" />
+        <input type="hidden" value={next ? next : (variant == "business" ? "/dashboard" : "/business")} name="next" />
 
         <div className="text-center">
           <Button fullWidth large secondary>
